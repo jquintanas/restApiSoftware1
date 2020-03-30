@@ -1,6 +1,6 @@
 import {Router} from "express";
-import appController from "../controller/appController";
-class GamesRoutes {
+import defaultController from "../controller/controllerDefault";
+class routerDefault {
   public router: Router = Router();
 
   constructor() {
@@ -8,13 +8,13 @@ class GamesRoutes {
   }
   config():void {
     //this.router.[get | post | put | delete]
-    this.router.get("/",appController.index);
-    this.router.post("/", appController.json);
-    this.router.get("/getData", appController.getData);
-    this.router.post("/postData",appController.postData);
-    this.router.delete("/deleteData/:id", appController.deleteData);
-    this.router.put("/updateData/:id", appController.updateData);
+    this.router.get("/",defaultController.index);
+    this.router.post("/", defaultController.json);
+    this.router.get("/getData", defaultController.getData);
+    this.router.post("/postData",defaultController.postData);
+    this.router.delete("/deleteData/:id", defaultController.deleteData);
+    this.router.put("/updateData/:id", defaultController.updateData);
   }
 }
-const appRoutes = new GamesRoutes();
+const appRoutes = new routerDefault();
 export default appRoutes.router;

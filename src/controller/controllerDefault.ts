@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 let db = require('./../../models');
 let estudiantes = db.estudiantes;
-class AppController {
+class defaultController {
 
     public async getData(req: Request, res: Response): Promise<void> {
         estudiantes.findAll().then((data: any) => {
@@ -80,4 +80,4 @@ class AppController {
         res.json({ log: "mensaje" });
     }
 }
-export default new AppController();
+export default new defaultController();

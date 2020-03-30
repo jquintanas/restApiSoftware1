@@ -3,9 +3,7 @@ import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
 import cors from "cors";
-//impots de rutas personalizadas
-import appRouter from "./router/routerDefault";
-//let db = require('./../models');
+//import routerDefault from "./router/routerDefault";
 
 class Server {
   public app:Application;
@@ -26,7 +24,7 @@ class Server {
   
 
   router():void {
-    this.app.use("/",appRouter);
+    //this.app.use("/",routerDefault);
   }
 
   start(): void {
