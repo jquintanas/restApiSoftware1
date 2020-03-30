@@ -42,8 +42,8 @@ module.exports = (sequelize, DataTypes) => {
   Fmodificación: 30/03/2020
   Ucreación: Danny
   Umodificación: Danny
-  Comentarios: se asocia el idcompra de la tabla compra porque es foreignkey
-  Parametros de entrada: modelo Compras, el campo idcompra y como se mostrará
+  Comentarios: se asocia el idcompra de la tabla compras porque es foreignkey
+  Parametros de entrada: modelo compras, el campo idcompra y como se mostrará.
   */
   Pedidos.associate = function(models) {
     // associations can be defined here
