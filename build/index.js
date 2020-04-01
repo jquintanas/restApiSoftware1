@@ -8,7 +8,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors_1 = __importDefault(require("cors"));
-//import routerDefault from "./router/routerDefault";
+const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -25,7 +25,7 @@ class Server {
         this.app.use(bodyParser.urlencoded({ extended: true }));
     }
     router() {
-        //this.app.use("/",routerDefault);
+        this.app.use("/", routerPedidos_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {
