@@ -1,9 +1,17 @@
+/*
+  Fcreación: -----
+  Fmodificación: 1/04/2020
+  Ucreación: ------
+  Umodificación: Danny 
+  Comentarios: se importó el archivo router pedidos para hacer uso de las rutas al momento de levantar el server
+  */
+
 import express, {Application} from "express";
 import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
 import cors from "cors";
-//import routerDefault from "./router/routerDefault";
+import routerPedidos from "./router/routerPedidos";
 
 class Server {
   public app:Application;
@@ -24,7 +32,7 @@ class Server {
   
 
   router():void {
-    //this.app.use("/",routerDefault);
+    this.app.use("/",routerPedidos);
   }
 
   start(): void {
