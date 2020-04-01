@@ -1,9 +1,9 @@
 /*
   Fcreación: 30/03/2020
-  Fmodificación: ------
+  Fmodificación: 01/04/2020
   Ucreación: Danny
-  Umodificación: ------ 
-  Comentarios: creación de archivo pedidos router para generar las rutas de enlace.
+  Umodificación: Danny 
+  Comentarios: se cambiaron las rutas de get y post
   */
 
 import { Router } from 'express';
@@ -16,8 +16,8 @@ class routerPedidos {
     }
     config():void {
       //this.router.[get | post | put | delete]
-      this.router.get("/pedidos/",pedidosController.index);
-      this.router.post("/pedidos/", pedidosController.json);
+      this.router.get("/pedidos",pedidosController.index);
+      this.router.post("/pedidos", pedidosController.json);
       this.router.get("/pedidos/getData", pedidosController.getData);
       this.router.post("/pedidos/postData",pedidosController.postData);
       this.router.delete("/pedidos/deleteData/:id", pedidosController.deleteData);
