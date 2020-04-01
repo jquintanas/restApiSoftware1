@@ -1,9 +1,9 @@
 /*
   Fcreación: 30/03/2020
-  Fmodificación: ------
+  Fmodificación: 01/04/2020
   Ucreación: Danny
-  Umodificación: ------ 
-  Comentarios: creación de archivo pedidos controller para tener los metodos get, push, put o delete.
+  Umodificación: Danny 
+  Comentarios: se argego un mensaje en el async get para verificar si detectaba el requerimiento
   */
 import { Request, Response } from "express";
 let db = require('./../../models');
@@ -59,7 +59,7 @@ class pedidosController {
 
     public async index(req: Request, res: Response): Promise<void> {
         //codigo aquí
-        res.send("token");
+        res.send("token recibido");
     }
     public async json(req: Request, res: Response): Promise<void> {
         //codigo aquí
