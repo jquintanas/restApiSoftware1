@@ -5,36 +5,38 @@
   Umodificación: Danny 
   Comentarios: se añadió una variable para definir el sequelize ya que generaba conflicto al momento
   de iniciar el server
+  UModificacion: JQuintana
+  Fecha: 6/04/2020
+  Comentario: se elimina variable sequelize para cambiarla por DataType, correccion de error de migracion de base de datos.
   */
 'use strict';
-var Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const Novedads = sequelize.define('Novedads', {
     idnovedad: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     idusuarioReporta: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     idusuarioReporta: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     descripcion: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {});
   Novedads.associate = function(models) {

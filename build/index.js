@@ -1,4 +1,11 @@
 "use strict";
+/*
+  Fcreación: -----
+  Fmodificación: 1/04/2020
+  Ucreación: ------
+  Umodificación: Danny
+  Comentarios: se importó el archivo router pedidos para hacer uso de las rutas al momento de levantar el server
+  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -9,6 +16,7 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const cors_1 = __importDefault(require("cors"));
 const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
+const routerPago_1 = __importDefault(require("./router/routerPago"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -26,6 +34,7 @@ class Server {
     }
     router() {
         this.app.use("/", routerPedidos_1.default);
+        this.app.use("/api/pagos", routerPago_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {

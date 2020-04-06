@@ -5,9 +5,11 @@
   Umodificación: Danny 
   Comentarios: se añadió una variable para definir el sequelize ya que generaba conflicto al momento
   de iniciar el server
+  UModificacion: JQuintana
+  Fecha: 6/04/2020
+  Comentario: se elimina variable sequelize para cambiarla por DataType, correccion de error de migracion de base de datos.
   */
 'use strict';
-var Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const compras = sequelize.define('compras', {
     
@@ -15,31 +17,31 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     idusuario: {
       allowNull: false,
-      type: Sequelize.STRING
+      type: DataTypes.STRING
     },
     fechacompra: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     idformaEntrega: {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: DataTypes.INTEGER
     },
     horaEntrega: {
       allowNull: false,
-      type: Sequelize.TIME
+      type: DataTypes.TIME
     },
     createdAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     },
     updatedAt: {
       allowNull: false,
-      type: Sequelize.DATE
+      type: DataTypes.DATE
     }
   }, {});
   compras.associate = function(models) {

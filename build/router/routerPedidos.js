@@ -1,10 +1,10 @@
 "use strict";
 /*
   Fcreación: 30/03/2020
-  Fmodificación: ------
+  Fmodificación: 01/04/2020
   Ucreación: Danny
-  Umodificación: ------
-  Comentarios: creación de archivo pedidos router para generar las rutas de enlace.
+  Umodificación: Danny
+  Comentarios: se cambiaron las rutas de get y post
   */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };

@@ -72,7 +72,7 @@ class pedidosController {
     json(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             //codigo aquí
-            res.status(500).json({ log: "mensaje" });
+            res.json({ log: "mensaje" });
         });
     }
 }

@@ -12,6 +12,7 @@ const bodyParser =  require("body-parser");
 const path = require("path");
 import cors from "cors";
 import routerPedidos from "./router/routerPedidos";
+import routerPagos from "./router/routerPago"
 
 class Server {
   public app:Application;
@@ -33,6 +34,7 @@ class Server {
 
   router():void {
     this.app.use("/",routerPedidos);
+    this.app.use("/api/pagos",routerPagos);
   }
 
   start(): void {
