@@ -10,9 +10,11 @@ import express, {Application} from "express";
 import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
+const helmet = require('helmet');
 import cors from "cors";
 import routerPedidos from "./router/routerPedidos";
-import routerPagos from "./router/routerPago"
+import routerPagos from "./router/routerPago";
+import routerUsuarios from "./router/routerUsuario"; 
 
 class Server {
   public app:Application;
@@ -29,12 +31,17 @@ class Server {
     this.app.use(morgan("dev"));
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
+    this.app.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
+    this.app.use(helmet.permittedCrossDomainPolicies());
+    this.app.use(helmet.noSniff());
+    this.app.use(helmet.contentSecurityPolicy({directives: {defaultSrc: ["'self'"]} }));
   }
   
 
   router():void {
     this.app.use("/",routerPedidos);
     this.app.use("/api/pagos",routerPagos);
+    this.app.use("/api/usuarios",routerUsuarios);
   }
 
   start(): void {
