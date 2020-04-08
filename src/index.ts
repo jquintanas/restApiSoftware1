@@ -39,7 +39,7 @@ class Server {
   
 
   router():void {
-    this.app.use("/",routerPedidos);
+    this.app.use("/api/pedidos",routerPedidos);
     this.app.use("/api/pagos",routerPagos);
     this.app.use("/api/usuarios",routerUsuarios);
   }
