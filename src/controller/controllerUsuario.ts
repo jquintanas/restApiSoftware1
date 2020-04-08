@@ -2,11 +2,6 @@ import { Request, Response } from "express";
 const usuarios = require('./../../models').Usuarios;
 
 class usuariosController {
-    /*
-    FechaCreacion: 06/04/2020
-    Usuario: Drios
-    Comentario: Este metodo se encarga de buscar todos los usuarios que se encuentren en la base
-    */
     public async getData(req: Request, res: Response): Promise<void> {
         usuarios.findAll().then((data: any) => {
             res.status(200).json(data);
@@ -28,8 +23,8 @@ class usuariosController {
             direccion: req.body.direccion,
             contrasenia:req.body.contrasenia,
             rol:req.body.rol,
-            createdAt:req.body.createdAt,
-            updatedAt:req.body.updateAt
+            createdAt:new Date(),
+            updatedAt:new Date()
         }
 
         usuarios.create(usuario).then((rs: any) => {
