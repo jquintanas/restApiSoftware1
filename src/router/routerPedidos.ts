@@ -15,12 +15,11 @@ class routerPedidos {
       this.config();
     }
     config():void {
-      //this.router.[get | post | put | delete]
-      this.router.get("/pedidos",pedidosController.index);
-      this.router.post("/pedidos", pedidosController.json);
-      this.router.get("/pedidos/getData", pedidosController.getData);
-      this.router.post("/pedidos/postData",pedidosController.postData);
-      this.router.delete("/pedidos/deleteData/:id", pedidosController.deleteData);
+      //this.router.[get | post | put | delete]     
+      this.router.get("/get", pedidosController.getData);
+      this.router.get("/:id", pedidosController.findByID);
+      this.router.post("/post",pedidosController.postData);
+      this.router.delete("/:id", pedidosController.deleteData);
       
     }
   }
