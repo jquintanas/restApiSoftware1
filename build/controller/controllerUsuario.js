@@ -11,11 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const usuarios = require('./../../models').Usuarios;
 class usuariosController {
-    /*
-    FechaCreacion: 06/04/2020
-    Usuario: Drios
-    Comentario: Este metodo se encarga de buscar todos los usuarios que se encuentren en la base
-    */
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             usuarios.findAll().then((data) => {
@@ -39,8 +34,8 @@ class usuariosController {
                 direccion: req.body.direccion,
                 contrasenia: req.body.contrasenia,
                 rol: req.body.rol,
-                createdAt: req.body.createdAt,
-                updatedAt: req.body.updateAt
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
             usuarios.create(usuario).then((rs) => {
                 res.status(200).json(rs);

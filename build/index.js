@@ -39,7 +39,7 @@ class Server {
         this.app.use(helmet.contentSecurityPolicy({ directives: { defaultSrc: ["'self'"] } }));
     }
     router() {
-        this.app.use("/", routerPedidos_1.default);
+        this.app.use("/api/pedidos", routerPedidos_1.default);
         this.app.use("/api/pagos", routerPago_1.default);
         this.app.use("/api/usuarios", routerUsuario_1.default);
     }

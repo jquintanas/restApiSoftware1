@@ -9,8 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-let db = require('./../../models');
-let pedidos = db.pedidos;
+const pedidos = require('./../../models').Pedidos;
 class pedidosController {
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -18,7 +17,7 @@ class pedidosController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error!!" });
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
                 console.log(err);
                 return;
             });
@@ -26,15 +25,17 @@ class pedidosController {
     }
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let ped = {
+            let pedido = {
+                idpedido: req.body.idpedido,
                 idcompra: req.body.idcompra,
                 idproducto: req.body.idproducto,
                 cantidad: req.body.cantidad,
                 subtotal: req.body.subtotal,
                 cubiertos: req.body.cubiertos,
-                createdAt: new Date()
+                createdAt: new Date(),
+                updatedAt: new Date()
             };
-            pedidos.create(ped).then((rs) => {
+            pedidos.create(pedido).then((rs) => {
                 res.status(200).json(rs);
                 return;
             }, (err) => {
@@ -49,11 +50,11 @@ class pedidosController {
             let { id } = req.params;
             pedidos.destroy({ where: { idpedido: id } }).then((data) => {
                 if (data == 1) {
-                    res.status(200).json({ log: "Exito!!!!" });
+                    res.status(200).json({ log: "Pedido eliminado correctamente" });
                     return;
                 }
                 else {
-                    res.status(200).json({ log: "Sin datos a eliminar." });
+                    res.status(200).json({ log: "No existe el pedido." });
                     return;
                 }
             }, (err) => {
@@ -63,16 +64,33 @@ class pedidosController {
             });
         });
     }
-    index(req, res) {
+    findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            //codigo aquí
-            res.send("token recibido");
-        });
-    }
-    json(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            //codigo aquí
-            res.json({ log: "mensaje" });
+            let id = req.params.id;
+            if (isNaN(id)) {
+                res.status(500).json({ log: "El ID introducido no es valido." });
+                return;
+            }
+            id = Number(id);
+            if (Number.isInteger(id) == false) {
+                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                return;
+            }
+            pedidos.findOne({
+                where: {
+                    idpedido: id
+                }
+            }).then((data) => {
+                if (data == null) {
+                    res.status(404).json({ log: "No Existen datos a mostrar para el ID." });
+                    return;
+                }
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json(err);
+                return;
+            });
         });
     }
 }
