@@ -56,6 +56,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Usuarios.associate = function(models) {
     // associations can be defined here
+    /*Usuarios.belongsTo(models.rols,{
+      foreignKey: 'idrol',
+      as: 'Codigo_rol'
+    });*/
   };
   return Usuarios;
 };
