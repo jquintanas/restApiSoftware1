@@ -12,9 +12,11 @@ const bodyParser =  require("body-parser");
 const path = require("path");
 const helmet = require('helmet');
 import cors from "cors";
+
 import routerPedidos from "./router/routerPedidos";
 import routerPagos from "./router/routerPago";
 import routerUsuarios from "./router/routerUsuario"; 
+import routerRols from "./router/routerRol"; 
 
 class Server {
   public app:Application;
@@ -42,6 +44,7 @@ class Server {
     this.app.use("/api/pedidos",routerPedidos);
     this.app.use("/api/pagos",routerPagos);
     this.app.use("/api/usuarios",routerUsuarios);
+    this.app.use("/api/rols",routerRols);
   }
 
   start(): void {
