@@ -8,6 +8,10 @@
   UModificacion: JQuintana
   Fecha: 6/04/2020
   Comentario: se elimina variable sequelize para cambiarla por DataType, correccion de error de migracion de base de datos.
+
+  UModificacion: JQuintana
+  Fecha: 11/04/2020
+  Comentario: Se agregan relaciones entre modelos
   */
 'use strict';
 module.exports = (sequelize, DataTypes) => {
@@ -56,6 +60,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Usuarios.associate = function(models) {
     // associations can be defined here
+
+    Usuarios.hasMany(models.Novedads, {foreignKey: 'idusuarioReporta', sourceKey: 'cedula'});
+
+    Usuarios.hasMany(models.Novedads, {foreignKey: 'idusuarioReportado', sourceKey: 'cedula'});
   };
   return Usuarios;
 };

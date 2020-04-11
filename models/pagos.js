@@ -20,13 +20,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     idformaPago: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {
+        model: "formasPagos",
+        key: "id"
+      },
+      onUpdate: "cascade",
+      onDelete: "cascade"
     },
     total: {
       allowNull: false,
       type: DataTypes.FLOAT
     },
-    imagen : {
+    imagen: {
       allowNull: false,
       type: DataTypes.STRING
     },
@@ -35,12 +41,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     },
     updatedAt: {
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.DATE
     }
   }, {});
-  Pagos.associate = function(models) {
+  Pagos.associate = function (models) {
     // associations can be defined here
+    Pagos.belongsTo(models.formasPagos, { foreignKey: 'idformaPago', foreignKeyConstraint: true, targetKey: 'id' });
   };
   return Pagos;
 };

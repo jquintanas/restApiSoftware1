@@ -4,6 +4,10 @@
   Ucreación: ------
   Umodificación: Danny 
   Comentarios: se importó el archivo router pedidos para hacer uso de las rutas al momento de levantar el server
+
+  UModificacion: JQuintana
+  fecha: 11/04/2020
+  Comentario: se agregan router de pago y novedad.
   */
 
 import express, {Application} from "express";
@@ -12,7 +16,8 @@ const bodyParser =  require("body-parser");
 const path = require("path");
 import cors from "cors";
 import routerPedidos from "./router/routerPedidos";
-import routerPagos from "./router/routerPago"
+import routerPagos from "./router/routerPago";
+import routernovedad from "./router/routerNovedad";
 
 class Server {
   public app:Application;
@@ -35,6 +40,7 @@ class Server {
   router():void {
     this.app.use("/",routerPedidos);
     this.app.use("/api/pagos",routerPagos);
+    this.app.use("/api/novedad", routernovedad);
   }
 
   start(): void {
