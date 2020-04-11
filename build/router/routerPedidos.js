@@ -18,12 +18,11 @@ class routerPedidos {
         this.config();
     }
     config() {
-        //this.router.[get | post | put | delete]
-        this.router.get("/pedidos", controllerPedidos_1.default.index);
-        this.router.post("/pedidos", controllerPedidos_1.default.json);
-        this.router.get("/pedidos/getData", controllerPedidos_1.default.getData);
-        this.router.post("/pedidos/postData", controllerPedidos_1.default.postData);
-        this.router.delete("/pedidos/deleteData/:id", controllerPedidos_1.default.deleteData);
+        //this.router.[get | post | put | delete]     
+        this.router.get("/get", controllerPedidos_1.default.getData);
+        this.router.get("/:id", controllerPedidos_1.default.findByID);
+        this.router.post("/post", controllerPedidos_1.default.postData);
+        this.router.delete("/:id", controllerPedidos_1.default.deleteData);
     }
 }
 const appRoutes = new routerPedidos();

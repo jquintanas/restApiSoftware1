@@ -18,10 +18,13 @@ const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const bodyParser = require("body-parser");
 const path = require("path");
+const helmet = require('helmet');
 const cors_1 = __importDefault(require("cors"));
 const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
 const routerPago_1 = __importDefault(require("./router/routerPago"));
 const routerNovedad_1 = __importDefault(require("./router/routerNovedad"));
+const routerUsuario_1 = __importDefault(require("./router/routerUsuario"));
+const routerRol_1 = __importDefault(require("./router/routerRol"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -36,11 +39,17 @@ class Server {
         this.app.use(morgan_1.default("dev"));
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: true }));
+        this.app.use(helmet.hidePoweredBy({ setTo: 'PHP 4.2.0' }));
+        this.app.use(helmet.permittedCrossDomainPolicies());
+        this.app.use(helmet.noSniff());
+        this.app.use(helmet.contentSecurityPolicy({ directives: { defaultSrc: ["'self'"] } }));
     }
     router() {
-        this.app.use("/", routerPedidos_1.default);
+        this.app.use("/api/pedidos", routerPedidos_1.default);
         this.app.use("/api/pagos", routerPago_1.default);
         this.app.use("/api/novedad", routerNovedad_1.default);
+        this.app.use("/api/usuarios", routerUsuario_1.default);
+        this.app.use("/api/rols", routerRol_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {
