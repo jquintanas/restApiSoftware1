@@ -14,6 +14,8 @@ class routerRol {
         //this.router.[get | post | put | delete]
         this.router.get("/get", controllerRol_1.default.getData);
         this.router.get("/:id", controllerRol_1.default.findByID);
+        this.router.post("/post", controllerRol_1.default.postData);
+        this.router.delete("/:id", controllerRol_1.default.deleteData);
     }
 }
 exports.default = new routerRol().router;

@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.INTEGER
     },
-    descripcion: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE
@@ -30,6 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: {
       allowNull: false,
       type: DataTypes.DATE
+    },
+    descripcion: {
+      allowNull: false,
+      type: DataTypes.STRING
     }
   }, {});
   Rols.associate = function(models) {
