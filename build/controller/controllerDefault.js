@@ -12,9 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 let db = require('./../../models');
 let estudiantes = db.estudiantes;
 /**
+ * Clase controladora del router default
  * @class
- * @method
- * @desc Obtiene una lista de ubicaciones a ofrecerle al cliente
  */
 class defaultController {
     getData(req, res) {
