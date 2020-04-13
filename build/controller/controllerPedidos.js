@@ -14,31 +14,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
 /**
- * @const {Pedidos} {Compras}
- * @desc Import del modelo pedidos y compras de la base de datos.
+ * @const {Pedidos}
+ * @desc Import del modelo pedidos de la base de datos.
  */
 const pedidos = require('./../../models').Pedidos;
-const compras = require('./../../models').compras;
-/*
-    FechaCreacion: 01/04/2020
-    Usuario: Drios96
-    Comentario: Clase controladora de pedidos.
+/**
+ * @const {Compras}
+ * @desc Import del modelo compras de la base de datos.
  */
+const compras = require('./../../models').compras;
 /**
  * @classdesc Clase controladora de pedidos.
  * @desc FechaCreacion: 01/04/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {novedadController} novedadController
+ * @returns {pedidosController} pedidosController
  * @author Danny Rios <dprios@espol.edu.ec>
  */
 class pedidosController {
-    /*
-    FechaCreacion: 01/04/2020
-    Usuario: Drios96
-    Comentario: Este método se encarga de buscar los pedidos
-    */
     /**
      * @async
      * @method
@@ -77,11 +71,6 @@ class pedidosController {
             });
         });
     }
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Drios
-    Comentario: Este método se encarga de agregar un nuevo pedido
-    */
     /**
    * @async
    * @method
@@ -132,12 +121,6 @@ class pedidosController {
             });
         });
     }
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Drios96
-    Comentario: Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
-    por la url.
-    */
     /**
     * @async
     * @method
@@ -184,11 +167,6 @@ class pedidosController {
             });
         });
     }
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Drios96
-    Comentario: Este método se encarga de buscar el pago en base al ID proporcionaro en la url
-    */
     /**
    * @async
    * @method
