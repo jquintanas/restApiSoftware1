@@ -61,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
     // associations can be defined here
     Pedidos.belongsTo(models.compras,{
       foreignKey: 'idcompra',
-      as: 'Codigo_Compra'
+      foreignKeyConstraint: true
     });
 
   };

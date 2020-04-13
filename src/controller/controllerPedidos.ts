@@ -1,25 +1,65 @@
 import { Request, Response } from "express";
-const pedidos = require('./../../models').Pedidos;
 import { pedidosInterface } from "./../interfaces/pedidosInterface";
 import globales from "./../utils/globales";
+/** 
+ * @const {Pedidos} {Compras}
+ * @desc Import del modelo pedidos y compras de la base de datos.
+ */
+const pedidos = require('./../../models').Pedidos;
+const compras = require('./../../models').compras;
+
 /*
-    FechaCreacion: 12/04/2020
+    FechaCreacion: 01/04/2020
     Usuario: Drios96
     Comentario: Clase controladora de pedidos.
  */
+/**
+ * @classdesc Clase controladora de pedidos.
+ * @desc FechaCreacion: 01/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {novedadController} novedadController
+ * @author Danny Rios <dprios@espol.edu.ec>
+ */
 class pedidosController {
     /*
-    FechaCreacion: 12/04/2020
+    FechaCreacion: 01/04/2020
     Usuario: Drios96
     Comentario: Este método se encarga de buscar los pedidos
     */
+
+
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 01/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     public async getData(req: Request, res: Response): Promise<void> {
         let token = true;
         if (!token) {
             res.status(401).json({ log: "Token invalido." });
             return;
         }
-        pedidos.findAll().then((data: any) => {
+        pedidos.findAll(
+            {
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+                include: [
+                    {
+                        model: compras,
+                        required: true,
+                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
+                    }
+                ]
+            }
+        ).then((data: any) => {
             res.status(200).json(data);
             return;
         }, (err: any) => {
@@ -34,6 +74,19 @@ class pedidosController {
     Usuario: Drios
     Comentario: Este método se encarga de agregar un nuevo pedido
     */
+
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Danny Rios <dprios@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de agregar un nuevo pedido <br> FechaCreacion: 01/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     public async postData(req: Request, res: Response): Promise<void> {
         let token = true;
         if (!token) {
@@ -45,15 +98,14 @@ class pedidosController {
             res.status(401).json({ log: "Violación de integridad de datos." });
             return;
         }
-        let pedido = {
+        let pedido :pedidosInterface = {
             idpedido: req.body.idpedido,
             idcompra: req.body.idcompra,
             idproducto: req.body.idproducto,
             cantidad: req.body.cantidad,
             subtotal: req.body.subtotal,
             cubiertos: req.body.cubiertos,
-            createdAt: new Date(),
-            updatedAt: new Date()
+            createdAt: new Date()
         }
         pedidos.create(pedido).then((resp: any) => {
             if (resp._options.isNewRecord) {
@@ -79,6 +131,20 @@ class pedidosController {
     Comentario: Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
     por la url.
     */
+
+   /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Danny Rios <dprios@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
+    por la url. <br> FechaCreacion: 01/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     public async deleteData(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
@@ -115,6 +181,20 @@ class pedidosController {
     Usuario: Drios96
     Comentario: Este método se encarga de buscar el pago en base al ID proporcionaro en la url
     */
+
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Danny Rios <dprios@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de buscar el pago en base al ID proporcionaro en la url
+   * . <br> FechaCreacion: 01/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
@@ -130,7 +210,17 @@ class pedidosController {
             {
                 where: {
                     idpedido: id
-                }
+                },
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+                    include: [
+                        {
+                            model: compras,
+                            required: true,
+                            attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
+                        }
+                    ]
+                
+                
             }
         ).then((data: any) => {
             if (data == null) {
