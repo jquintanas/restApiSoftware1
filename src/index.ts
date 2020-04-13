@@ -23,7 +23,7 @@ import routernovedad from "./router/routerNovedad";
 import routerUsuarios from "./router/routerUsuario"; 
 import routerRols from "./router/routerRol"; 
 import routerCompras from "./router/routerCompras"; 
-import routerFacturas from "./router/routerFacturas"; 
+//import routerFacturas from "./router/routerFacturas"; 
 
 class Server {
   public app:Application;
@@ -54,7 +54,7 @@ class Server {
     this.app.use("/api/usuarios",routerUsuarios);
     this.app.use("/api/rols",routerRols);
     this.app.use("/api/compras",routerCompras);
-    this.app.use("/api/facturas",routerFacturas);
+    //this.app.use("/api/facturas",routerFacturas);
   }
 
   start(): void {

@@ -11,9 +11,9 @@ class routerCompras {
     config():void {
         //this.router.[post]
         this.router.post("/post", comprasController.postData);
-        this.router.post("/:id", comprasController.findByID);
-        this.router.post("/get", comprasController.getData);
-        this.router.post("/:id", comprasController.deleteData);
+        this.router.get("/:id", comprasController.findByID);
+        this.router.get("/get", comprasController.getData);
+        this.router.delete("/:id", comprasController.deleteData);
       }
 }
 export default new routerCompras().router

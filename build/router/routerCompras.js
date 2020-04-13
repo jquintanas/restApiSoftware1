@@ -13,9 +13,9 @@ class routerCompras {
     config() {
         //this.router.[post]
         this.router.post("/post", controllerCompras_1.default.postData);
-        this.router.post("/:id", controllerCompras_1.default.findByID);
-        this.router.post("/get", controllerCompras_1.default.getData);
-        this.router.post("/:id", controllerCompras_1.default.deleteData);
+        this.router.get("/:id", controllerCompras_1.default.findByID);
+        this.router.get("/get", controllerCompras_1.default.getData);
+        this.router.delete("/:id", controllerCompras_1.default.deleteData);
     }
 }
 exports.default = new routerCompras().router;

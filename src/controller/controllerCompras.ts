@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const compras = require('./../../models').Compras;
+const compras = require('./../../models').compras;
 
   class comprasController {
       public async getData(req: Request, res: Response): Promise<void> {

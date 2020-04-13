@@ -26,7 +26,7 @@ const routerNovedad_1 = __importDefault(require("./router/routerNovedad"));
 const routerUsuario_1 = __importDefault(require("./router/routerUsuario"));
 const routerRol_1 = __importDefault(require("./router/routerRol"));
 const routerCompras_1 = __importDefault(require("./router/routerCompras"));
-const routerFacturas_1 = __importDefault(require("./router/routerFacturas"));
+//import routerFacturas from "./router/routerFacturas"; 
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -53,7 +53,7 @@ class Server {
         this.app.use("/api/usuarios", routerUsuario_1.default);
         this.app.use("/api/rols", routerRol_1.default);
         this.app.use("/api/compras", routerCompras_1.default);
-        this.app.use("/api/facturas", routerFacturas_1.default);
+        //this.app.use("/api/facturas",routerFacturas);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {
