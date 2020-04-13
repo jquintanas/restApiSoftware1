@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const pagos = require('./../../models').Pagos;
 const formasPagos = require('./../../models').formasPagos;
 const globales_1 = __importDefault(require("./../utils/globales"));
+const seguridad_1 = require("./../utils/seguridad");
 /*
     FechaCreacion: 11/04/2020
     Usuario: JQuintana
@@ -87,13 +88,19 @@ class pagosController {
                 res.status(401).json({ log: "Violación de integridad de datos." });
                 return;
             }
-            //aqui desencriptar los datos
+            let { hash } = req.body;
             let data = {
                 idformaPago: req.body.idformaPago,
                 imagen: req.body.imagen,
-                total: req.body.total,
-                createdAt: new Date()
+                total: req.body.total
             };
+            let hashInterno = seguridad_1.Seguridad.hashJSON(data);
+            //aqui se debe desencriptar el hash
+            data.createdAt = new Date();
+            if (hashInterno != hash) {
+                res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
+                return;
+            }
             pagos.create(data).then((resp) => {
                 if (resp._options.isNewRecord) {
                     res.status(202).json({
