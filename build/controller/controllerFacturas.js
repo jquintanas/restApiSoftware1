@@ -9,11 +9,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const compras = require('./../../models').compras;
-class comprasController {
+const facturas = require('./../../models').facturas;
+class facturasController {
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            compras.findAll().then((data) => {
+            facturas.findAll().then((data) => {
                 res.status(200).json(data);
                 return;
             }, (err) => {
@@ -32,15 +32,13 @@ class comprasController {
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
-                res
-                    .status(500)
-                    .json({ log: "El ID introducido no es valido, debe ser un entero." });
+                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            compras
+            facturas
                 .findOne({
                 where: {
-                    idcompra: id,
+                    idfactura: id,
                 },
             })
                 .then((data) => {
@@ -60,43 +58,20 @@ class comprasController {
     }
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let compra = {
-                idcompra: req.body.idcompra,
-                idusuario: req.body.idusuario,
-                fechacompra: new Date(),
-                idformaEntrega: req.body.idformaEntrega,
-                horaEntrega: new Date(),
-                createdAt: new Date(),
-                updatedAt: new Date()
+            let factura = {
+                idfactura: req.body.idfactura,
+                idpedido: req.body.idpedido,
+                idpago: req.body.idpago,
             };
-            compras.create(compra).then((rs) => {
+            facturas.create(factura).then((rs) => {
                 res.status(200).json(rs);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error, no se pudo crear la compra" });
-                console.log(err);
-                return;
-            });
-        });
-    }
-    deleteData(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let { id } = req.params;
-            compras.destroy({ where: { idcompra: id } }).then((data) => {
-                if (data == 1) {
-                    res.status(200).json({ log: "Compra eliminado correctamente" });
-                    return;
-                }
-                else {
-                    res.status(200).json({ log: "No existe la compra." });
-                    return;
-                }
-            }, (err) => {
-                res.status(500).json({ log: "Error!!" });
+                res.status(500).json({ log: "Error, no se pudo crear la factura" });
                 console.log(err);
                 return;
             });
         });
     }
 }
-exports.default = new comprasController();
+exports.default = new facturasController();

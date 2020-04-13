@@ -2,10 +2,7 @@ import { Request, Response } from "express";
 let db = require('./../../models');
 let estudiantes = db.estudiantes;
 
-/**
- * Clase controladora del router default
- * @class
- */
+
 class defaultController {
 
     public async getData(req: Request, res: Response): Promise<void> {

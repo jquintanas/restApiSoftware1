@@ -13,11 +13,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
+/**
+ * @const {Novedads}
+ * @desc Import del modelo Novedad de la base de datos.
+ */
 const novedad = require("./../../models").Novedads;
 /*
     FechaCreacion: 11/04/2020
     Usuario: JQuintana
     Comentario: Clase controladora de novedades.
+ */
+/**
+ * @classdesc Clase controladora de novedades.
+ * @desc FechaCreacion: 11/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {novedadController} novedadController
+ * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class novedadController {
     /*
@@ -25,6 +38,18 @@ class novedadController {
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar la novedad en base al ID proporcionado en la url
     */
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar la novedad en base al ID proporcionado en la url. <br> FechaCreacion: 11/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     findById(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -66,6 +91,18 @@ class novedadController {
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url
     */
+    /**
+    * @async
+    * @method
+    * @public
+    * @version 1.0.0
+    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+    * @returns {JSON} JSON con los datos obtenidos de la consulta.
+    * @desc Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url. <br> FechaCreacion: 11/04/2020
+    * @param {Request} req Objeto Request
+    * @param {Response} res Objeto response
+    * @type {Promise<void>} Promesa de tipo void.
+    */
     findByReportado(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { reportado } = req.params;
@@ -98,6 +135,18 @@ class novedadController {
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url
     */
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con los datos obtenidos de la consulta.
+   * @desc  Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url. <br> FechaCreacion: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     findByReporta(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { reporta } = req.params;
@@ -130,6 +179,18 @@ class novedadController {
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar todas las novedades
     */
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con los datos obtenidos de la consulta.
+   * @desc  Este método se encarga de buscar todas las novedades. <br> FechaCreacion: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     findAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let token = true;
@@ -159,6 +220,19 @@ class novedadController {
     Comentario: Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
     y su integridad.
     */
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
+    y su integridad. <br> FechaCreacion: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     addNovedad(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let token = true;
@@ -200,6 +274,18 @@ class novedadController {
     Usuario: JQuintana
     Comentario: Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripcion.
     */
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripcion. <br> FechaCreacion: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     updateNovedad(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;

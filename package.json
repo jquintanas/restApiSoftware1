@@ -7,7 +7,7 @@
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
     "start": "node build/index.js",
-    "docs": "jsdoc build/*.js"
+    "docs": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r"
   },
   "repository": {
     "type": "git",
