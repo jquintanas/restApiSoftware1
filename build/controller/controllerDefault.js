@@ -11,6 +11,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 let db = require('./../../models');
 let estudiantes = db.estudiantes;
+/**
+ * @class
+ * @method
+ * @desc Obtiene una lista de ubicaciones a ofrecerle al cliente
+ */
 class defaultController {
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

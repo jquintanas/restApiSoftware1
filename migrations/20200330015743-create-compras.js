@@ -14,8 +14,8 @@ module.exports = {
       fechacompra: {
         type: Sequelize.DATE
       },
-      idformaEntrega: {
-        type: Sequelize.INTEGER
+      entregaDomocilio: {
+        type: Sequelize.BOOLEAN
       },
       horaEntrega: {
         type: Sequelize.TIME

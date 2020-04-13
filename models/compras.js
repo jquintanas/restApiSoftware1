@@ -27,9 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.DATE
     },
-    idformaEntrega: {
+    entregaDomocilio: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.BOOLEAN
     },
     horaEntrega: {
       allowNull: false,
