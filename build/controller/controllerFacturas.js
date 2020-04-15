@@ -10,6 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const facturas = require('./../../models').facturas;
+/*
+ FechaCreacion: 12/04/2020
+ Usuario: Franmanging
+ */
 class facturasController {
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -23,6 +27,11 @@ class facturasController {
             });
         });
     }
+    /*
+    FechaCreacion: 12/04/2020
+    Usuario: Franmanging
+    Comentario: Metodo para buscar Factura mediantes idfactura
+    */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -56,6 +65,11 @@ class facturasController {
             });
         });
     }
+    /*
+    FechaCreacion: 12/04/2020
+    Usuario: Franmanging
+    Comentario: Metodo para crear Factura con los campos idfactura, idpedido y idpago
+    */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let factura = {

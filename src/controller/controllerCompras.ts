@@ -1,7 +1,21 @@
 import { Request, Response } from "express";
 const compras = require('./../../models').compras;
 
+ /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     Comentario: Controller de compras
+     */
+
+
   class comprasController {
+
+     /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     Comentario: Metodo para buscar las compras
+     */
+
       public async getData(req: Request, res: Response): Promise<void> {
         compras.findAll().then(
           (data: any) => {
@@ -15,6 +29,12 @@ const compras = require('./../../models').compras;
           }
           );
         }
+
+         /*
+          FechaCreacion: 12/04/2020
+          Usuario: Franmanging
+          Comentario: Metodo para buscar una compra mediante idcompra
+          */
 
           public async findByID(req: Request, res: Response): Promise<void> {
             let id: any = req.params.id;
@@ -53,6 +73,13 @@ const compras = require('./../../models').compras;
               );
           }
       
+
+        /*
+          FechaCreacion: 12/04/2020
+          Usuario: Franmanging
+          Comentario: Metodo para crear una nueva compra 
+          */
+
       public async postData(req: Request, res: Response): Promise<void> {
         let compra = {
             idcompra: req.body.idcompra,
@@ -75,6 +102,13 @@ const compras = require('./../../models').compras;
             return;
         });
       }
+
+
+      /*
+          FechaCreacion: 12/04/2020
+          Usuario: Franmanging
+          Comentario: Metodo para borrar una compra mediante idcompra
+          */
 
       public async deleteData(req: Request, res: Response): Promise<void> {
         let { id } = req.params;

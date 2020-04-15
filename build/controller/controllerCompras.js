@@ -10,7 +10,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const compras = require('./../../models').compras;
+/*
+    FechaCreacion: 12/04/2020
+    Usuario: Franmanging
+    Comentario: Controller de compras
+    */
 class comprasController {
+    /*
+    FechaCreacion: 12/04/2020
+    Usuario: Franmanging
+    Comentario: Metodo para buscar las compras
+    */
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             compras.findAll().then((data) => {
@@ -23,6 +33,11 @@ class comprasController {
             });
         });
     }
+    /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     Comentario: Metodo para buscar una compra mediante idcompra
+     */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -58,6 +73,11 @@ class comprasController {
             });
         });
     }
+    /*
+      FechaCreacion: 12/04/2020
+      Usuario: Franmanging
+      Comentario: Metodo para crear una nueva compra
+      */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let compra = {
@@ -79,6 +99,11 @@ class comprasController {
             });
         });
     }
+    /*
+        FechaCreacion: 12/04/2020
+        Usuario: Franmanging
+        Comentario: Metodo para borrar una compra mediante idcompra
+        */
     deleteData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { id } = req.params;

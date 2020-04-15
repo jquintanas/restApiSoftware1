@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 const facturas = require('./../../models').facturas;
 
+    /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     */
 class facturasController {
     public async getData(req: Request, res: Response): Promise<void> {
       facturas.findAll().then(
@@ -16,6 +20,11 @@ class facturasController {
       );
     }
 
+     /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     Comentario: Metodo para buscar Factura mediantes idfactura
+     */
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
@@ -50,7 +59,11 @@ class facturasController {
         );
     }
 
-
+     /*
+     FechaCreacion: 12/04/2020
+     Usuario: Franmanging
+     Comentario: Metodo para crear Factura con los campos idfactura, idpedido y idpago
+     */
       public async postData(req: Request, res: Response): Promise<void> {
         let factura = {
             idfactura: req.body.idfactura,
