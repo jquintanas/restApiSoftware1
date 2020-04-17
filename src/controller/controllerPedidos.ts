@@ -110,7 +110,7 @@ class pedidosController {
                 res.status(202).json(
                     {
                         log: "Pedido ingresado con éxito",
-                        uri: globales.globales.urlBasePedidos + resp.dataValues.idpedido
+                        uri: globales.globales.urlBasePedidos + resp.dataValues.idpedido                      
                     }
                 );
                 return;
