@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { pedidosInterface } from "./../interfaces/pedidosInterface";
 import globales from "./../utils/globales";
+import { Seguridad } from "./../utils/seguridad";
 /** 
  * @const {Pedidos} 
  * @desc Import del modelo pedidos de la base de datos.
@@ -86,15 +87,24 @@ class pedidosController {
             res.status(401).json({ log: "Violación de integridad de datos." });
             return;
         }
+        //let hash = req.body;
         let pedido :pedidosInterface = {
             idpedido: req.body.idpedido,
             idcompra: req.body.idcompra,
             idproducto: req.body.idproducto,
             cantidad: req.body.cantidad,
             subtotal: req.body.subtotal,
-            cubiertos: req.body.cubiertos,
-            createdAt: new Date()
+            cubiertos: req.body.cubiertos          
         }
+        /*
+        let hashInterno = Seguridad.hashJSON(pedido);
+        let hashDesencriptado = Seguridad.desencriptar(hashInterno);
+        pedido.createdAt = new Date();
+        if(hashInterno != hash){
+            res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno,hashDesencriptado});
+            return;
+        }*/
+        pedido.createdAt = new Date();
         pedidos.create(pedido).then((resp: any) => {
             if (resp._options.isNewRecord) {
                 res.status(202).json(
