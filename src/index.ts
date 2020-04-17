@@ -15,6 +15,7 @@ import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
 const helmet = require('helmet');
+const expectCt = require('expect-ct');
 import cors from "cors";
 
 import routerPedidos from "./router/routerPedidos";
@@ -44,6 +45,11 @@ class Server {
     this.app.use(helmet.permittedCrossDomainPolicies());
     this.app.use(helmet.noSniff());
     this.app.use(helmet.contentSecurityPolicy({directives: {defaultSrc: ["'self'"]} }));
+    this.app.use(helmet.hsts({ maxAge: 31536000, includeSubDomains: true, preload: true }));
+    this.app.use(expectCt({
+      enforce: true,
+      maxAge: 30
+    }))
   }
   
 

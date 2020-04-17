@@ -19,6 +19,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const bodyParser = require("body-parser");
 const path = require("path");
 const helmet = require('helmet');
+const expectCt = require('expect-ct');
 const cors_1 = __importDefault(require("cors"));
 const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
 const routerPago_1 = __importDefault(require("./router/routerPago"));
@@ -45,6 +46,11 @@ class Server {
         this.app.use(helmet.permittedCrossDomainPolicies());
         this.app.use(helmet.noSniff());
         this.app.use(helmet.contentSecurityPolicy({ directives: { defaultSrc: ["'self'"] } }));
+        this.app.use(helmet.hsts({ maxAge: 31536000, includeSubDomains: true, preload: true }));
+        this.app.use(expectCt({
+            enforce: true,
+            maxAge: 30
+        }));
     }
     router() {
         this.app.use("/api/pedidos", routerPedidos_1.default);
