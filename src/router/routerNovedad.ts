@@ -4,7 +4,17 @@ import novedadController from "./../controller/controllerNovedad";
 /*
     FechaCreacion: 11/04/2020
     Usuario: JQuintana
-    Comentario: Clase router de pago.
+    Comentario: Clase router de pnovedadago.
+ */
+
+  /**
+ * @classdesc Clase router de novedad.
+ * @desc Fecha Creación: 11/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {routerPagos} router
+ * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class routerNovedad {
     public router: Router = Router();

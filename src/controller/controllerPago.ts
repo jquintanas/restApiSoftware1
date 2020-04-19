@@ -9,13 +9,36 @@ import { Seguridad } from "./../utils/seguridad";
     Usuario: JQuintana
     Comentario: Clase controladora de pagos.
  */
+
+ /**
+ * @classdesc Clase controladora de pagos.
+ * @desc Fecha Creación: 11/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {pagosController} pagosController
+ * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+ */
 class pagosController {
 
     /*
-    FechaCreacion: 06/04/2020
+    FechaCreación: 06/04/2020
     Usuario: JQuintana
-    Comentario: Este método se encarga de buscar el pago en base al ID proporcionaro en la url
+    Comentario: Este método se encarga de buscar el pago en base al ID proporcionado en la url
     */
+
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar el pago en base al ID proporcionado en la url. <br> Fecha Creación: 11/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
@@ -62,11 +85,25 @@ class pagosController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de agregar los datos del pago realizado por el usuario, se debe validar la integridad
     de los mismos, cuando se ingresa exitosamente los datos se retorna el mensaje pertinente y la uri del recurso.
     */
+
+    /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc   Este método se encarga de agregar los datos del pago realizado por el usuario, se debe validar la integridad
+    de los mismos, cuando se ingresa exitosamente los datos se retorna el mensaje pertinente y la uri del recurso. <br> Fecha Creación: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
     public async addPago(req: Request, res: Response): Promise<void> {
         let token = true;
         if (!token) {
@@ -113,9 +150,22 @@ class pagosController {
 
 
     /*
-   FechaCreacion: 11/04/2020
+   FechaCreación: 11/04/2020
    Usuario: JQuintana
    Comentario: Este método se encarga de eliminar una forma de pago en base al ID que se proporciona por la url.
+   */
+
+   /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc   Este método se encarga de eliminar una forma de pago en base al ID que se proporciona por la url. <br> Fecha Creación: 11/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
    */
     public async deletePago(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;

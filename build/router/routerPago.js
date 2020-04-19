@@ -10,6 +10,15 @@ const controllerPago_1 = __importDefault(require("../controller/controllerPago")
     Usuario: JQuintana
     Comentario: Clase router de pago.
  */
+/**
+* @classdesc Clase router de pago.
+* @desc Fecha Creación: 11/04/2020
+* @class
+* @public
+* @version 1.0.0
+* @returns {routerPagos} router
+* @author Jonathan Quintana <jiquinta@espol.edu.ec>
+*/
 class routerPagos {
     constructor() {
         this.router = express_1.Router();

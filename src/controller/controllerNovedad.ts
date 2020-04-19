@@ -2,19 +2,19 @@ import { Request, Response } from "express";
 import globales from "./../utils/globales";
 import { novedadinterface } from "./../interfaces/novedadInterface";
 /** 
- * @const {Novedads} 
+ * @const Novedad
  * @desc Import del modelo Novedad de la base de datos.
  */
 const novedad = require("./../../models").Novedads;
 
 /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Clase controladora de novedades.
  */
 /**
  * @classdesc Clase controladora de novedades.
- * @desc FechaCreacion: 11/04/2020
+ * @desc Fecha Creación: 11/04/2020
  * @class
  * @public
  * @version 1.0.0
@@ -24,7 +24,7 @@ const novedad = require("./../../models").Novedads;
 class novedadController {
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar la novedad en base al ID proporcionado en la url
     */
@@ -36,7 +36,7 @@ class novedadController {
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar la novedad en base al ID proporcionado en la url. <br> FechaCreacion: 11/04/2020
+     * @desc Este método se encarga de buscar la novedad en base al ID proporcionado en la url. <br> Fecha Creación: 11/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
@@ -80,7 +80,7 @@ class novedadController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url
     */
@@ -92,7 +92,7 @@ class novedadController {
     * @version 1.0.0
     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-    * @desc Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url. <br> FechaCreacion: 11/04/2020
+    * @desc Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url. <br> Fecha Creación: 11/04/2020
     * @param {Request} req Objeto Request
     * @param {Response} res Objeto response
     * @type {Promise<void>} Promesa de tipo void.
@@ -128,7 +128,7 @@ class novedadController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url
     */
@@ -140,7 +140,7 @@ class novedadController {
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
    * @returns {JSON} JSON con los datos obtenidos de la consulta.
-   * @desc  Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url. <br> FechaCreacion: 11/04/2020
+   * @desc  Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url. <br> Fecha Creación: 11/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Promesa de tipo void.
@@ -176,7 +176,7 @@ class novedadController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de buscar todas las novedades
     */
@@ -188,7 +188,7 @@ class novedadController {
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
    * @returns {JSON} JSON con los datos obtenidos de la consulta.
-   * @desc  Este método se encarga de buscar todas las novedades. <br> FechaCreacion: 11/04/2020
+   * @desc  Este método se encarga de buscar todas las novedades. <br> Fecha Creación: 11/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Promesa de tipo void.
@@ -219,7 +219,7 @@ class novedadController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
     Comentario: Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
     y su integridad.
@@ -233,7 +233,7 @@ class novedadController {
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
    * @returns {JSON} JSON con la respuesta de la transacción.
    * @desc  Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
-    y su integridad. <br> FechaCreacion: 11/04/2020
+    y su integridad. <br> Fecha Creación: 11/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Promesa de tipo void.
@@ -277,9 +277,9 @@ class novedadController {
     }
 
     /*
-    FechaCreacion: 11/04/2020
+    FechaCreación: 11/04/2020
     Usuario: JQuintana
-    Comentario: Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripcion.
+    Comentario: Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripción.
     */
 
     /**
@@ -289,7 +289,7 @@ class novedadController {
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
    * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripcion. <br> FechaCreacion: 11/04/2020
+   * @desc  Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripción. <br> Fecha Creación: 11/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Promesa de tipo void.
