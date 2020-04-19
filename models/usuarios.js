@@ -47,7 +47,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     rol: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Rols",
+        key: "idrol"
+      },
+      onUpdate: "cascade",
+      onDelete: "cascade"
     },
     createdAt: {
       allowNull: false,
@@ -64,6 +70,8 @@ module.exports = (sequelize, DataTypes) => {
     Usuarios.hasMany(models.Novedads, {foreignKey: 'idusuarioReporta', sourceKey: 'cedula'});
 
     Usuarios.hasMany(models.Novedads, {foreignKey: 'idusuarioReportado', sourceKey: 'cedula'});
+
+    Usuarios.belongsTo(models.Rols, { foreignKey: 'rol', foreignKeyConstraint: true, targetKey: 'idrol' });
   };
   return Usuarios;
 };

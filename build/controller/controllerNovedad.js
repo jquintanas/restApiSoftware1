@@ -62,11 +62,6 @@ class novedadController {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             novedad.findOne({
                 where: {
                     idnovedad: id
@@ -107,10 +102,6 @@ class novedadController {
         return __awaiter(this, void 0, void 0, function* () {
             let { reportado } = req.params;
             let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             novedad.findAll({
                 where: {
                     idUsuarioreportado: reportado
@@ -150,11 +141,6 @@ class novedadController {
     findByReporta(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { reporta } = req.params;
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             novedad.findAll({
                 where: {
                     idUsuarioreporta: reporta
@@ -193,11 +179,6 @@ class novedadController {
    */
     findAll(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             novedad.findAll({
                 attributes: ['idnovedad', 'idUsuarioreporta', 'idUsuarioreportado', 'descripcion']
             }).then((data) => {
@@ -235,11 +216,6 @@ class novedadController {
    */
     addNovedad(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             let JsonValido = true;
             if (!JsonValido) {
                 res.status(401).json({ log: "Violación de integridad de datos." });
@@ -296,11 +272,6 @@ class novedadController {
             id = Number(id);
             if (Number.isInteger(id) == false) {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
-                return;
-            }
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
                 return;
             }
             let { descripcion } = req.body;

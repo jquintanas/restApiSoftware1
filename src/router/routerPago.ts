@@ -1,5 +1,6 @@
 import { Router } from "express";
 import pagosController from "../controller/controllerPago";
+import { Seguridad } from "./../utils/seguridad";
 
 /*
     FechaCreacion: 11/04/2020
@@ -25,9 +26,9 @@ class routerPagos {
 
     config():void {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id",pagosController.findByID);
-        this.router.post("/", pagosController.addPago);
-        this.router.delete("/:id", pagosController.deletePago);
+        this.router.get("/:id",Seguridad.verificarToken,pagosController.findByID);
+        this.router.post("/", Seguridad.verificarToken,pagosController.addPago);
+        this.router.delete("/:id", Seguridad.verificarToken,pagosController.deletePago);
       }
 }
 export default new routerPagos().router

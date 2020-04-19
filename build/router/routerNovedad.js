@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerNovedad_1 = __importDefault(require("./../controller/controllerNovedad"));
+const seguridad_1 = require("./../utils/seguridad");
 /*
     FechaCreacion: 11/04/2020
     Usuario: JQuintana
@@ -26,12 +27,12 @@ class routerNovedad {
     }
     config() {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id", controllerNovedad_1.default.findById);
-        this.router.get("/reportado/:reportado", controllerNovedad_1.default.findByReportado);
-        this.router.get("/reporta/:reporta", controllerNovedad_1.default.findByReporta);
-        this.router.get("/", controllerNovedad_1.default.findAll);
-        this.router.post("/", controllerNovedad_1.default.addNovedad);
-        this.router.put("/:id/:reporta/:reportado", controllerNovedad_1.default.updateNovedad);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findById);
+        this.router.get("/reportado/:reportado", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findByReportado);
+        this.router.get("/reporta/:reporta", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findByReporta);
+        this.router.get("/", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findAll);
+        this.router.post("/", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.addNovedad);
+        this.router.put("/:id/:reporta/:reportado", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.updateNovedad);
     }
 }
 exports.default = new routerNovedad().router;

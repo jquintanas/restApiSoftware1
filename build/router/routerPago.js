@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerPago_1 = __importDefault(require("../controller/controllerPago"));
+const seguridad_1 = require("./../utils/seguridad");
 /*
     FechaCreacion: 11/04/2020
     Usuario: JQuintana
@@ -26,9 +27,9 @@ class routerPagos {
     }
     config() {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id", controllerPago_1.default.findByID);
-        this.router.post("/", controllerPago_1.default.addPago);
-        this.router.delete("/:id", controllerPago_1.default.deletePago);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerPago_1.default.findByID);
+        this.router.post("/", seguridad_1.Seguridad.verificarToken, controllerPago_1.default.addPago);
+        this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerPago_1.default.deletePago);
     }
 }
 exports.default = new routerPagos().router;

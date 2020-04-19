@@ -1,5 +1,6 @@
 import { Router } from "express";
 import novedadController from "./../controller/controllerNovedad";
+import { Seguridad } from "./../utils/seguridad";
 
 /*
     FechaCreacion: 11/04/2020
@@ -25,12 +26,12 @@ class routerNovedad {
 
     config(): void {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id", novedadController.findById);
-        this.router.get("/reportado/:reportado", novedadController.findByReportado);
-        this.router.get("/reporta/:reporta", novedadController.findByReporta);
-        this.router.get("/", novedadController.findAll);
-        this.router.post("/", novedadController.addNovedad);
-        this.router.put("/:id/:reporta/:reportado",novedadController.updateNovedad);
+        this.router.get("/:id",Seguridad.verificarToken, novedadController.findById);
+        this.router.get("/reportado/:reportado",Seguridad.verificarToken, novedadController.findByReportado);
+        this.router.get("/reporta/:reporta",Seguridad.verificarToken, novedadController.findByReporta);
+        this.router.get("/",Seguridad.verificarToken, novedadController.findAll);
+        this.router.post("/",Seguridad.verificarToken, novedadController.addNovedad);
+        this.router.put("/:id/:reporta/:reportado",Seguridad.verificarToken,novedadController.updateNovedad);
         
     }
 }

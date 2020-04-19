@@ -16,6 +16,27 @@ exports.default = {
          * @version 1.0.0
          */
         urlBaseNovedad: "http://localhost:3000/api/novedades/",
-        urlBasePedidos: "http://localhost:3000/api/pedidos/"
+        urlBasePedidos: "http://localhost:3000/api/pedidos/",
+        /**
+         * @const idRolGeneral
+         * @desc Rol de usuario general.
+         * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+         * @version 1.0.0
+         */
+        idRolGeneral: 3,
+        /**
+         * @const secretToken
+         * @desc Clave secreta para tokens.
+         * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+         * @version 1.0.0
+         */
+        secretToken: "7187ba3735b821b9ae7bd7d5dd98b61a07ec2e9cef2aad92b97a4ed6080290e6",
+        /**
+         * @const urlBaseNovedad
+         * @desc Clave secreta para encriptar y desencriptar.
+         * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+         * @version 1.0.0
+         */
+        secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a"
     }
 };

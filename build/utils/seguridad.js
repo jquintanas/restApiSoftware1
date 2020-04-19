@@ -1,8 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 let crypto = require('crypto');
 var AES = require("crypto-js/aes");
 var CryptoJS = require("crypto-js");
+const jwt = require("jsonwebtoken");
+const globales_1 = __importDefault(require("./globales"));
 /**
  * @classdesc Clase contenedora de las funciones de seguridad del api.
  * @desc Fecha Creación: 13/04/2020
@@ -42,7 +47,7 @@ class Seguridad {
      * @param {String} cadena cadena a encriptar.
      */
     static encriptar(cadena) {
-        let clave = "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a";
+        let clave = globales_1.default.globales.secretEncryp;
         return AES.encrypt(cadena, clave).toString().replace(/\//gi, "-");
     }
     /**
@@ -56,10 +61,40 @@ class Seguridad {
      * @param {String} cadena cadena a desencriptar.
      */
     static desencriptar(cadena) {
-        let clave = "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a";
+        let clave = globales_1.default.globales.secretEncryp;
         let cade = cadena.replace(/-/gi, "/");
         let bytes = AES.decrypt(cade, clave);
         return bytes.toString(CryptoJS.enc.Utf8);
+    }
+    /**
+     * @static
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+     * @desc función middleware para verificar la valides del token de sesión enviado.
+     */
+    static verificarToken(req, res, next) {
+        let bearerHeader = req.headers["authorization"];
+        console.log(bearerHeader);
+        if (typeof bearerHeader !== 'undefined') {
+            let bearer = bearerHeader.split(" ");
+            let bearerToken = bearer[1];
+            jwt.verify(bearerToken, globales_1.default.globales.secretToken, (err, data) => {
+                if (err) {
+                    res.status(403).json({ log: "No tiene permiso para ver el recurso." });
+                }
+                else {
+                    //console.log(data);
+                    next();
+                    return;
+                }
+            });
+            //res.status(403).json({log: "No tiene permiso para ver el recurso."})
+        }
+        else {
+            res.status(403).json({ log: "No existe el token de sesión." });
+        }
     }
 }
 exports.Seguridad = Seguridad;
