@@ -10,7 +10,7 @@ const seguridad_1 = require("./../utils/seguridad");
 
 
 /**
-* @classdesc Clase router de novedad.
+* @classdesc Clase router de Rol.
 * @desc Fecha Creación: 12/04/2020
 * @class
 * @public

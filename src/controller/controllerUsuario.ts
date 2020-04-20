@@ -4,11 +4,40 @@ import { usuariointerface } from "./../interfaces/usuarioInterface";
 const rols = require("./../../models").rols;
 import { Seguridad } from "./../utils/seguridad";
 
-const seguridad_1 = require("./../utils/seguridad");
+/** 
+ * @const Usuarios
+ * @desc Import del modelo Usuario de la base de datos.
+ */
 
 const usuarios = require("./../../models").Usuarios;
 
+
+/**
+ * @classdesc Clase controladora de usuarios.
+ * @desc Fecha Creación: 12/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {usuariosController} usuariosController
+ * @author Karla Burgos <kbburgos@espol.edu.ec>
+ */
+
 class usuariosController {
+
+  /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Karla Burgos <kbburgos@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de agregar el usuario proporcionado por el usuario posterior a verificar los datos
+    y su integridad. <br> Fecha Creación: 19/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
+
   public async addUsuario(req: Request, res: Response): Promise<void> {
     let token = true;
     if (!token) {
@@ -57,6 +86,20 @@ class usuariosController {
     );
   }
 
+
+  /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Karla Burgos <kbburgos@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar el usuario en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
@@ -101,6 +144,20 @@ class usuariosController {
         }
       );
   }
+
+
+  /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Karla Burgos <kbburgos@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc   Este método se encarga de eliminar el usuario en base a la cedula que se proporciona por la url. <br> Fecha Creación: 12/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
 
   public async deleteUsuario(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
