@@ -8,6 +8,16 @@
 
 import { Router } from 'express';
 import pedidosController from "../controller/controllerPedidos";
+import { Seguridad } from "./../utils/seguridad";
+/**
+ * @classdesc Clase router de pedidos.
+ * @desc Fecha Creación: 01/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {routerPedidos} router
+ * @author Danny Ríos <dprios@espol.edu.ec>
+ */
 class routerPedidos {
     public router: Router = Router();
   
@@ -16,10 +26,10 @@ class routerPedidos {
     }
     config():void {
       //this.router.[get | post | put | delete]     
-      this.router.get("/get", pedidosController.getData);
-      this.router.get("/:id", pedidosController.findByID);
-      this.router.post("/post",pedidosController.postData);
-      this.router.delete("/:id", pedidosController.deleteData);
+      this.router.get("/get", Seguridad.verificarToken, pedidosController.getData);
+      this.router.get("/:id", Seguridad.verificarToken, pedidosController.findByID);
+      this.router.post("/post", Seguridad.verificarToken, pedidosController.postData);
+      this.router.delete("/:id", Seguridad.verificarToken, pedidosController.deleteData);
       
     }
   }
