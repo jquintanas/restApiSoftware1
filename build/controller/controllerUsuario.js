@@ -14,10 +14,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
 const rols = require("./../../models").rols;
-const seguridad_2 = require("./../utils/seguridad");
 const seguridad_1 = require("./../utils/seguridad");
+/**
+ * @const Usuarios
+ * @desc Import del modelo Usuario de la base de datos.
+ */
 const usuarios = require("./../../models").Usuarios;
+/**
+ * @classdesc Clase controladora de usuarios.
+ * @desc Fecha Creación: 12/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {usuariosController} usuariosController
+ * @author Karla Burgos <kbburgos@espol.edu.ec>
+ */
 class usuariosController {
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Karla Burgos <kbburgos@espol.edu.ec>
+     * @returns {JSON} JSON con la respuesta de la transacción.
+     * @desc  Este método se encarga de agregar el usuario proporcionado por el usuario posterior a verificar los datos
+      y su integridad. <br> Fecha Creación: 19/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     addUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let token = true;
@@ -37,7 +62,7 @@ class usuariosController {
                 contrasenia: req.body.contrasenia,
                 rol: req.body.rol,
             };
-            let hashInterno = seguridad_2.Seguridad.hashJSON(data);
+            let hashInterno = seguridad_1.Seguridad.hashJSON(data);
             //aqui se debe desencriptar el hash
             data.createdAt = new Date();
             if (hashInterno != hash) {
@@ -63,6 +88,18 @@ class usuariosController {
             });
         });
     }
+    /**
+       * @async
+       * @method
+       * @public
+       * @version 1.0.0
+       * @author Karla Burgos <kbburgos@espol.edu.ec>
+       * @returns {JSON} JSON con los datos obtenidos de la consulta.
+       * @desc Este método se encarga de buscar el usuario en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+       * @param {Request} req Objeto Request
+       * @param {Response} res Objeto response
+       * @type {Promise<void>} Promesa de tipo void.
+       */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -106,6 +143,18 @@ class usuariosController {
             });
         });
     }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Karla Burgos <kbburgos@espol.edu.ec>
+     * @returns {JSON} JSON con la respuesta de la transacción.
+     * @desc   Este método se encarga de eliminar el usuario en base a la cedula que se proporciona por la url. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     deleteUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
