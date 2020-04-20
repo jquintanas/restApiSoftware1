@@ -1,14 +1,11 @@
-/*
-  Fcreación: 30/03/2020
-  Fmodificación: 01/04/2020
-  Ucreación: Danny
-  Umodificación: Danny 
-  Comentarios: se cambiaron las rutas de get y post
-  */
-
 import { Router } from 'express';
 import pedidosController from "../controller/controllerPedidos";
 import { Seguridad } from "./../utils/seguridad";
+/*
+    FechaCreacion: 30/03/2020
+    Usuario: drios96
+    Comentario: Clase router de pedidos.
+ */
 /**
  * @classdesc Clase router de pedidos.
  * @desc Fecha Creación: 01/04/2020
