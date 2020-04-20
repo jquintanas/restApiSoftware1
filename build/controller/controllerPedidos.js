@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
+const seguridad_1 = require("./../utils/seguridad");
 /**
  * @const {Pedidos}
  * @desc Import del modelo pedidos de la base de datos.
@@ -95,7 +96,7 @@ class pedidosController {
                 res.status(401).json({ log: "Violación de integridad de datos." });
                 return;
             }
-            //let hash = req.body;
+            let { hash } = req.body;
             let pedido = {
                 idpedido: req.body.idpedido,
                 idcompra: req.body.idcompra,
@@ -104,14 +105,13 @@ class pedidosController {
                 subtotal: req.body.subtotal,
                 cubiertos: req.body.cubiertos
             };
-            /*
-            let hashInterno = Seguridad.hashJSON(pedido);
-            let hashDesencriptado = Seguridad.desencriptar(hashInterno);
+            let hashInterno = seguridad_1.Seguridad.hashJSON(pedido);
+            //let hashDesencriptado = Seguridad.desencriptar(hashInterno);
             pedido.createdAt = new Date();
-            if(hashInterno != hash){
-                res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno,hashDesencriptado});
+            if (hashInterno != hash) {
+                res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
                 return;
-            }*/
+            }
             pedido.createdAt = new Date();
             pedidos.create(pedido).then((resp) => {
                 if (resp._options.isNewRecord) {
