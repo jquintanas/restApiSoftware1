@@ -10,7 +10,6 @@
   Comentario: se elimina variable sequelize para cambiarla por DataType, correccion de error de migracion de base de datos.
   */
 'use strict';
-var Sequelize = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   const Rols = sequelize.define('Rols', {
     idrol: {

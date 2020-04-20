@@ -1,19 +1,24 @@
-import { Router } from 'express';
+import { Router } from "express";
 import usuarioController from "../controller/controllerUsuario";
+import { Seguridad } from "./../utils/seguridad";
+
 class routerUsuarios {
-    public router: Router = Router();
-  
-    constructor() {
-      this.config();
-    }
-    config():void {
-      //this.router.[get | post | put | delete]
-      this.router.get("/get", usuarioController.getData);
-      this.router.post("/post", usuarioController.postData);
-      this.router.get("/:id",usuarioController.findByID);
-      this.router.delete("/:id",usuarioController.deleteData);
-      this.router.put("/:id",usuarioController.updateData);
-    }
+  public router: Router = Router();
+
+  constructor() {
+    this.config();
   }
-  const appRoutes = new routerUsuarios();
-  export default appRoutes.router;
+  config(): void {
+    //this.router.[get | post | put | delete]
+    //this.router.get("/", Seguridad.verificarToken, usuarioController.findAll);
+    this.router.get("/:id", Seguridad.verificarToken, usuarioController.findByID);
+    this.router.post("/", Seguridad.verificarToken, usuarioController.addUsuario);
+    this.router.delete(
+      "/:id",
+      Seguridad.verificarToken,
+      usuarioController.deleteUsuario
+    );
+  }
+}
+const appRoutes = new routerUsuarios();
+export default appRoutes.router;

@@ -8,6 +8,20 @@ export default {
          */
         urlBasePagos: "http://localhost:3000/api/pagos/",
         /**
+         * @const urlBaseRol
+         * @desc URL del api de rols.
+         * @author Karla Burgos <kbburgos@espol.edu.ec>
+         * @version 1.0.0
+         */
+        urlBaseRol: "http://localhost:3000/api/rols/",
+        /**
+         * @const urlBaseUsuario
+         * @desc URL del api de usuarios.
+         * @author Karla Burgos <kbburgos@espol.edu.ec>
+         * @version 1.0.0
+         */
+        urlBaseUsuario: "http://localhost:3000/api/rols/",
+        /**
          * @const urlBaseNovedad
          * @desc URL del api de novedades.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>

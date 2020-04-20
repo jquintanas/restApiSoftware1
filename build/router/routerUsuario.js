@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerUsuario_1 = __importDefault(require("../controller/controllerUsuario"));
+const seguridad_1 = require("./../utils/seguridad");
 class routerUsuarios {
     constructor() {
         this.router = express_1.Router();
@@ -12,11 +13,10 @@ class routerUsuarios {
     }
     config() {
         //this.router.[get | post | put | delete]
-        this.router.get("/get", controllerUsuario_1.default.getData);
-        this.router.post("/post", controllerUsuario_1.default.postData);
-        this.router.get("/:id", controllerUsuario_1.default.findByID);
-        this.router.delete("/:id", controllerUsuario_1.default.deleteData);
-        this.router.put("/:id", controllerUsuario_1.default.updateData);
+        //this.router.get("/", Seguridad.verificarToken, usuarioController.findAll);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.findByID);
+        this.router.post("/", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.addUsuario);
+        this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.deleteUsuario);
     }
 }
 const appRoutes = new routerUsuarios();

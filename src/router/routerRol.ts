@@ -1,5 +1,6 @@
 import { Router } from "express";
 import rolsController from "../controller/controllerRol";
+import { Seguridad } from "./../utils/seguridad";
 
 class routerRol {
   public router: Router = Router();
@@ -10,10 +11,10 @@ class routerRol {
 
   config(): void {
     //this.router.[get | post | put | delete]
-    this.router.get("/get", rolsController.getData);
-    this.router.get("/:id", rolsController.findByID);
-    this.router.post("/post", rolsController.postData);
-    this.router.delete("/:id", rolsController.deleteData);
+    this.router.get("/", Seguridad.verificarToken, rolsController.findAll);
+    this.router.get("/:id", Seguridad.verificarToken, rolsController.findById);
+    this.router.post("/", Seguridad.verificarToken, rolsController.addRol);
+    this.router.delete("/:id", Seguridad.verificarToken, rolsController.deleteRol);
   }
 }
 export default new routerRol().router;
