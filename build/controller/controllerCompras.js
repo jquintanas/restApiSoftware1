@@ -142,7 +142,16 @@ class comprasController {
      */
     deleteData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let { id } = req.params;
+            let id = req.params.id;
+            if (isNaN(id)) {
+                res.status(500).json({ log: "El ID introducido no es valido." });
+                return;
+            }
+            id = Number(id);
+            if (Number.isInteger(id) == false) {
+                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                return;
+            }
             compras.destroy({ where: { idcompra: id } }).then((data) => {
                 if (data == 1) {
                     res.status(200).json({ log: "Compra eliminado correctamente" });

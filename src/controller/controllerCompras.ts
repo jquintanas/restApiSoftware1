@@ -148,7 +148,18 @@ const compras = require('./../../models').compras;
        */
 
       public async deleteData(req: Request, res: Response): Promise<void> {
-        let { id } = req.params;
+        let id: any = req.params.id;
+        if (isNaN(id)) {
+            res.status(500).json({ log: "El ID introducido no es valido." });
+            return;
+        }
+        id = Number(id);
+        if (Number.isInteger(id) == false) {
+            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            return;
+        }
+
+
         compras.destroy({ where: { idcompra: id } }).then((data: any) => {
             if (data == 1) {
                 res.status(200).json({ log: "Compra eliminado correctamente" });
