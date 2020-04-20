@@ -1,20 +1,36 @@
 import { Request, Response } from "express";
+
+/** 
+ * @const Rol
+ * @desc Import del modelo compras de la base de datos.
+ */
+
 const compras = require('./../../models').compras;
 
- /*
-     FechaCreacion: 12/04/2020
-     Usuario: Franmanging
-     Comentario: Controller de compras
-     */
-
+    /**
+ * @classdesc Clase controladora de comrpas.
+ * @desc Fecha Creación: 12/04/2020
+ * @class
+ * @public
+ * @version 1.0.0
+ * @returns {comprasController}  comprasController
+ * @author Francesca Man Ging <fman@espol.edu.ec>
+ */
 
   class comprasController {
 
-     /*
-     FechaCreacion: 12/04/2020
-     Usuario: Franmanging
-     Comentario: Metodo para buscar las compras
-     */
+     /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Francesca Man Ging <fman@espol.edu.ec>
+   * @returns {JSON} JSON con los datos obtenidos de la consulta.
+   * @desc  Este método se encarga de buscar todas las comrpas. <br> Fecha Creación: 12/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
 
       public async getData(req: Request, res: Response): Promise<void> {
         compras.findAll().then(
@@ -30,11 +46,18 @@ const compras = require('./../../models').compras;
           );
         }
 
-         /*
-          FechaCreacion: 12/04/2020
-          Usuario: Franmanging
-          Comentario: Metodo para buscar una compra mediante idcompra
-          */
+         /**
+         * @async
+         * @method
+         * @public
+         * @version 1.0.0
+         * @author Francesca Man Ging <fman@espol.edu.ec>
+         * @returns {JSON} JSON con los datos obtenidos de la consulta.
+         * @desc Este método se encarga de buscar la compra en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+         * @param {Request} req Objeto Request
+         * @param {Response} res Objeto response
+         * @type {Promise<void>} Promesa de tipo void.
+         */
 
           public async findByID(req: Request, res: Response): Promise<void> {
             let id: any = req.params.id;
@@ -74,11 +97,18 @@ const compras = require('./../../models').compras;
           }
       
 
-        /*
-          FechaCreacion: 12/04/2020
-          Usuario: Franmanging
-          Comentario: Metodo para crear una nueva compra 
-          */
+        /**
+         * @async
+         * @method
+         * @public
+         * @version 1.0.0
+         * @author Francesca Man Ging <fman@espol.edu.ec>
+         * @returns {JSON} JSON con la respuesta de la transacción.
+         * @desc  Este método se encarga de agregar la compra proporcionado por el usuario. <br> Fecha Creación: 12/04/2020
+        * @param {Request} req Objeto Request
+        * @param {Response} res Objeto response
+        * @type {Promise<void>} Promesa de tipo void.
+        */
 
       public async postData(req: Request, res: Response): Promise<void> {
         let compra = {
@@ -104,14 +134,32 @@ const compras = require('./../../models').compras;
       }
 
 
-      /*
-          FechaCreacion: 12/04/2020
-          Usuario: Franmanging
-          Comentario: Metodo para borrar una compra mediante idcompra
-          */
+      /**
+       * @async
+       * @method
+       * @public
+       * @version 1.0.0
+       * @author Francesca Man Ging <fman@espol.edu.ec>
+       * @returns {JSON} JSON con la respuesta de la transacción.
+       * @desc   Este método se encarga de eliminar la compra en base al ID que se proporciona por la url. <br> Fecha Creación: 12/04/2020
+       * @param {Request} req Objeto Request
+       * @param {Response} res Objeto response
+       * @type {Promise<void>} Promesa de tipo void.
+       */
 
       public async deleteData(req: Request, res: Response): Promise<void> {
-        let { id } = req.params;
+        let id: any = req.params.id;
+        if (isNaN(id)) {
+            res.status(500).json({ log: "El ID introducido no es valido." });
+            return;
+        }
+        id = Number(id);
+        if (Number.isInteger(id) == false) {
+            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            return;
+        }
+
+
         compras.destroy({ where: { idcompra: id } }).then((data: any) => {
             if (data == 1) {
                 res.status(200).json({ log: "Compra eliminado correctamente" });

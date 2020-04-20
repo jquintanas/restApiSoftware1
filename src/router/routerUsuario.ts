@@ -18,7 +18,9 @@ class routerUsuarios {
       Seguridad.verificarToken,
       usuarioController.deleteUsuario
     );
+    this.router.put("/:id/:reporta/:reportado",Seguridad.verificarToken,usuarioController.updateUsuario);
   }
+  
 }
 const appRoutes = new routerUsuarios();
 export default appRoutes.router;

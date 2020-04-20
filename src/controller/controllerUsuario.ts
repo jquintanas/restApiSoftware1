@@ -4,13 +4,12 @@ import { usuariointerface } from "./../interfaces/usuarioInterface";
 const rols = require("./../../models").rols;
 import { Seguridad } from "./../utils/seguridad";
 
-/** 
+/**
  * @const Usuarios
  * @desc Import del modelo Usuario de la base de datos.
  */
 
 const usuarios = require("./../../models").Usuarios;
-
 
 /**
  * @classdesc Clase controladora de usuarios.
@@ -23,7 +22,6 @@ const usuarios = require("./../../models").Usuarios;
  */
 
 class usuariosController {
-
   /**
    * @async
    * @method
@@ -39,11 +37,6 @@ class usuariosController {
    */
 
   public async addUsuario(req: Request, res: Response): Promise<void> {
-    let token = true;
-    if (!token) {
-      res.status(401).json({ log: "Token invalido." });
-      return;
-    }
     let { hash } = req.body;
     //aqui desencriptar los datos
     let data: usuariointerface = {
@@ -86,24 +79,23 @@ class usuariosController {
     );
   }
 
-
   /**
-     * @async
-     * @method
-     * @public
-     * @version 1.0.0
-     * @author Karla Burgos <kbburgos@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar el usuario en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
-     */
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Karla Burgos <kbburgos@espol.edu.ec>
+   * @returns {JSON} JSON con los datos obtenidos de la consulta.
+   * @desc Este método se encarga de buscar el usuario en base a la cedula proporcionado en la url. <br> Fecha Creación: 12/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
 
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
-      res.status(500).json({ log: "El ID introducido no es valido." });
+      res.status(500).json({ log: "La cédula introducida no es valido." });
       return;
     }
     id = Number(id);
@@ -144,7 +136,6 @@ class usuariosController {
         }
       );
   }
-
 
   /**
    * @async
@@ -190,5 +181,71 @@ class usuariosController {
     );
   }
 
+
+  /**
+   * @async
+   * @method
+   * @public
+   * @version 1.0.0
+   * @author Karla Burgos <kbburgos@espol.edu.ec>
+   * @returns {JSON} JSON con la respuesta de la transacción.
+   * @desc  Este método se encarga de modificar el usuario proporcionada por el cliente, se actualizan todos los datos. <br> Fecha Creación: 19/04/2020
+   * @param {Request} req Objeto Request
+   * @param {Response} res Objeto response
+   * @type {Promise<void>} Promesa de tipo void.
+   */
+
+  public async updateUsuario(req: Request, res: Response): Promise<void> {
+    let id: any = req.params.id;
+    if (isNaN(id)) {
+      res.status(500).json({ log: "La cédula ingresada no es valida." });
+      return;
+    }
+    id = String(id);
+    let { hash } = req.body;
+    //aqui desencriptar los datos
+    let data: usuariointerface = {
+      cedula: req.body.cedula,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      telefono: req.body.telefono,
+      email: req.body.email,
+      direccion: req.body.direccion,
+      contrasenia: req.body.contrasenia,
+      rol: req.body.rol,
+      updatedAt: new Date(),
+    };
+    let hashInterno = Seguridad.hashJSON(data);
+    //aqui se debe desencriptar el hash
+    //data.createdAt = new Date();
+    if (hashInterno != hash) {
+      res
+        .status(401)
+        .json({ log: "Violación de integridad de datos, hash invalido." });
+      return;
+    }
+
+    usuarios
+      .update(data, {
+        where: {
+          cedula: id,
+        },
+      })
+      .then(
+        (resp: any) => {
+          if (resp[0] == 1) {
+            res.status(200).json({ log: "Usuario actualizado." });
+            return;
+          }
+          res.status(202).json({ log: "No se pudo actualizar." });
+          return;
+        },
+        (err: any) => {
+          res.status(500).json({ log: "Error" });
+          console.log(err);
+          return;
+        }
+      );
   }
+}
 export default new usuariosController();
