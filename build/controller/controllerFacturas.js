@@ -9,11 +9,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const facturas = require('./../../models').facturas;
-/*
- FechaCreacion: 12/04/2020
- Usuario: Franmanging
+/**
+ * @const Rol
+ * @desc Import del modelo facturas de la base de datos.
  */
+const facturas = require('./../../models').facturas;
+/**
+    * @classdesc Clase controladora de facturas.
+    * @desc Fecha Creación: 12/04/2020
+    * @class
+    * @public
+    * @version 1.0.0
+    * @returns {facturasController}  facturasController
+    * @author Francesca Man Ging <fman@espol.edu.ec>
+    */
 class facturasController {
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -27,11 +36,18 @@ class facturasController {
             });
         });
     }
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Franmanging
-    Comentario: Metodo para buscar Factura mediantes idfactura
-    */
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar la factura en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -65,11 +81,18 @@ class facturasController {
             });
         });
     }
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Franmanging
-    Comentario: Metodo para crear Factura con los campos idfactura, idpedido y idpago
-    */
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let factura = {

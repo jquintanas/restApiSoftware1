@@ -9,18 +9,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @const Rol
+ * @desc Import del modelo compras de la base de datos.
+ */
 const compras = require('./../../models').compras;
-/*
-    FechaCreacion: 12/04/2020
-    Usuario: Franmanging
-    Comentario: Controller de compras
-    */
+/**
+* @classdesc Clase controladora de comrpas.
+* @desc Fecha Creación: 12/04/2020
+* @class
+* @public
+* @version 1.0.0
+* @returns {comprasController}  comprasController
+* @author Francesca Man Ging <fman@espol.edu.ec>
+*/
 class comprasController {
-    /*
-    FechaCreacion: 12/04/2020
-    Usuario: Franmanging
-    Comentario: Metodo para buscar las compras
-    */
+    /**
+  * @async
+  * @method
+  * @public
+  * @version 1.0.0
+  * @author Francesca Man Ging <fman@espol.edu.ec>
+  * @returns {JSON} JSON con los datos obtenidos de la consulta.
+  * @desc  Este método se encarga de buscar todas las comrpas. <br> Fecha Creación: 12/04/2020
+  * @param {Request} req Objeto Request
+  * @param {Response} res Objeto response
+  * @type {Promise<void>} Promesa de tipo void.
+  */
     getData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             compras.findAll().then((data) => {
@@ -33,11 +48,18 @@ class comprasController {
             });
         });
     }
-    /*
-     FechaCreacion: 12/04/2020
-     Usuario: Franmanging
-     Comentario: Metodo para buscar una compra mediante idcompra
-     */
+    /**
+    * @async
+    * @method
+    * @public
+    * @version 1.0.0
+    * @author Francesca Man Ging <fman@espol.edu.ec>
+    * @returns {JSON} JSON con los datos obtenidos de la consulta.
+    * @desc Este método se encarga de buscar la compra en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+    * @param {Request} req Objeto Request
+    * @param {Response} res Objeto response
+    * @type {Promise<void>} Promesa de tipo void.
+    */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
@@ -73,11 +95,18 @@ class comprasController {
             });
         });
     }
-    /*
-      FechaCreacion: 12/04/2020
-      Usuario: Franmanging
-      Comentario: Metodo para crear una nueva compra
-      */
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON con la respuesta de la transacción.
+     * @desc  Este método se encarga de agregar la compra proporcionado por el usuario. <br> Fecha Creación: 12/04/2020
+    * @param {Request} req Objeto Request
+    * @param {Response} res Objeto response
+    * @type {Promise<void>} Promesa de tipo void.
+    */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let compra = {
@@ -99,11 +128,18 @@ class comprasController {
             });
         });
     }
-    /*
-        FechaCreacion: 12/04/2020
-        Usuario: Franmanging
-        Comentario: Metodo para borrar una compra mediante idcompra
-        */
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON con la respuesta de la transacción.
+     * @desc   Este método se encarga de eliminar la compra en base al ID que se proporciona por la url. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     deleteData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { id } = req.params;

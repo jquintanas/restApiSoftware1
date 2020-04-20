@@ -6,19 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerRol_1 = __importDefault(require("../controller/controllerRol"));
 const seguridad_1 = require("./../utils/seguridad");
-
-
-
-/**
-* @classdesc Clase router de Rol.
-* @desc Fecha Creación: 12/04/2020
-* @class
-* @public
-* @version 1.0.0
-* @returns {routerPagos} router
-* @author Karla Burgos <kbburgos@espol.edu.ec>
-*/
-
 class routerRol {
     constructor() {
         this.router = express_1.Router();
