@@ -28,6 +28,12 @@ export default {
          * @version 1.0.0
          */
         urlBaseNovedad: "http://localhost:3000/api/novedades/",
+        /**
+         * @const urlBasePedidos
+         * @desc URL del api de pedidos.
+         * @author Danny Ríos <dprios@espol.edu.ec>
+         * @version 1.0.0
+         */
         urlBasePedidos: "http://localhost:3000/api/pedidos/",
         /**
          * @const idRolGeneral
