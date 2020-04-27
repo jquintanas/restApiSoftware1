@@ -1,4 +1,7 @@
 import { Request, Response } from "express";
+import { comprasInterface } from "./../interfaces/comprasInterface";
+import globales from "./../utils/globales";
+import { Seguridad } from "./../utils/seguridad";
 
 /** 
  * @const Rol
@@ -26,13 +29,14 @@ const compras = require('./../../models').compras;
    * @version 1.0.0
    * @author Francesca Man Ging <fman@espol.edu.ec>
    * @returns {JSON} JSON con los datos obtenidos de la consulta.
-   * @desc  Este método se encarga de buscar todas las comrpas. <br> Fecha Creación: 12/04/2020
+   * @desc  Este método se encarga de buscar todas las compaas. <br> Fecha Creación: 12/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Promesa de tipo void.
    */
 
       public async getData(req: Request, res: Response): Promise<void> {
+        
         compras.findAll().then(
           (data: any) => {
             res.status(200).json(data);
@@ -111,7 +115,20 @@ const compras = require('./../../models').compras;
         */
 
       public async postData(req: Request, res: Response): Promise<void> {
-        let compra = {
+        let token = true;
+        if (!token) {
+            res.status(401).json({ log: "Token invalido." });
+            return;
+        }
+        let JsonValido = true;
+        if (!JsonValido) {
+            res.status(401).json({ log: "Violación de integridad de datos." });
+            return;
+        }
+
+        let {hash} = req.body;
+
+        let compra: comprasInterface = {
             idcompra: req.body.idcompra,
             idusuario: req.body.idusuario,
             fechacompra: new Date(),
@@ -119,14 +136,29 @@ const compras = require('./../../models').compras;
             horaEntrega: new Date(),
             createdAt: new Date(),
             updatedAt: new Date()
-
           };
 
-          compras.create(compra).then(
-            (rs: any) => {
-            res.status(200).json(rs);
-            return;
-        }, (err: any) => {
+          let hashInterno = Seguridad.hashJSON(compra);
+          compra.createdAt = new Date();
+          if(hashInterno != hash){
+              res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno});
+              return;
+          }
+
+          compra.createdAt = new Date();
+          compras.create(compra).then((rs: any) => {
+            if (rs._options.isNewRecord) {
+              res.status(202).json(
+                  {
+                      log: "Compra ingresado con éxito",
+                      uri: globales.globales.urlBaseCompras + rs.dataValues.idcompra                      
+                  }
+              );
+              return;
+          }
+          res.status(200).json({ log: "No se ingresaron los datos." });
+          return;
+         }, (err: any) => {
             res.status(500).json({ log: "Error, no se pudo crear la compra" });
             console.log(err);
             return;
@@ -159,6 +191,11 @@ const compras = require('./../../models').compras;
             return;
         }
 
+        let token = true;
+        if (!token) {
+            res.status(401).json({ log: "Token invalido." });
+            return;
+        }
 
         compras.destroy({ where: { idcompra: id } }).then((data: any) => {
             if (data == 1) {

@@ -180,6 +180,18 @@ class usuariosController {
             });
         });
     }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Karla Burgos <kbburgos@espol.edu.ec>
+     * @returns {JSON} JSON con la respuesta de la transacción.
+     * @desc  Este método se encarga de modificar el usuario proporcionada por el cliente, se actualizan todos los datos. <br> Fecha Creación: 19/04/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     updateUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;

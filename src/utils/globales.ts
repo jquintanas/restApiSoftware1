@@ -55,6 +55,20 @@ export default {
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a"
+        secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a",
+        /**
+         * @const urlBaseFacturas
+         * @desc URL del api de facturas.
+         * @author Francesca Man Ging <fman@espol.edu.ec>
+         * @version 1.0.0
+         */
+        urlBaseFacturas: "http://localhost:3000/api/facturas/",
+        /**
+         * @const urlBaseCompras
+         * @desc URL del api de compras.
+         * @author Francesca Man Ging <fman@espol.edu.ec>
+         * @version 1.0.0
+         */
+        urlBaseCompras: "http://localhost:3000/api/compras/"
     }
 };

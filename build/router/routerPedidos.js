@@ -1,11 +1,4 @@
 "use strict";
-/*
-  Fcreación: 30/03/2020
-  Fmodificación: 01/04/2020
-  Ucreación: Danny
-  Umodificación: Danny
-  Comentarios: se cambiaron las rutas de get y post
-  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -13,6 +6,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerPedidos_1 = __importDefault(require("../controller/controllerPedidos"));
 const seguridad_1 = require("./../utils/seguridad");
+/*
+    FechaCreacion: 30/03/2020
+    Usuario: drios96
+    Comentario: Clase router de pedidos.
+ */
 /**
  * @classdesc Clase router de pedidos.
  * @desc Fecha Creación: 01/04/2020

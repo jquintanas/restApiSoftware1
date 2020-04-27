@@ -17,6 +17,7 @@ class routerUsuarios {
         this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.findByID);
         this.router.post("/", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.addUsuario);
         this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.deleteUsuario);
+        this.router.put("/:id/:reporta/:reportado", seguridad_1.Seguridad.verificarToken, controllerUsuario_1.default.updateUsuario);
     }
 }
 const appRoutes = new routerUsuarios();

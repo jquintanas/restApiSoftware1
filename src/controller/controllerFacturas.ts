@@ -1,4 +1,7 @@
 import { Request, Response } from "express";
+import { facturasInterface } from "./../interfaces/facturasInterface";
+import globales from "./../utils/globales";
+import { Seguridad } from "./../utils/seguridad";
 
 /** 
  * @const Rol
@@ -18,6 +21,20 @@ const facturas = require('./../../models').facturas;
          */
 
 class facturasController {
+       /**
+         * @async
+         * @method
+         * @public
+         * @version 1.0.0
+         * @author Francesca Man Ging <fman@espol.edu.ec>
+         * @returns {JSON} JSON con los datos obtenidos de la consulta.
+         * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
+         * @param {Request} req Objeto Request
+         * @param {Response} res Objeto response
+         * @type {Promise<void>} Promesa de tipo void.
+         */
+
+
     public async getData(req: Request, res: Response): Promise<void> {
       facturas.findAll().then(
           (data: any) => {
@@ -94,14 +111,42 @@ class facturasController {
          */
 
       public async postData(req: Request, res: Response): Promise<void> {
-        let factura = {
+        let token = true;
+        if (!token) {
+            res.status(401).json({ log: "Token invalido." });
+            return;
+        }
+        let JsonValido = true;
+        if (!JsonValido) {
+            res.status(401).json({ log: "Violación de integridad de datos." });
+            return;
+        }
+
+        let {hash} = req.body;
+        
+        let factura: facturasInterface = {
             idfactura: req.body.idfactura,
             idpedido: req.body.idpedido,
             idpago: req.body.idpago,
           };
-          facturas.create(factura).then(
-              (rs: any) => {
-               res.status(200).json(rs);
+
+          let hashInterno = Seguridad.hashJSON(factura);
+          if(hashInterno != hash){
+              res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno});
+              return;
+          }
+
+          facturas.create(factura).then((rs: any) => {
+                if (rs._options.isNewRecord) {
+                res.status(202).json(
+                    {
+                        log: "Factura ingresado con éxito",
+                        uri: globales.globales.urlBaseFacturas + rs.dataValues.idfactura                    
+                    }
+                );
+                return;
+                
+            }res.status(200).json(rs);
                return;
             }, 
             (err: any) => {

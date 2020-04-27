@@ -34,6 +34,11 @@ const compras = require('./../../models').compras;
  * @author Danny Rios <dprios@espol.edu.ec>
  */
 class pedidosController {
+    /*
+    FechaCreación: 01/04/2020
+    Usuario: drios96
+    Comentario: Este método se encarga de buscar los pedidos
+    */
     /**
      * @async
      * @method
@@ -72,6 +77,11 @@ class pedidosController {
             });
         });
     }
+    /*
+    FechaCreación: 01/04/2020
+    Usuario: drios96
+    Comentario: Este método se encarga de agregar un nuevo pedido .
+    */
     /**
    * @async
    * @method
@@ -130,6 +140,12 @@ class pedidosController {
             });
         });
     }
+    /*
+    FechaCreación: 01/04/2020
+    Usuario: drios96
+    Comentario: Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
+    por la url.
+    */
     /**
     * @async
     * @method
@@ -176,6 +192,11 @@ class pedidosController {
             });
         });
     }
+    /*
+    FechaCreación: 01/04/2020
+    Usuario: drios96
+    Comentario: Este método se encarga de buscar el pago en base al ID proporcionaro en la url.
+    */
     /**
    * @async
    * @method
