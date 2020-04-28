@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerFacturas_1 = __importDefault(require("../controller/controllerFacturas"));
+const seguridad_1 = require("./../utils/seguridad");
 /*
     FechaCreacion: 11/04/2020
     Usuario: FranManGing
@@ -26,9 +27,9 @@ class routerFacturas {
     }
     config() {
         //this.router.[get | post]
-        this.router.post("/post", controllerFacturas_1.default.postData);
-        this.router.get("/:id", controllerFacturas_1.default.findByID);
-        this.router.get("/:id", controllerFacturas_1.default.getData);
+        this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.postData);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.findByID);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.getData);
     }
 }
 exports.default = new routerFacturas().router;

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerCompras_1 = __importDefault(require("../controller/controllerCompras"));
+const seguridad_1 = require("./../utils/seguridad");
 /*
     FechaCreacion: 11/04/2020
     Usuario: FranManGing
@@ -26,10 +27,10 @@ class routerCompras {
     }
     config() {
         //this.router.[post]
-        this.router.post("/post", controllerCompras_1.default.postData);
-        this.router.get("/:id", controllerCompras_1.default.findByID);
-        this.router.get("/get", controllerCompras_1.default.getData);
-        this.router.delete("/:id", controllerCompras_1.default.deleteData);
+        this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerCompras_1.default.postData);
+        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerCompras_1.default.findByID);
+        this.router.get("/get", seguridad_1.Seguridad.verificarToken, controllerCompras_1.default.getData);
+        this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerCompras_1.default.deleteData);
     }
 }
 exports.default = new routerCompras().router;
