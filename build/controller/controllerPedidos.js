@@ -46,32 +46,28 @@ class pedidosController {
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
      */
-    getData(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
-            pedidos.findAll({
-                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
+    /*public async getData(req: Request, res: Response): Promise<void> {
+        pedidos.findAll(
+            {
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
                 include: [
                     {
                         model: compras,
                         required: true,
-                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega']
+                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
                     }
                 ]
-            }).then((data) => {
-                res.status(200).json(data);
-                return;
-            }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
-                return;
-            });
+            }
+        ).then((data: any) => {
+            res.status(200).json(data);
+            return;
+        }, (err: any) => {
+            res.status(500).json({ log: "Error!! No hay datos en la base" });
+            console.log(err);
+            return;
         });
-    }
+
+    }*/
     /**
    * @async
    * @method
@@ -86,16 +82,6 @@ class pedidosController {
    */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
-            let JsonValido = true;
-            if (!JsonValido) {
-                res.status(401).json({ log: "Violación de integridad de datos." });
-                return;
-            }
             let { hash } = req.body;
             let pedido = {
                 idpedido: req.body.idpedido,
@@ -106,13 +92,11 @@ class pedidosController {
                 cubiertos: req.body.cubiertos
             };
             let hashInterno = seguridad_1.Seguridad.hashJSON(pedido);
-            //let hashDesencriptado = Seguridad.desencriptar(hashInterno);
             pedido.createdAt = new Date();
             if (hashInterno != hash) {
-                res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
+                res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
                 return;
             }
-            pedido.createdAt = new Date();
             pedidos.create(pedido).then((resp) => {
                 if (resp._options.isNewRecord) {
                     res.status(202).json({
@@ -153,11 +137,6 @@ class pedidosController {
             id = Number(id);
             if (Number.isInteger(id) == false) {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
-                return;
-            }
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
                 return;
             }
             pedidos.destroy({ where: { idpedido: id } }).then((data) => {
