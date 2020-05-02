@@ -6,11 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerNovedad_1 = __importDefault(require("./../controller/controllerNovedad"));
 const seguridad_1 = require("./../utils/seguridad");
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de pnovedadago.
- */
 /**
 * @classdesc Clase router de novedad.
 * @desc Fecha Creación: 11/04/2020

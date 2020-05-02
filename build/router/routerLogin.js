@@ -5,11 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerLogin_1 = __importDefault(require("../controller/controllerLogin"));
-/*
-    FechaCreacion: 19/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de login.
- */
 /**
 * @classdesc Clase router de login.
 * @desc Fecha Creación: 19/04/2020

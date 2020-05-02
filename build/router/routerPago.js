@@ -6,11 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerPago_1 = __importDefault(require("../controller/controllerPago"));
 const seguridad_1 = require("./../utils/seguridad");
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de pago.
- */
 /**
 * @classdesc Clase router de pago.
 * @desc Fecha Creación: 11/04/2020

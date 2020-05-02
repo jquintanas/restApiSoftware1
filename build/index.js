@@ -25,7 +25,7 @@ const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
 const routerPago_1 = __importDefault(require("./router/routerPago"));
 const routerNovedad_1 = __importDefault(require("./router/routerNovedad"));
 const routerUsuario_1 = __importDefault(require("./router/routerUsuario"));
-const routerRol_1 = __importDefault(require("./router/routerRol"));
+//import routerRols from "./router/routerRol"; 
 const routerCompras_1 = __importDefault(require("./router/routerCompras"));
 const routerLogin_1 = __importDefault(require("./router/routerLogin"));
 //import routerFacturas from "./router/routerFacturas"; 
@@ -58,7 +58,7 @@ class Server {
         this.app.use("/api/pagos", routerPago_1.default);
         this.app.use("/api/novedad", routerNovedad_1.default);
         this.app.use("/api/usuarios", routerUsuario_1.default);
-        this.app.use("/api/rols", routerRol_1.default);
+        //this.app.use("/api/rols",routerRols);
         this.app.use("/api/compras", routerCompras_1.default);
         this.app.use("/api/login", routerLogin_1.default);
         //this.app.use("/api/facturas",routerFacturas);

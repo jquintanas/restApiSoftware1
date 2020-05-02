@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
 const seguridad_1 = require("./../utils/seguridad");
 /**
- * @const Rol
+ * @const compras
  * @desc Import del modelo compras de la base de datos.
  */
 const compras = require('./../../models').compras;
@@ -36,7 +36,7 @@ class comprasController {
   * @version 1.0.0
   * @author Francesca Man Ging <fman@espol.edu.ec>
   * @returns {JSON} JSON con los datos obtenidos de la consulta.
-  * @desc  Este método se encarga de buscar todas las compaas. <br> Fecha Creación: 12/04/2020
+  * @desc  Este método se encarga de buscar todas las compras. <br> Fecha Creación: 12/04/2020
   * @param {Request} req Objeto Request
   * @param {Response} res Objeto response
   * @type {Promise<void>} Promesa de tipo void.

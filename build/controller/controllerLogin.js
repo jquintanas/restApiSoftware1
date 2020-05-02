@@ -16,11 +16,6 @@ const seguridad_1 = require("./../utils/seguridad");
 const globales_1 = __importDefault(require("./../utils/globales"));
 const usuarios = require('./../../models').Usuarios;
 const jwt = require("jsonwebtoken");
-/*
-    FechaCreación: 19/04/2020
-    Usuario: JQuintana
-    Comentario: Clase controladora de Login.
- */
 /**
  * @classdesc Clase controladora de Login.
  * @desc Fecha Creación: 19/04/2020
@@ -31,11 +26,6 @@ const jwt = require("jsonwebtoken");
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class loginController {
-    /*
-   FechaCreación: 19/04/2020
-   Usuario: JQuintana
-   Comentario: Este método se encarga de buscar el usuario en base a las credenciales proporcionadas y devuelve los datos de este junto con el token de sesión.
-   */
     /**
      * @async
      * @method

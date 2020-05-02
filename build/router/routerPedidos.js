@@ -6,11 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerPedidos_1 = __importDefault(require("../controller/controllerPedidos"));
 const seguridad_1 = require("./../utils/seguridad");
-/*
-    FechaCreacion: 30/03/2020
-    Usuario: drios96
-    Comentario: Clase router de pedidos.
- */
 /**
  * @classdesc Clase router de pedidos.
  * @desc Fecha Creación: 01/04/2020

@@ -115,13 +115,6 @@ class usuariosController {
                     cedula: id,
                 },
                 attributes: ["cedula", "nombre", "apellido", "direccion", "rol"],
-                include: [
-                    {
-                        model: rols,
-                        required: true,
-                        attributes: ["idrol"],
-                    },
-                ],
             })
                 .then((data) => {
                 if (data == null) {

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const globales_1 = __importDefault(require("./../utils/globales"));
 const seguridad_1 = require("./../utils/seguridad");
 /**
- * @const Rol
+ * @const facturas
  * @desc Import del modelo facturas de la base de datos.
  */
 const facturas = require('./../../models').facturas;

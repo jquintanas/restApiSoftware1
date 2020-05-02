@@ -94,7 +94,9 @@ class usuariosController {
 
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
+   
     if (isNaN(id)) {
+      
       res.status(500).json({ log: "La cédula introducida no es valido." });
       return;
     }
@@ -111,13 +113,6 @@ class usuariosController {
           cedula: id,
         },
         attributes: ["cedula", "nombre", "apellido", "direccion", "rol"],
-        include: [
-          {
-            model: rols,
-            required: true,
-            attributes: ["idrol"],
-          },
-        ],
       })
       .then(
         (data: any) => {

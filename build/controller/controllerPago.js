@@ -16,11 +16,6 @@ const pagos = require('./../../models').Pagos;
 const formasPagos = require('./../../models').formasPagos;
 const globales_1 = __importDefault(require("./../utils/globales"));
 const seguridad_1 = require("./../utils/seguridad");
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase controladora de pagos.
- */
 /**
 * @classdesc Clase controladora de pagos.
 * @desc Fecha Creación: 11/04/2020
@@ -31,11 +26,6 @@ const seguridad_1 = require("./../utils/seguridad");
 * @author Jonathan Quintana <jiquinta@espol.edu.ec>
 */
 class pagosController {
-    /*
-    FechaCreación: 06/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar el pago en base al ID proporcionado en la url
-    */
     /**
      * @async
      * @method
@@ -86,12 +76,6 @@ class pagosController {
             });
         });
     }
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de agregar los datos del pago realizado por el usuario, se debe validar la integridad
-    de los mismos, cuando se ingresa exitosamente los datos se retorna el mensaje pertinente y la uri del recurso.
-    */
     /**
    * @async
    * @method
@@ -107,11 +91,6 @@ class pagosController {
    */
     addPago(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
             let { hash } = req.body;
             let data = {
                 idformaPago: req.body.idformaPago,
@@ -142,11 +121,6 @@ class pagosController {
             });
         });
     }
-    /*
-   FechaCreación: 11/04/2020
-   Usuario: JQuintana
-   Comentario: Este método se encarga de eliminar una forma de pago en base al ID que se proporciona por la url.
-   */
     /**
     * @async
     * @method
