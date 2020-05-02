@@ -2,12 +2,6 @@ import { Router } from "express";
 import pagosController from "../controller/controllerPago";
 import { Seguridad } from "./../utils/seguridad";
 
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de pago.
- */
-
  /**
  * @classdesc Clase router de pago.
  * @desc Fecha Creación: 11/04/2020

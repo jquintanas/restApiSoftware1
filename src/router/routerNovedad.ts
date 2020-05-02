@@ -2,11 +2,6 @@ import { Router } from "express";
 import novedadController from "./../controller/controllerNovedad";
 import { Seguridad } from "./../utils/seguridad";
 
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de pnovedadago.
- */
 
   /**
  * @classdesc Clase router de novedad.

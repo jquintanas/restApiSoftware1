@@ -1,17 +1,13 @@
 import { Request, Response } from "express";
 import globales from "./../utils/globales";
 import { novedadinterface } from "./../interfaces/novedadInterface";
+import { Seguridad } from "../utils/seguridad";
 /** 
  * @const Novedad
  * @desc Import del modelo Novedad de la base de datos.
  */
 const novedad = require("./../../models").Novedads;
 
-/*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase controladora de novedades.
- */
 /**
  * @classdesc Clase controladora de novedades.
  * @desc Fecha Creación: 11/04/2020
@@ -22,13 +18,6 @@ const novedad = require("./../../models").Novedads;
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class novedadController {
-
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar la novedad en base al ID proporcionado en la url
-    */
-
     /**
      * @async
      * @method
@@ -74,12 +63,6 @@ class novedadController {
         );
     }
 
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url
-    */
-
     /**
     * @async
     * @method
@@ -94,7 +77,6 @@ class novedadController {
     */
     public async findByReportado(req: Request, res: Response): Promise<void> {
         let { reportado } = req.params;
-        let token = true;
         novedad.findAll(
             {
                 where: {
@@ -117,12 +99,6 @@ class novedadController {
 
         );
     }
-
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url
-    */
 
     /**
    * @async
@@ -161,12 +137,6 @@ class novedadController {
         );
     }
 
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar todas las novedades
-    */
-
     /**
    * @async
    * @method
@@ -199,13 +169,6 @@ class novedadController {
         );
     }
 
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
-    y su integridad.
-    */
-
     /**
    * @async
    * @method
@@ -220,17 +183,17 @@ class novedadController {
    * @type {Promise<void>} Promesa de tipo void.
    */
     public async addNovedad(req: Request, res: Response): Promise<void> {
-        let JsonValido = true;
-        if (!JsonValido) {
-            res.status(401).json({ log: "Violación de integridad de datos." });
-            return;
-        }
+        let {hash} = req.body;
         //aqui desencriptar los datos
         let data: novedadinterface = {
             descripcion: req.body.descripcion,
             idusuarioReporta: req.body.idusuarioReporta,
-            idusuarioReportado: req.body.idusuarioReportado,
-            createdAt: new Date()
+            idusuarioReportado: req.body.idusuarioReportado
+        }
+        let hashInterno = Seguridad.hashJSON(data);
+        if(hashInterno != hash){
+            res.status(401).json({log: "Violación de integridad de datos, hash invalido."});
+            return;
         }
         novedad.create(data).then((resp: any) => {
             if (resp._options.isNewRecord) {
@@ -251,12 +214,6 @@ class novedadController {
         }
         );
     }
-
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripción.
-    */
 
     /**
    * @async

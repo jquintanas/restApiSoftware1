@@ -1,13 +1,5 @@
 import { Router } from "express";
 import comprasLogin from "../controller/controllerLogin";
-import { Seguridad } from "./../utils/seguridad";
-
-
-/*
-    FechaCreacion: 19/04/2020
-    Usuario: JQuintana
-    Comentario: Clase router de login.
- */
 
   /**
  * @classdesc Clase router de login.

@@ -4,7 +4,7 @@ import globales from "./../utils/globales";
 import { Seguridad } from "./../utils/seguridad";
 
 /** 
- * @const Rol
+ * @const facturas
  * @desc Import del modelo facturas de la base de datos.
  */
 

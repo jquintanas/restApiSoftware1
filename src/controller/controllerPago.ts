@@ -4,11 +4,6 @@ const formasPagos = require('./../../models').formasPagos;
 import { pagosInterface } from "./../interfaces/pagosInterface";
 import globales from "./../utils/globales";
 import { Seguridad } from "./../utils/seguridad";
-/*
-    FechaCreacion: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Clase controladora de pagos.
- */
 
  /**
  * @classdesc Clase controladora de pagos.
@@ -20,13 +15,6 @@ import { Seguridad } from "./../utils/seguridad";
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class pagosController {
-
-    /*
-    FechaCreación: 06/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de buscar el pago en base al ID proporcionado en la url
-    */
-
     /**
      * @async
      * @method
@@ -79,13 +67,6 @@ class pagosController {
         );
     }
 
-    /*
-    FechaCreación: 11/04/2020
-    Usuario: JQuintana
-    Comentario: Este método se encarga de agregar los datos del pago realizado por el usuario, se debe validar la integridad
-    de los mismos, cuando se ingresa exitosamente los datos se retorna el mensaje pertinente y la uri del recurso.
-    */
-
     /**
    * @async
    * @method
@@ -100,11 +81,6 @@ class pagosController {
    * @type {Promise<void>} Promesa de tipo void.
    */
     public async addPago(req: Request, res: Response): Promise<void> {
-        let token = true;
-        if (!token) {
-            res.status(401).json({ log: "Token invalido." });
-            return;
-        }
         let {hash} = req.body;
         let data: pagosInterface = {
             idformaPago: req.body.idformaPago,
@@ -136,14 +112,6 @@ class pagosController {
             return;
         });
     }
-
-
-
-    /*
-   FechaCreación: 11/04/2020
-   Usuario: JQuintana
-   Comentario: Este método se encarga de eliminar una forma de pago en base al ID que se proporciona por la url.
-   */
 
    /**
    * @async
@@ -182,11 +150,7 @@ class pagosController {
             console.log(err);
             return;
         })
-
     }
-
-
-
 }
 
 export default new pagosController();

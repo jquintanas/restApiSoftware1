@@ -5,7 +5,7 @@ import { rolinterface } from "./../interfaces/rolInterface";
 
 
 /** 
- * @const Rol
+ * @const rols
  * @desc Import del modelo Rol de la base de datos.
  */
 
