@@ -30,30 +30,6 @@ const facturas = require('./../../models').facturas;
     */
 class facturasController {
     /**
-      * @async
-      * @method
-      * @public
-      * @version 1.0.0
-      * @author Francesca Man Ging <fman@espol.edu.ec>
-      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-      * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
-      * @param {Request} req Objeto Request
-      * @param {Response} res Objeto response
-      * @type {Promise<void>} Promesa de tipo void.
-      */
-    getData(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            facturas.findAll().then((data) => {
-                res.status(200).json(data);
-                return;
-            }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
-                return;
-            });
-        });
-    }
-    /**
      * @async
      * @method
      * @public
@@ -77,8 +53,7 @@ class facturasController {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            facturas
-                .findOne({
+            facturas.findOne({
                 where: {
                     idfactura: id,
                 },
@@ -105,23 +80,13 @@ class facturasController {
      * @version 1.0.0
      * @author Francesca Man Ging <fman@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
+     * @desc  Este método se encarga de agregar una nueva facturas. <br> Fecha Creación: 12/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
      */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
-            let JsonValido = true;
-            if (!JsonValido) {
-                res.status(401).json({ log: "Violación de integridad de datos." });
-                return;
-            }
             let { hash } = req.body;
             let factura = {
                 idfactura: req.body.idfactura,

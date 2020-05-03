@@ -11,13 +11,30 @@
   */
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Facturas = sequelize.define('Facturas', {
-    idfactura: DataTypes.INTEGER,
-    idpedido: DataTypes.INTEGER,
-    idpago: DataTypes.INTEGER
-  }, {});
-  Facturas.associate = function(models) {
-    // associations can be defined here
-  };
+
+    const Facturas = sequelize.define('Facturas', {
+      idfactura: DataTypes.INTEGER,
+      idpedido: DataTypes.INTEGER,
+      idpago: DataTypes.INTEGER
+      }, {});
+
+      /*
+      Fcreación: 11/04/2020
+      Ucreación: Francesca Man Ging
+      Comentarios: se asocia el idpedido de la tabla pedido porque es foreignkey
+      Comentarios: se asocia el idpago de la tabla pago porque es foreignkey
+      */
+
+    Facturas.associate = function(models) {
+     /* Facturas.belongsTo(models.pedidos,{
+          foreignKey: 'idpedido',
+          foreignKeyConstraint: true
+      });
+
+      Facturas.belongsTo(models.pagos, { 
+        foreignKey: 'idPago', 
+        foreignKeyConstraint: true
+      });*/
+    };
   return Facturas;
 };

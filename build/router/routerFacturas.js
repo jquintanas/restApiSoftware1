@@ -29,7 +29,6 @@ class routerFacturas {
         //this.router.[get | post]
         this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.postData);
         this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.findByID);
-        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.getData);
     }
 }
 exports.default = new routerFacturas().router;

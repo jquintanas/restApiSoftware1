@@ -21,33 +21,6 @@ const facturas = require('./../../models').facturas;
          */
 
 class facturasController {
-       /**
-         * @async
-         * @method
-         * @public
-         * @version 1.0.0
-         * @author Francesca Man Ging <fman@espol.edu.ec>
-         * @returns {JSON} JSON con los datos obtenidos de la consulta.
-         * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
-         * @param {Request} req Objeto Request
-         * @param {Response} res Objeto response
-         * @type {Promise<void>} Promesa de tipo void.
-         */
-
-
-    public async getData(req: Request, res: Response): Promise<void> {
-      facturas.findAll().then(
-          (data: any) => {
-              res.status(200).json(data);
-              return;
-        }, 
-        (err: any) => {
-            res.status(500).json({ log: "Error!! No hay datos en la base" });
-            console.log(err);
-            return;
-        }
-      );
-    }
 
         /**
          * @async
@@ -63,39 +36,40 @@ class facturasController {
          */
 
 
-    public async findByID(req: Request, res: Response): Promise<void> {
-        let id: any = req.params.id;
-        if (isNaN(id)) {
-            res.status(500).json({ log: "El ID introducido no es valido." });
-            return;
-        }
-        id = Number(id);
-        if (Number.isInteger(id) == false) {
-            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
-            return;
-        }
-        facturas
-            .findOne({
-                where: {
-                    idfactura: id,
-                },
-            })
-            .then((data: any) => {
-            if (data == null) {
-                res
-                .status(404)
-                .json({ log: "No Existen datos a mostrar para el ID." })
-                return;
+            public async findByID(req: Request, res: Response): Promise<void> {
+                let id: any = req.params.id;
+                if (isNaN(id)) {
+                    res.status(500).json({ log: "El ID introducido no es valido." });
+                    return;
+                }
+
+                id = Number(id);
+                if (Number.isInteger(id) == false) {
+                    res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                    return;
+                }
+
+                facturas.findOne({
+                        where: {
+                            idfactura: id,
+                        },
+                    })
+                    .then((data: any) => {
+                        if (data == null) {
+                            res
+                            .status(404)
+                            .json({ log: "No Existen datos a mostrar para el ID." })
+                            return;
+                        }
+                    res.status(200).json(data);
+                    return;
+                    }, 
+                    (err: any) => {
+                    res.status(500).json(err);
+                    return;
+                    }
+                    );
             }
-            res.status(200).json(data);
-            return;
-        }, 
-        (err: any) => {
-            res.status(500).json(err);
-            return;
-        }
-        );
-    }
 
         /**
          * @async
@@ -104,58 +78,46 @@ class facturasController {
          * @version 1.0.0
          * @author Francesca Man Ging <fman@espol.edu.ec>
          * @returns {JSON} JSON con los datos obtenidos de la consulta.
-         * @desc  Este método se encarga de buscar todas las facturas. <br> Fecha Creación: 12/04/2020
+         * @desc  Este método se encarga de agregar una nueva facturas. <br> Fecha Creación: 12/04/2020
          * @param {Request} req Objeto Request
          * @param {Response} res Objeto response
          * @type {Promise<void>} Promesa de tipo void.
          */
 
-      public async postData(req: Request, res: Response): Promise<void> {
-        let token = true;
-        if (!token) {
-            res.status(401).json({ log: "Token invalido." });
-            return;
-        }
-        let JsonValido = true;
-        if (!JsonValido) {
-            res.status(401).json({ log: "Violación de integridad de datos." });
-            return;
-        }
+            public async postData(req: Request, res: Response): Promise<void> {
+                let {hash} = req.body;
+                let factura: facturasInterface = {
+                    idfactura: req.body.idfactura,
+                    idpedido: req.body.idpedido,
+                    idpago: req.body.idpago,
+                };
 
-        let {hash} = req.body;
-        
-        let factura: facturasInterface = {
-            idfactura: req.body.idfactura,
-            idpedido: req.body.idpedido,
-            idpago: req.body.idpago,
-          };
+                let hashInterno = Seguridad.hashJSON(factura);
+                if(hashInterno != hash){
+                    res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno});
+                    return;
+                }
 
-          let hashInterno = Seguridad.hashJSON(factura);
-          if(hashInterno != hash){
-              res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno});
-              return;
-          }
-
-          facturas.create(factura).then((rs: any) => {
-                if (rs._options.isNewRecord) {
-                res.status(202).json(
-                    {
-                        log: "Factura ingresado con éxito",
-                        uri: globales.globales.urlBaseFacturas + rs.dataValues.idfactura                    
+                facturas.create(factura).then((rs: any) => {
+                        if (rs._options.isNewRecord) {
+                        res.status(202).json(
+                            {
+                                log: "Factura ingresado con éxito",
+                                uri: globales.globales.urlBaseFacturas + rs.dataValues.idfactura                    
+                            }
+                        );
+                        return;
+                        
+                    }res.status(200).json(rs);
+                    return;
+                    }, 
+                    (err: any) => {
+                        res.status(500).json({ log: "Error, no se pudo crear la factura" });
+                        console.log(err);
+                        return;
                     }
                 );
-                return;
-                
-            }res.status(200).json(rs);
-               return;
-            }, 
-            (err: any) => {
-                res.status(500).json({ log: "Error, no se pudo crear la factura" });
-                console.log(err);
-                return;
             }
-        );
-      }
 
       
 }

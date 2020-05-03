@@ -29,7 +29,7 @@ class routerCompras {
         //this.router.[post]
         this.router.post("/post", Seguridad.verificarToken, comprasController.postData);
         this.router.get("/:id", Seguridad.verificarToken, comprasController.findByID);
-        this.router.get("/get", Seguridad.verificarToken, comprasController.getData);
+        //this.router.get("/get", Seguridad.verificarToken, comprasController.getData);
         this.router.delete("/:id", Seguridad.verificarToken, comprasController.deleteData);
       }
 }

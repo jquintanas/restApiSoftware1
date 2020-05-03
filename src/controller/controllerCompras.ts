@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { comprasInterface } from "./../interfaces/comprasInterface";
 import globales from "./../utils/globales";
 import { Seguridad } from "./../utils/seguridad";
+import controllerUsuario from "./controllerUsuario";
 
 /** 
  * @const compras
@@ -9,6 +10,12 @@ import { Seguridad } from "./../utils/seguridad";
  */
 
 const compras = require('./../../models').compras;
+
+/** 
+ * @const {usuario} 
+ * @desc Import del modelo usuario de la base de datos.
+ */
+const usuario = require('./../../models').usuario;
 
 /**
 * @classdesc Clase controladora de comrpas.
@@ -33,7 +40,7 @@ class comprasController {
 * @param {Request} req Objeto Request
 * @param {Response} res Objeto response
 * @type {Promise<void>} Promesa de tipo void.
-*/
+
 
   public async getData(req: Request, res: Response): Promise<void> {
     compras.findAll().then(
@@ -48,6 +55,8 @@ class comprasController {
       }
     );
   }
+
+  */
 
   /**
   * @async
@@ -74,13 +83,20 @@ class comprasController {
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
-    compras
-      .findOne({
+    compras.findOne({
         where: {
-          idcompra: id,
+            idcompra: id
         },
-      })
-      .then(
+        attributes: ['idcompra', 'idusuario', 'fechacompra','idformaEntrega','horaEntrega'],
+            include: [
+                {
+                    model: usuario,
+                    required: true,
+                    attributes: ['cedula', 'nombre', 'apellido']
+                }
+            ]
+      }
+      ).then(
         (data: any) => {
           if (data == null) {
             res
@@ -112,19 +128,7 @@ class comprasController {
   * @type {Promise<void>} Promesa de tipo void.
   */
   public async postData(req: Request, res: Response): Promise<void> {
-    let token = true;
-    if (!token) {
-      res.status(401).json({ log: "Token invalido." });
-      return;
-    }
-    let JsonValido = true;
-    if (!JsonValido) {
-      res.status(401).json({ log: "Violación de integridad de datos." });
-      return;
-    }
-
     let { hash } = req.body;
-
     let compra: comprasInterface = {
       idcompra: req.body.idcompra,
       idusuario: req.body.idusuario,
@@ -141,8 +145,6 @@ class comprasController {
       res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
       return;
     }
-
-    compra.createdAt = new Date();
     compras.create(compra).then((rs: any) => {
       if (rs._options.isNewRecord) {
         res.status(202).json(
@@ -187,13 +189,7 @@ class comprasController {
       res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
-
-    let token = true;
-    if (!token) {
-      res.status(401).json({ log: "Token invalido." });
-      return;
-    }
-
+    
     compras.destroy({ where: { idcompra: id } }).then((data: any) => {
       if (data == 1) {
         res.status(200).json({ log: "Compra eliminado correctamente" });

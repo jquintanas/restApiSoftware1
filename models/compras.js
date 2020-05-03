@@ -44,8 +44,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
+
+
+  /*
+  Fcreación: 11/04/2020
+  Ucreación: Francesca Man Ging
+  Comentarios: se asocia el idusuario de la tabla usuario porque es foreignkey
+  */
+
   compras.associate = function(models) {
-    // associations can be defined here
-  };
+    /* associations can be defined here
+
+    compras.associate = function(models) {
+      compras.belongsTo(models.Usuarios,{
+          foreignKey: 'cdeula',
+          foreignKeyConstraint: true
+      })};*/
+    }
   return compras;
 };

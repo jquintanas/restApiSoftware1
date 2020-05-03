@@ -20,6 +20,11 @@ const seguridad_1 = require("./../utils/seguridad");
  */
 const compras = require('./../../models').compras;
 /**
+ * @const {usuario}
+ * @desc Import del modelo usuario de la base de datos.
+ */
+const usuario = require('./../../models').usuario;
+/**
 * @classdesc Clase controladora de comrpas.
 * @desc Fecha Creación: 12/04/2020
 * @class
@@ -40,19 +45,23 @@ class comprasController {
   * @param {Request} req Objeto Request
   * @param {Response} res Objeto response
   * @type {Promise<void>} Promesa de tipo void.
-  */
-    getData(req, res) {
-        return __awaiter(this, void 0, void 0, function* () {
-            compras.findAll().then((data) => {
-                res.status(200).json(data);
-                return;
-            }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
-                return;
-            });
-        });
+  
+  
+    public async getData(req: Request, res: Response): Promise<void> {
+      compras.findAll().then(
+        (data: any) => {
+          res.status(200).json(data);
+          return;
+        },
+        (err: any) => {
+          res.status(500).json({ log: "Error!! No hay datos en la base" });
+          console.log(err);
+          return;
+        }
+      );
     }
+  
+    */
     /**
     * @async
     * @method
@@ -79,13 +88,19 @@ class comprasController {
                     .json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            compras
-                .findOne({
+            compras.findOne({
                 where: {
-                    idcompra: id,
+                    idcompra: id
                 },
-            })
-                .then((data) => {
+                attributes: ['idcompra', 'idusuario', 'fechacompra', 'idformaEntrega', 'horaEntrega'],
+                include: [
+                    {
+                        model: usuario,
+                        required: true,
+                        attributes: ['cedula', 'nombre', 'apellido']
+                    }
+                ]
+            }).then((data) => {
                 if (data == null) {
                     res
                         .status(404)
@@ -114,16 +129,6 @@ class comprasController {
     */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
-                return;
-            }
-            let JsonValido = true;
-            if (!JsonValido) {
-                res.status(401).json({ log: "Violación de integridad de datos." });
-                return;
-            }
             let { hash } = req.body;
             let compra = {
                 idcompra: req.body.idcompra,
@@ -140,7 +145,6 @@ class comprasController {
                 res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
                 return;
             }
-            compra.createdAt = new Date();
             compras.create(compra).then((rs) => {
                 if (rs._options.isNewRecord) {
                     res.status(202).json({
@@ -180,11 +184,6 @@ class comprasController {
             id = Number(id);
             if (Number.isInteger(id) == false) {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
-                return;
-            }
-            let token = true;
-            if (!token) {
-                res.status(401).json({ log: "Token invalido." });
                 return;
             }
             compras.destroy({ where: { idcompra: id } }).then((data) => {
