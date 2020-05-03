@@ -55,8 +55,9 @@ class facturasController {
             }
             facturas.findOne({
                 where: {
-                    idfactura: id,
+                    idfactura: id
                 },
+                attributes: ['idfactura', 'idpedido', 'idpago'],
             })
                 .then((data) => {
                 if (data == null) {
@@ -80,7 +81,8 @@ class facturasController {
      * @version 1.0.0
      * @author Francesca Man Ging <fman@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc  Este método se encarga de agregar una nueva facturas. <br> Fecha Creación: 12/04/2020
+     * @desc  Este método se encarga de agregar una nueva facturas posterior a verificar los datos
+y su integridad. <br> Fecha Creación: 12/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.

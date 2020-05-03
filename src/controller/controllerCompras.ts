@@ -11,14 +11,9 @@ import controllerUsuario from "./controllerUsuario";
 
 const compras = require('./../../models').compras;
 
-/** 
- * @const {usuario} 
- * @desc Import del modelo usuario de la base de datos.
- */
-const usuario = require('./../../models').usuario;
 
 /**
-* @classdesc Clase controladora de comrpas.
+* @classdesc Clase controladora de compras.
 * @desc Fecha Creación: 12/04/2020
 * @class
 * @public
@@ -88,13 +83,6 @@ class comprasController {
             idcompra: id
         },
         attributes: ['idcompra', 'idusuario', 'fechacompra','idformaEntrega','horaEntrega'],
-            include: [
-                {
-                    model: usuario,
-                    required: true,
-                    attributes: ['cedula', 'nombre', 'apellido']
-                }
-            ]
       }
       ).then(
         (data: any) => {
