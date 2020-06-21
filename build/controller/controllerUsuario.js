@@ -53,9 +53,9 @@ class usuariosController {
                 apellido: req.body.apellido,
                 telefono: req.body.telefono,
                 email: req.body.email,
-                direccion: req.body.direccion,
                 contrasenia: req.body.contrasenia,
                 rol: req.body.rol,
+                direccion: req.body.direccion
             };
             let hashInterno = seguridad_1.Seguridad.hashJSON(data);
             //aqui se debe desencriptar el hash
@@ -77,7 +77,7 @@ class usuariosController {
                 res.status(200).json({ log: "No se ingresaron los datos." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                res.status(500).json({ log: "Error", error: err.original.code });
                 console.log(err);
                 return;
             });

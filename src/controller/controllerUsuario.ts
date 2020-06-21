@@ -45,9 +45,9 @@ class usuariosController {
       apellido: req.body.apellido,
       telefono: req.body.telefono,
       email: req.body.email,
-      direccion: req.body.direccion,
       contrasenia: req.body.contrasenia,
       rol: req.body.rol,
+      direccion: req.body.direccion
     };
     let hashInterno = Seguridad.hashJSON(data);
     //aqui se debe desencriptar el hash
@@ -72,7 +72,7 @@ class usuariosController {
         return;
       },
       (err: any) => {
-        res.status(500).json({ log: "Error" });
+        res.status(500).json({ log: "Error", error: err.original.code });
         console.log(err);
         return;
       }
