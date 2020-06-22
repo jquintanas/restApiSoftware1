@@ -59,8 +59,7 @@ class loginController {
             let refreshToken = jwt.sign({id},globales.globales.refreshToken,{expiresIn:globales.globales.tiempoRefreshToken});
             let response = {
                 "status": "Logged in",
-                "token": token,
-                "refreshToken": refreshToken,
+                "token": token
             }
             tokenList[refreshToken] = response;
            
@@ -73,6 +72,18 @@ class loginController {
         });
     }
 
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de generar un token a partir del id y refreshtoken recibido por el usuario. <br> Fecha Creación: 22/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     public async token(req: Request, res: Response) : Promise<void>{
         let {id,clave,refreshToken}= req.body;
         
@@ -86,7 +97,18 @@ class loginController {
             res.status(404).json({ log: "No existe el token en la lista de tokens." });
         }
     }
-    
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga eliminar el token existente en la lista de tokens cuando el usuario cierra sesión. <br> Fecha Creación: 22/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     public async rejectToken(req:Request, res:Response)  : Promise<void>{
         let refreshToken = req.body.refreshToken;
         if(refreshToken in tokenList){
