@@ -13,11 +13,7 @@ class routerUsuarios {
     //this.router.get("/", Seguridad.verificarToken, usuarioController.findAll);
     this.router.get("/:id", Seguridad.verificarToken, usuarioController.findByID);
     this.router.post("/", Seguridad.verificarToken, usuarioController.addUsuario);
-    this.router.delete(
-      "/:id",
-      Seguridad.verificarToken,
-      usuarioController.deleteUsuario
-    );
+    this.router.delete("/:id",Seguridad.verificarToken,usuarioController.deleteUsuario);
     this.router.put("/:id/:reporta/:reportado",Seguridad.verificarToken,usuarioController.updateUsuario);
   }
   

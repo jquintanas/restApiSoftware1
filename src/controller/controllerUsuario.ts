@@ -37,7 +37,8 @@ class usuariosController {
    */
 
   public async addUsuario(req: Request, res: Response): Promise<void> {
-    let { hash } = req.body;
+    let {hash}  =  req.body;
+    
     //aqui desencriptar los datos
     let data: usuariointerface = {
       cedula: req.body.cedula,
@@ -55,7 +56,7 @@ class usuariosController {
     if (hashInterno != hash) {
       res
         .status(401)
-        .json({ log: "Violación de integridad de datos, hash invalido." });
+        .json({log: "Violación de integridad de datos, hash invalido."});
       return;
     }
 

@@ -81,6 +81,7 @@ export class Seguridad {
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
+            
             jwt.verify(bearerToken, globales.globales.secretToken, (err:any, data:any) => {
                 if (err) {
                     res.status(403).json({log: "No tiene permiso para ver el recurso."})

@@ -1,8 +1,10 @@
 import { Request, Response } from "express";
 import { Seguridad } from "./../utils/seguridad";
 import globales from "./../utils/globales";
+const tokenList:any = {};
 const usuarios = require('./../../models').Usuarios;
 const jwt = require("jsonwebtoken");
+
 
 /**
  * @classdesc Clase controladora de Login.
@@ -14,6 +16,9 @@ const jwt = require("jsonwebtoken");
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class loginController {
+
+
+
     /**
      * @async
      * @method
@@ -26,7 +31,8 @@ class loginController {
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
      */
-    public async findByID(req: Request, res: Response): Promise<void> {
+
+    public async login(req: Request, res: Response): Promise<void> {
         let { id, clave } = req.body;
         if (id == null || clave == null) {
             res.status(401).json({ log: "Faltan datos, ingrese usuario y clave." });
@@ -39,21 +45,26 @@ class loginController {
                 {
                     cedula: id,
                     contrasenia: clave,
-                    rol: globales.globales.idRolGeneral
+                    rol: globales.globales.idRolGeneral //3
                 },
                 attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion"]
 
-            }
+            } 
         ).then((data: any) => {
             if (data == null) {
                 res.status(404).json({ log: "No Existen datos a mostrar para el ID." })
                 return;
             }
-            let opcionesToken = {
-                expiresIn: 3600
+            let token = jwt.sign({ id }, globales.globales.secretToken,{expiresIn:globales.globales.tiempoToken});
+            let refreshToken = jwt.sign({id},globales.globales.refreshToken,{expiresIn:globales.globales.tiempoRefreshToken});
+            let response = {
+                "status": "Logged in",
+                "token": token,
+                "refreshToken": refreshToken,
             }
-            let token = jwt.sign({ id }, globales.globales.secretToken,opcionesToken);
-            res.status(200).json({ data, token });
+            tokenList[refreshToken] = response;
+           
+            res.status(200).json({ data, token, refreshToken  });
             return;
         }, (err: any) => {
             console.log(err);
@@ -62,6 +73,29 @@ class loginController {
         });
     }
 
+    public async token(req: Request, res: Response) : Promise<void>{
+        let {id,clave,refreshToken}= req.body;
+        
+
+        if((refreshToken) && (refreshToken in tokenList)){
+
+            let token = jwt.sign({id}, globales.globales.secretToken,{expiresIn:globales.globales.tiempoToken});
+            tokenList[refreshToken].token = token;
+            res.status(200).json({ token});
+        }else{
+            res.status(404).json({ log: "No existe el token en la lista de tokens." });
+        }
+    }
+    
+    public async rejectToken(req:Request, res:Response)  : Promise<void>{
+        let refreshToken = req.body.refreshToken;
+        if(refreshToken in tokenList){
+            delete tokenList[refreshToken]
+        }
+        res.status(200).json({ log: "token eliminado"});
+    }
+
 }
+
 
 export default new loginController();

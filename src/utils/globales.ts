@@ -13,7 +13,7 @@ export default {
          * @author Karla Burgos <kbburgos@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseUsuario: "http://localhost:3000/api/rols/",
+        urlBaseUsuario: "http://localhost:3000/api/usuarios/",
         /**
          * @const urlBaseNovedad
          * @desc URL del api de novedades.
@@ -43,6 +43,13 @@ export default {
          */
         secretToken: "7187ba3735b821b9ae7bd7d5dd98b61a07ec2e9cef2aad92b97a4ed6080290e6",
         /**
+         * @const refreshToken
+         * @desc Clave secreta para refrescar el token.
+         * @author Danny Ríos <dprios@espol.edu.ec>
+         * @version 1.0.0
+         */
+        refreshToken:"530157b48c7fd777f6c02a158b7bafca274efeb638da854c0d460e6e250b8713",
+        /**
          * @const urlBaseNovedad
          * @desc Clave secreta para encriptar y desencriptar.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
@@ -62,6 +69,28 @@ export default {
          * @author Francesca Man Ging <fman@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseCompras: "http://localhost:3000/api/compras/"
+        urlBaseCompras: "http://localhost:3000/api/compras/",
+        /**
+         * @const listRefreshTokens
+         * @desc Lista de los tokens para refresh.
+         * @author Danny Rios <dprios@espol.edu.ec>
+         * @version 1.0.0
+         */
+        listRefreshTokens: {},
+        /**
+         * @const tiempoToken
+         * @desc Tiempo de vida del token.
+         * @author Danny Rios <dprios@espol.edu.ec>
+         * @version 1.0.0
+         */
+        tiempoToken: 300,
+        /**
+         * @const tiempoRefreshToken
+         * @desc Tiempo de vida del refresh token
+         * @author Danny Rios <dprios@espol.edu.ec>
+         * @version 1.0.0
+         */
+        tiempoRefreshToken: 86400,
+        
     }
 };

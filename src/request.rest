@@ -1,0 +1,22 @@
+GET http://localhost:3000/api/login/usuario
+Content-Type: application/json
+
+{
+    "id":"0955744347",
+    "clave":"12345"
+}
+
+###
+
+POST http://localhost:3000/api/login/token
+Content-Type: application/json
+
+{
+    "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5NTU3NDQzNDciLCJpYXQiOjE1OTI3OTU0MTV9.zmuZXhIsBJhQ7SfrzzeEiu04sZtQs4rkjJvK2FbSqRI",
+    "id": "0955744347"
+}
+
+###
+
+GET http://localhost:3000/api/pedidos/usuario
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA5NTU3NDQzNDciLCJpYXQiOjE1OTI3OTMwNTMsImV4cCI6MTU5Mjc5NjY1M30.iBN_cnCn-3cjK-4pqnVaoiQuwVDTMbj6WaXGgOy9e0Q

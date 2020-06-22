@@ -19,7 +19,9 @@ class routerLogin {
 
     config():void {
         //this.router.[post]
-        this.router.get("/usuario" ,comprasLogin.findByID);
+        this.router.post("/usuario" ,comprasLogin.login);
+        this.router.post("/token",comprasLogin.token);
+        this.router.post("/reject",comprasLogin.rejectToken);
       }
 }
 export default new routerLogin().router

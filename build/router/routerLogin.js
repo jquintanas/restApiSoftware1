@@ -21,7 +21,9 @@ class routerLogin {
     }
     config() {
         //this.router.[post]
-        this.router.get("/usuario", controllerLogin_1.default.findByID);
+        this.router.post("/usuario", controllerLogin_1.default.login);
+        this.router.post("/token", controllerLogin_1.default.token);
+        this.router.post("/reject", controllerLogin_1.default.rejectToken);
     }
 }
 exports.default = new routerLogin().router;
