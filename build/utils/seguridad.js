@@ -3,7 +3,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Seguridad = void 0;
 let crypto = require('crypto');
 var AES = require("crypto-js/aes");
 var CryptoJS = require("crypto-js");
@@ -77,16 +76,18 @@ class Seguridad {
      */
     static verificarToken(req, res, next) {
         let bearerHeader = req.headers["authorization"];
-        console.log(bearerHeader);
+        //console.log(bearerHeader)
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
             jwt.verify(bearerToken, globales_1.default.globales.secretToken, (err, data) => {
                 if (err) {
-                    res.status(403).json({ log: "No tiene permiso para ver el recurso." });
+                    res.status(403).json({ log: "El token ha expirado.", err: err });
                 }
                 else {
                     //console.log(data);
+                    let dataId = data['id'];
+                    res.locals.post = dataId;
                     next();
                     return;
                 }

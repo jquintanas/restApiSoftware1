@@ -63,8 +63,7 @@ class loginController {
                 let refreshToken = jwt.sign({ id }, globales_1.default.globales.refreshToken, { expiresIn: globales_1.default.globales.tiempoRefreshToken });
                 let response = {
                     "status": "Logged in",
-                    "token": token,
-                    "refreshToken": refreshToken,
+                    "token": token
                 };
                 tokenList[refreshToken] = response;
                 res.status(200).json({ data, token, refreshToken });
@@ -76,9 +75,21 @@ class loginController {
             });
         });
     }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de generar un token a partir del id y refreshtoken recibido por el usuario. <br> Fecha Creación: 22/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     token(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let { id, clave, refreshToken } = req.body;
+            let { id, refreshToken } = req.body;
             if ((refreshToken) && (refreshToken in tokenList)) {
                 let token = jwt.sign({ id }, globales_1.default.globales.secretToken, { expiresIn: globales_1.default.globales.tiempoToken });
                 tokenList[refreshToken].token = token;
@@ -89,6 +100,18 @@ class loginController {
             }
         });
     }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga eliminar el token existente en la lista de tokens cuando el usuario cierra sesión. <br> Fecha Creación: 22/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
     rejectToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let refreshToken = req.body.refreshToken;

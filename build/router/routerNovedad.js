@@ -22,6 +22,8 @@ class routerNovedad {
     }
     config() {
         //this.router.[get | post | put | delete]
+        this.router.get("/nusuario", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.getNovedadesUser);
+        this.router.get("/novedades", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.getNovedades);
         this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findById);
         this.router.get("/reportado/:reportado", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findByReportado);
         this.router.get("/reporta/:reporta", seguridad_1.Seguridad.verificarToken, controllerNovedad_1.default.findByReporta);

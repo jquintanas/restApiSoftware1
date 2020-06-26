@@ -28,7 +28,10 @@ class routerFacturas {
     config():void {
         //this.router.[get | post]
         this.router.post("/post", Seguridad.verificarToken, facturasController.postData);
+        this.router.get("/fuser",Seguridad.verificarToken, facturasController.getFacturasUser);
+        this.router.get("/getFacturas",Seguridad.verificarToken, facturasController.getFacturas);
         this.router.get("/:id",Seguridad.verificarToken, facturasController.findByID);
+        
       }
 }
 export default new routerFacturas().router

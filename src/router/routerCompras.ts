@@ -28,8 +28,9 @@ class routerCompras {
     config():void {
         //this.router.[post]
         this.router.post("/post", Seguridad.verificarToken, comprasController.postData);
+        this.router.get("/cuser", Seguridad.verificarToken, comprasController.getComprasUser);
+        this.router.get("/getCompras", Seguridad.verificarToken, comprasController.getCompras);
         this.router.get("/:id", Seguridad.verificarToken, comprasController.findByID);
-        //this.router.get("/get", Seguridad.verificarToken, comprasController.getData);
         this.router.delete("/:id", Seguridad.verificarToken, comprasController.deleteData);
       }
 }

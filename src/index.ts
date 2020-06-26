@@ -26,6 +26,7 @@ import routerUsuarios from "./router/routerUsuario";
 //import routerRols from "./router/routerRol"; 
 import routerCompras from "./router/routerCompras"; 
 import routerLogin from "./router/routerLogin";
+import routerFacturas from "./router/routerFacturas";
 //import routerFacturas from "./router/routerFacturas"; 
 
 class Server {
@@ -63,7 +64,7 @@ class Server {
     //this.app.use("/api/rols",routerRols);
     this.app.use("/api/compras",routerCompras);
     this.app.use("/api/login", routerLogin);
-    //this.app.use("/api/facturas",routerFacturas);
+    this.app.use("/api/facturas",routerFacturas);
   }
 
   start(): void {

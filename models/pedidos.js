@@ -21,7 +21,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     idcompra: {
       allowNull: false,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      references: {
+        model: "compras",
+        key: "idcompra"
+      },
+      onUpdate: "cascade",
+      onDelete: "cascade"
     },
     idproducto: {
       allowNull: false,

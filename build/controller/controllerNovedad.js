@@ -34,6 +34,63 @@ class novedadController {
      * @method
      * @public
      * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar las novedades de acuerdo al usuario <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    getNovedadesUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let dataId = res.locals;
+            let id = dataId.post;
+            novedad.findAll({
+                attributes: ['idnovedad', 'idusuarioReportado', 'descripcion', 'createdAt'],
+                where: {
+                    idusuarioReporta: id
+                },
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar las novedades  <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    getNovedades(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            novedad.findAll({
+                attributes: ['idnovedad', 'idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt', 'updatedAt'],
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
      * @desc Este método se encarga de buscar la novedad en base al ID proporcionado en la url. <br> Fecha Creación: 11/04/2020

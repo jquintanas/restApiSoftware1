@@ -28,6 +28,8 @@ class routerFacturas {
     config() {
         //this.router.[get | post]
         this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.postData);
+        this.router.get("/fuser", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.getFacturasUser);
+        this.router.get("/getFacturas", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.getFacturas);
         this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerFacturas_1.default.findByID);
     }
 }

@@ -18,7 +18,27 @@ const seguridad_1 = require("./../utils/seguridad");
  * @const facturas
  * @desc Import del modelo facturas de la base de datos.
  */
-const facturas = require('./../../models').facturas;
+const facturas = require('./../../models').Facturas;
+/**
+ * @const pedidos
+ * @desc Import del modelo pedidos de la base de datos.
+ */
+const pedidos = require('./../../models').Pedidos;
+/**
+ * @const pagos
+ * @desc Import del modelo compras de la base de datos.
+ */
+const compras = require('./../../models').compras;
+/**
+ * @const pagos
+ * @desc Import del modelo compras de la base de datos.
+ */
+const pagos = require('./../../models').Pagos;
+/**
+ * @const formaPagos
+ * @desc Import del modelo compras de la base de datos.
+ */
+const formasPagos = require('./../../models').formasPagos;
 /**
     * @classdesc Clase controladora de facturas.
     * @desc Fecha Creación: 12/04/2020
@@ -29,6 +49,116 @@ const facturas = require('./../../models').facturas;
     * @author Francesca Man Ging <fman@espol.edu.ec>
     */
 class facturasController {
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar las facturas de acuerdo al usuario <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    getFacturasUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let dataId = res.locals;
+            let id = dataId.post;
+            console.log(id);
+            facturas.findAll({
+                attributes: ['idfactura', 'idpedido', 'idpago'],
+                include: [
+                    {
+                        model: pedidos,
+                        required: true,
+                        attributes: ['idpedido'],
+                        include: [
+                            {
+                                model: compras,
+                                required: true,
+                                attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega'],
+                                where: {
+                                    idusuario: id
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        model: pagos,
+                        required: true,
+                        attributes: ['idPago'],
+                        include: [
+                            {
+                                model: formasPagos,
+                                required: true,
+                                attributes: ['id', 'nombre', 'descripcion']
+                            }
+                        ]
+                    }
+                ]
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar las facturas <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    getFacturas(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            facturas.findAll({
+                attributes: ['idfactura', 'idpedido', 'idpago'],
+                include: [
+                    {
+                        model: pedidos,
+                        required: true,
+                        attributes: ['idpedido'],
+                        include: [
+                            {
+                                model: compras,
+                                required: true,
+                                attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega'],
+                            }
+                        ]
+                    },
+                    {
+                        model: pagos,
+                        required: true,
+                        attributes: ['idPago'],
+                        include: [
+                            {
+                                model: formasPagos,
+                                required: true,
+                                attributes: ['id', 'nombre', 'descripcion']
+                            }
+                        ]
+                    }
+                ]
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base", err: err });
+                console.log(err);
+                return;
+            });
+        });
+    }
     /**
      * @async
      * @method

@@ -13,9 +13,27 @@
 module.exports = (sequelize, DataTypes) => {
 
     const Facturas = sequelize.define('Facturas', {
-      idfactura: DataTypes.INTEGER,
-      idpedido: DataTypes.INTEGER,
-      idpago: DataTypes.INTEGER
+      idfactura:{
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+      }, 
+      idpedido:{
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: "pedidos",
+          key: "idpedido"
+        },
+      },
+      idpago: {
+        allowNull: false,
+        type: DataTypes.INTEGER,
+        references: {
+          model: "pagos",
+          key: "idPago"
+        },
+      }
       }, {});
 
       /*
@@ -26,15 +44,8 @@ module.exports = (sequelize, DataTypes) => {
       */
 
     Facturas.associate = function(models) {
-     /* Facturas.belongsTo(models.pedidos,{
-          foreignKey: 'idpedido',
-          foreignKeyConstraint: true
-      });
-
-      Facturas.belongsTo(models.pagos, { 
-        foreignKey: 'idPago', 
-        foreignKeyConstraint: true
-      });*/
+      Facturas.belongsTo(models.Pedidos,{foreignKey: 'idpedido',foreignKeyConstraint: true, targetKey: 'idpedido' });
+      Facturas.belongsTo(models.Pagos, { foreignKey: 'idpago', foreignKeyConstraint: true, targetKey: 'idPago'});
     };
   return Facturas;
 };

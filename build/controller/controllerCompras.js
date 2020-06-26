@@ -30,33 +30,63 @@ const compras = require('./../../models').compras;
 */
 class comprasController {
     /**
-  * @async
-  * @method
-  * @public
-  * @version 1.0.0
-  * @author Francesca Man Ging <fman@espol.edu.ec>
-  * @returns {JSON} JSON con los datos obtenidos de la consulta.
-  * @desc  Este método se encarga de buscar todas las compras. <br> Fecha Creación: 12/04/2020
-  * @param {Request} req Objeto Request
-  * @param {Response} res Objeto response
-  * @type {Promise<void>} Promesa de tipo void.
-  
-  
-    public async getData(req: Request, res: Response): Promise<void> {
-      compras.findAll().then(
-        (data: any) => {
-          res.status(200).json(data);
-          return;
-        },
-        (err: any) => {
-          res.status(500).json({ log: "Error!! No hay datos en la base" });
-          console.log(err);
-          return;
-        }
-      );
+       * @async
+       * @method
+       * @public
+       * @version 1.0.0
+       * @author Danny Rios <dprios@espol.edu.ec>
+       * @returns {JSON} JSON con los datos obtenidos de la consulta.
+       * @desc Este método se encarga de buscar las compras por usuario<br> FechaCreacion: 25/06/2020
+       * @param {Request} req Objeto Request
+       * @param {Response} res Objeto response
+       * @type {Promise<void>} Promesa de tipo void.
+       */
+    getComprasUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let dataId = res.locals;
+            let id = dataId.post;
+            console.log('id', id);
+            compras.findAll({
+                attributes: ['idcompra', 'fechacompra', 'horaEntrega'],
+                where: {
+                    idusuario: id
+                },
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
     }
-  
-    */
+    /**
+       * @async
+       * @method
+       * @public
+       * @version 1.0.0
+       * @author Danny Rios <dprios@espol.edu.ec>
+       * @returns {JSON} JSON con los datos obtenidos de la consulta.
+       * @desc Este método se encarga de buscar las compras <br> FechaCreacion: 25/06/2020
+       * @param {Request} req Objeto Request
+       * @param {Response} res Objeto response
+       * @type {Promise<void>} Promesa de tipo void.
+       */
+    getCompras(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            compras.findAll({
+                attributes: ['idcompra', 'idusuario', 'fechacompra', 'horaEntrega', 'createdAt'],
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
+    }
     /**
     * @async
     * @method

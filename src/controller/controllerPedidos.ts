@@ -30,20 +30,28 @@ class pedidosController {
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 01/04/2020
+     * @desc Este método se encarga de buscar los pedidos de acuerdo al usuario <br> FechaCreacion: 25/06/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
      */
-    /*public async getData(req: Request, res: Response): Promise<void> {       
+    public async getPedidosUser(req: Request, res: Response): Promise<void> {     
+        let dataId = res.locals; 
+        let id : number = dataId.post;
+  
+        
         pedidos.findAll(
             {
+                
                 attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
                 include: [
                     {
                         model: compras,
                         required: true,
-                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
+                        attributes: ['entregaDomocilio','horaEntrega'],
+                        where: {
+                            idusuario: id
+                        },
                     }
                 ]
             }
@@ -56,7 +64,42 @@ class pedidosController {
             return;
         });
 
-    }*/
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    public async getPedidos(req: Request, res: Response): Promise<void> {          
+        pedidos.findAll(
+            {
+                
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+                include: [
+                    {
+                        model: compras,
+                        required: true,
+                        attributes: ['entregaDomocilio','horaEntrega'],
+                    }
+                ]
+            }
+        ).then((data: any) => {
+            res.status(200).json(data);
+            return;
+        }, (err: any) => {
+            res.status(500).json({ log: "Error!! No hay datos en la base" });
+            console.log(err);
+            return;
+        });
+
+    }
     /**
    * @async
    * @method
@@ -78,7 +121,8 @@ class pedidosController {
             cantidad: req.body.cantidad,
             subtotal: req.body.subtotal,
             cubiertos: req.body.cubiertos          
-        }       
+        }  
+        
         let hashInterno = Seguridad.hashJSON(pedido);       
         pedido.createdAt = new Date();
         if(hashInterno != hash){
@@ -168,6 +212,7 @@ class pedidosController {
             res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
+        
         pedidos.findOne(
             {
                 where: {

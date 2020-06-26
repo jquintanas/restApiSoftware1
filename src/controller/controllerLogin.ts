@@ -85,9 +85,8 @@ class loginController {
      * @type {Promise<void>} Promesa de tipo void.
      */
     public async token(req: Request, res: Response) : Promise<void>{
-        let {id,clave,refreshToken}= req.body;
-        
-
+        let {id,refreshToken}= req.body;
+    
         if((refreshToken) && (refreshToken in tokenList)){
 
             let token = jwt.sign({id}, globales.globales.secretToken,{expiresIn:globales.globales.tiempoToken});

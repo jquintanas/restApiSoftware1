@@ -83,7 +83,7 @@ export default {
          * @author Danny Rios <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        tiempoToken: 300,
+        tiempoToken: 900,
         /**
          * @const tiempoRefreshToken
          * @desc Tiempo de vida del refresh token

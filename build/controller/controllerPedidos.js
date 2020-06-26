@@ -41,33 +41,70 @@ class pedidosController {
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 01/04/2020
+     * @desc Este método se encarga de buscar los pedidos de acuerdo al usuario <br> FechaCreacion: 25/06/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
      * @type {Promise<void>} Promesa de tipo void.
      */
-    /*public async getData(req: Request, res: Response): Promise<void> {
-        pedidos.findAll(
-            {
-                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+    getPedidosUser(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let dataId = res.locals;
+            let id = dataId.post;
+            pedidos.findAll({
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
                 include: [
                     {
                         model: compras,
                         required: true,
-                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
+                        attributes: ['entregaDomocilio', 'horaEntrega'],
+                        where: {
+                            idusuario: id
+                        },
                     }
                 ]
-            }
-        ).then((data: any) => {
-            res.status(200).json(data);
-            return;
-        }, (err: any) => {
-            res.status(500).json({ log: "Error!! No hay datos en la base" });
-            console.log(err);
-            return;
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
         });
-
-    }*/
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Rios <dprios@espol.edu.ec>
+     * @returns {JSON} JSON con los datos obtenidos de la consulta.
+     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Objeto Request
+     * @param {Response} res Objeto response
+     * @type {Promise<void>} Promesa de tipo void.
+     */
+    getPedidos(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            pedidos.findAll({
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
+                include: [
+                    {
+                        model: compras,
+                        required: true,
+                        attributes: ['entregaDomocilio', 'horaEntrega'],
+                    }
+                ]
+            }).then((data) => {
+                res.status(200).json(data);
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error!! No hay datos en la base" });
+                console.log(err);
+                return;
+            });
+        });
+    }
     /**
    * @async
    * @method
