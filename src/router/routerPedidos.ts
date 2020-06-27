@@ -20,7 +20,7 @@ class routerPedidos {
     config():void {
       //this.router.[get | post | put | delete]     
       this.router.get("/user", Seguridad.verificarToken, pedidosController.getPedidosUser);
-      this.router.get("/getAll", Seguridad.verificarToken, pedidosController.getPedidos);
+      this.router.get("/getAll", pedidosController.getPedidos);
       this.router.get("/:id", Seguridad.verificarToken, pedidosController.findByID);
       this.router.post("/post", Seguridad.verificarToken, pedidosController.postData);
       this.router.delete("/:id", Seguridad.verificarToken, pedidosController.deleteData);

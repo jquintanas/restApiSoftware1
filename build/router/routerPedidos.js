@@ -23,7 +23,7 @@ class routerPedidos {
     config() {
         //this.router.[get | post | put | delete]     
         this.router.get("/user", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.getPedidosUser);
-        this.router.get("/getAll", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.getPedidos);
+        this.router.get("/getAll", controllerPedidos_1.default.getPedidos);
         this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.findByID);
         this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.postData);
         this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.deleteData);
