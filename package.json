@@ -6,8 +6,9 @@
   "engines": {
     "node": "v12.13.1"
   },
+  "tsc": "tsc",
   "scripts": {
-    "tsc": "tsc",
+    
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
     "start": "node build/index.js",
