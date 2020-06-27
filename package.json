@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "v12.13.1"
+  },
   "scripts": {
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
