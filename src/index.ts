@@ -47,7 +47,7 @@ class Server {
     this.config();
     this.router();  }
 
-  config():void {
+  config() {
     this.app.set("port", process.env.PORT || 3000);
     this.app.use(cors());
     //static files
@@ -67,7 +67,7 @@ class Server {
   }
   
 
-  router():void {
+  router() {
     this.app.use("/api/pedidos",routerPedidos);
     this.app.use("/api/pagos",routerPagos);
     this.app.use("/api/novedad", routernovedad);
@@ -78,7 +78,7 @@ class Server {
     this.app.use("/api/facturas",routerFacturas);
   }
 
-  start(): void {
+  start(){
     this.app.listen(this.app.get("port"), () => {
       console.log("server on port: ", this.app.get("port"));
       //db.sequelize.sync();
