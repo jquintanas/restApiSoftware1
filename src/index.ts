@@ -12,13 +12,15 @@
 
 //import {Application} from "express";
 const express = require('express');
-import morgan from "morgan";
+//import morgan from "morgan";
+const morgan = require('morgan');
 const bodyParser =  require("body-parser");
 const path = require("path");
 const helmet = require('helmet');
 const expectCt = require('expect-ct');
 
-import cors from "cors";
+//import cors from "cors";
+const cors = require('cors');
 
 import routerPedidos from "./router/routerPedidos";
 import routerPagos from "./router/routerPago";
