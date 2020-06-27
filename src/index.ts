@@ -11,7 +11,7 @@
   */
 
 //import {Application} from "express";
-import express = require('express');
+const express = require('express');
 import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
@@ -31,6 +31,7 @@ import routerFacturas from "./router/routerFacturas";
 //import routerFacturas from "./router/routerFacturas"; 
 
 class Server {
+  //public app:Application;
   public app:any;
   constructor() {
     this.app = express();
