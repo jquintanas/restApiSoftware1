@@ -7,6 +7,7 @@
     "node": "v12.13.1"
   },
   "scripts": {
+    "tsc": "tsc",
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
     "start": "node build/index.js",
