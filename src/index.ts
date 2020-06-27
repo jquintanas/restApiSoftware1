@@ -10,7 +10,7 @@
   Comentario: se agregan router de pago y novedad.
   */
 
-import {Application} from "express";
+//import {Application} from "express";
 import express = require('express');
 import morgan from "morgan";
 const bodyParser =  require("body-parser");
@@ -31,7 +31,7 @@ import routerFacturas from "./router/routerFacturas";
 //import routerFacturas from "./router/routerFacturas"; 
 
 class Server {
-  public app:Application;
+  public app:any;
   constructor() {
     this.app = express();
     this.config();
