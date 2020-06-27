@@ -10,7 +10,8 @@
   Comentario: se agregan router de pago y novedad.
   */
 
-import express, {Application} from "express";
+import {Application} from "express";
+import express = require('express');
 import morgan from "morgan";
 const bodyParser =  require("body-parser");
 const path = require("path");
