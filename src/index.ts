@@ -22,14 +22,21 @@ const expectCt = require('expect-ct');
 //import cors from "cors";
 const cors = require('cors');
 
-import routerPedidos from "./router/routerPedidos";
-import routerPagos from "./router/routerPago";
-import routernovedad from "./router/routerNovedad";
-import routerUsuarios from "./router/routerUsuario"; 
+//import routerPedidos from "./router/routerPedidos";
+const routerPedidos = require('./router/routerPedidos');
+//import routerPagos from "./router/routerPago";
+const routerPagos = require('./router/routerPago');
+//import routernovedad from "./router/routerNovedad";
+const routernovedad = require('./router/routerNovedad');
+//import routerUsuarios from "./router/routerUsuario"; 
+const routerUsuarios = require('./router/routerUsuario');
 //import routerRols from "./router/routerRol"; 
-import routerCompras from "./router/routerCompras"; 
-import routerLogin from "./router/routerLogin";
-import routerFacturas from "./router/routerFacturas";
+//import routerCompras from "./router/routerCompras"; 
+const routerCompras = require('./router/routerCompras');
+//import routerLogin from "./router/routerLogin";
+const routerLogin = require('./router/routerLogin');
+//import routerFacturas from "./router/routerFacturas";
+const routerFacturas = require('./router/routerFacturas');
 //import routerFacturas from "./router/routerFacturas"; 
 
 class Server {
