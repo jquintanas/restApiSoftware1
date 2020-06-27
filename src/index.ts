@@ -41,7 +41,7 @@ const routerFacturas = require('./router/routerFacturas');
 
 class Server {
   //public app:Application;
-  app:any;
+  app;
   constructor() {
     this.app = express();
     this.config();
