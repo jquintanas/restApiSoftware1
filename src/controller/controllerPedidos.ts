@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { pedidosInterface } from "./../interfaces/pedidosInterface";
 import globales from "./../utils/globales";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 /** 
  * @const {Pedidos} 
  * @desc Import del modelo pedidos de la base de datos.
@@ -123,7 +123,7 @@ class pedidosController {
             cubiertos: req.body.cubiertos          
         }  
         
-        let hashInterno = Seguridad.hashJSON(pedido);       
+        let hashInterno = Security.hashJSON(pedido);       
         pedido.createdAt = new Date();
         if(hashInterno != hash){
             res.status(401).json({log: "Violación de integridad de datos, hash invalido."});
@@ -134,7 +134,7 @@ class pedidosController {
                 res.status(202).json(
                     {
                         log: "Pedido ingresado con éxito",
-                        uri: globales.globales.urlBasePedidos + resp.dataValues.idpedido                      
+                        uri: globales.globals.urlBasePedidos + resp.dataValues.idpedido                      
                     }
                 );
                 return;

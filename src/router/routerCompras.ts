@@ -1,6 +1,6 @@
 import { Router } from "express";
 import comprasController from "../controller/controllerCompras";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 /*
     FechaCreacion: 11/04/2020
@@ -27,11 +27,11 @@ class routerCompras {
 
     config():void {
         //this.router.[post]
-        this.router.post("/post", Seguridad.verificarToken, comprasController.postData);
-        this.router.get("/cuser", Seguridad.verificarToken, comprasController.getComprasUser);
-        this.router.get("/getCompras", Seguridad.verificarToken, comprasController.getCompras);
-        this.router.get("/:id", Seguridad.verificarToken, comprasController.findByID);
-        this.router.delete("/:id", Seguridad.verificarToken, comprasController.deleteData);
+        this.router.post("/post", Security.checkToken, comprasController.postData);
+        this.router.get("/cuser", Security.checkToken, comprasController.getComprasUser);
+        this.router.get("/getCompras", Security.checkToken, comprasController.getCompras);
+        this.router.get("/:id", Security.checkToken, comprasController.findByID);
+        this.router.delete("/:id", Security.checkToken, comprasController.deleteData);
       }
 }
 export default new routerCompras().router

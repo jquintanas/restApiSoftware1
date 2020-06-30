@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import pedidosController from "../controller/controllerPedidos";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 /**
  * @classdesc Clase router de pedidos.
@@ -19,11 +19,11 @@ class routerPedidos {
     }
     config():void {
       //this.router.[get | post | put | delete]     
-      this.router.get("/user", Seguridad.verificarToken, pedidosController.getPedidosUser);
+      this.router.get("/user", Security.checkToken, pedidosController.getPedidosUser);
       this.router.get("/getAll", pedidosController.getPedidos);
-      this.router.get("/:id", Seguridad.verificarToken, pedidosController.findByID);
-      this.router.post("/post", Seguridad.verificarToken, pedidosController.postData);
-      this.router.delete("/:id", Seguridad.verificarToken, pedidosController.deleteData);
+      this.router.get("/:id", Security.checkToken, pedidosController.findByID);
+      this.router.post("/post", Security.checkToken, pedidosController.postData);
+      this.router.delete("/:id", Security.checkToken, pedidosController.deleteData);
       
     }
   }

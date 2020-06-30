@@ -3,7 +3,7 @@ const pagos = require('./../../models').Pagos;
 const formasPagos = require('./../../models').formasPagos;
 import { pagosInterface } from "./../interfaces/pagosInterface";
 import globales from "./../utils/globales";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
  /**
  * @classdesc Clase controladora de pagos.
@@ -87,7 +87,7 @@ class pagosController {
             imagen: req.body.imagen,
             total: req.body.total
         }
-        let hashInterno = Seguridad.hashJSON(data);
+        let hashInterno = Security.hashJSON(data);
         //aqui se debe desencriptar el hash
         data.createdAt = new Date();
         if(hashInterno != hash){
@@ -99,7 +99,7 @@ class pagosController {
                 res.status(202).json(
                     {
                         log: "Ingresado",
-                        uri: globales.globales.urlBasePagos + resp.dataValues.idPago
+                        uri: globales.globals.urlBasePagos + resp.dataValues.idPago
                     }
                 );
                 return;

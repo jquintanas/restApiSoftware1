@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import globales from "./../utils/globales";
 import { usuariointerface } from "./../interfaces/usuarioInterface";
 const rols = require("./../../models").rols;
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 /**
  * @const Usuarios
@@ -50,7 +50,7 @@ class usuariosController {
       rol: req.body.rol,
       direccion: req.body.direccion
     };
-    let hashInterno = Seguridad.hashJSON(data);
+    let hashInterno = Security.hashJSON(data);
     //aqui se debe desencriptar el hash
     data.createdAt = new Date();
     if (hashInterno != hash) {
@@ -65,7 +65,7 @@ class usuariosController {
         if (resp._options.isNewRecord) {
           res.status(202).json({
             log: "Ingresado",
-            uri: globales.globales.urlBaseUsuario + resp.dataValues.cedula,
+            uri: globales.globals.urlBaseUsuario + resp.dataValues.cedula,
           });
           return;
         }
@@ -211,7 +211,7 @@ class usuariosController {
       rol: req.body.rol,
       updatedAt: new Date(),
     };
-    let hashInterno = Seguridad.hashJSON(data);
+    let hashInterno = Security.hashJSON(data);
     //aqui se debe desencriptar el hash
     //data.createdAt = new Date();
     if (hashInterno != hash) {

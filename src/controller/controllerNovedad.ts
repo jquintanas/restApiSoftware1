@@ -1,42 +1,42 @@
 import { Request, Response } from "express";
-import globales from "./../utils/globales";
+import globals from "./../utils/globales";
 import { novedadinterface } from "./../interfaces/novedadInterface";
-import { Seguridad } from "../utils/seguridad";
+import { Security } from "../utils/seguridad";
 /** 
  * @const Novedad
- * @desc Import del modelo Novedad de la base de datos.
+ * @desc Import of the model New from the database.
  */
 const novedad = require("./../../models").Novedads;
 
 /**
- * @classdesc Clase controladora de novedades.
- * @desc Fecha Creación: 11/04/2020
+ * @classdesc Novelty controlling class.
+ * @desc Creation Date: 04/11/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {novedadController} novedadController
+ * @returns {alertController} novedadController
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-class novedadController {
+class alertController {
     /**
      * @async
      * @method
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las novedades de acuerdo al usuario <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is responsible for searching for news according to the user <br> CreationDate: 06/25/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object Response
+     * @type {Promise<void>} Void type promise.
      */
-    public async getNovedadesUser(req: Request, res: Response): Promise<void> {     
-        let dataId = res.locals; 
-        let id : number = dataId.post;
-  
+    public async getAlertsUser(req: Request, res: Response): Promise<void> {
+        let dataId = res.locals;
+        let id: number = dataId.post;
+
         novedad.findAll(
             {
-                
+
                 attributes: ['idnovedad', 'idusuarioReportado', 'descripcion', 'createdAt'],
                 where: {
                     idusuarioReporta: id
@@ -58,18 +58,18 @@ class novedadController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las novedades  <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is in charge of searching for news <br> Creation Date: 06/25/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object Response
+     * @type {Promise<void>} Void type promise.
      */
-    public async getNovedades(req: Request, res: Response): Promise<void> {     
+    public async getAlerts(req: Request, res: Response): Promise<void> {
 
         novedad.findAll(
             {
-                
-                attributes: ['idnovedad','idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt','updatedAt'],
+
+                attributes: ['idnovedad', 'idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt', 'updatedAt'],
             }
         ).then((data: any) => {
             res.status(200).json(data);
@@ -87,11 +87,11 @@ class novedadController {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar la novedad en base al ID proporcionado en la url. <br> Fecha Creación: 11/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is in charge of searching for the novelty based on the ID provided in the url. <br> Creation Date: 04/11/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object Response
+     * @type {Promise<void>} Void type promise.
      */
     public async findById(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
@@ -132,13 +132,13 @@ class novedadController {
     * @public
     * @version 1.0.0
     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-    * @returns {JSON} JSON con los datos obtenidos de la consulta.
-    * @desc Este método se encarga de buscar la novedad en base al usuario que fue reportado proporcionado en la url. <br> Fecha Creación: 11/04/2020
-    * @param {Request} req Objeto Request
-    * @param {Response} res Objeto response
-    * @type {Promise<void>} Promesa de tipo void.
+    * @returns {JSON} JSON with the data obtained from the query.
+    * @desc This method is in charge of searching the news based on the user that was reported provided in the url. <br> Creation Date: 04/11/2020
+    * @param {Request} req Object Request
+    * @param {Response} res Object Response
+    * @type {Promise<void>} Void type promise.
     */
-    public async findByReportado(req: Request, res: Response): Promise<void> {
+    public async findByReported(req: Request, res: Response): Promise<void> {
         let { reportado } = req.params;
         novedad.findAll(
             {
@@ -169,13 +169,13 @@ class novedadController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con los datos obtenidos de la consulta.
-   * @desc  Este método se encarga de buscar las novedades en base al usuario que reporta proporcionado en la url. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the data obtained from the query.
+   * @desc  This method is in charge of looking for news based on the user who reports provided in the url. <br> Creation Date: 04/11/2020
+   * @param {Request} req Object Request
+   * @param {Response} res Object Response
+   * @type {Promise<void>} Void type promise.
    */
-    public async findByReporta(req: Request, res: Response): Promise<void> {
+    public async findByReports(req: Request, res: Response): Promise<void> {
         let { reporta } = req.params;
         novedad.findAll(
             {
@@ -206,11 +206,11 @@ class novedadController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con los datos obtenidos de la consulta.
-   * @desc  Este método se encarga de buscar todas las novedades. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the data obtained from the query.
+   * @desc  This method is responsible for finding all the news. <br> Creation Date: 04/11/2020
+   * @param {Request} req Object Request
+   * @param {Response} res Object Response
+   * @type {Promise<void>} Void type promise.
    */
     public async findAll(req: Request, res: Response): Promise<void> {
         novedad.findAll(
@@ -238,24 +238,24 @@ class novedadController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de agregar la novedad proporcionada por el usuario posterior a verificar los datos
-    y su integridad. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JThey are with the response of the transaction.
+   * @desc  This method is responsible for adding the novelty provided by the user after verifying the data
+     and its integrity. <br> Creation Date: 04/11/2020
+   * @param {Request} req Object Request
+   * @param {Response} res Object Response
+   * @type {Promise<void>} Void type promise.
    */
-    public async addNovedad(req: Request, res: Response): Promise<void> {
-        let {hash} = req.body;
+    public async addAlerts(req: Request, res: Response): Promise<void> {
+        let { hash } = req.body;
         //aqui desencriptar los datos
         let data: novedadinterface = {
             descripcion: req.body.descripcion,
             idusuarioReporta: req.body.idusuarioReporta,
             idusuarioReportado: req.body.idusuarioReportado
         }
-        let hashInterno = Seguridad.hashJSON(data);
-        if(hashInterno != hash){
-            res.status(401).json({log: "Violación de integridad de datos, hash invalido."});
+        let hashInterno = Security.hashJSON(data);
+        if (hashInterno != hash) {
+            res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
             return;
         }
         novedad.create(data).then((resp: any) => {
@@ -263,7 +263,7 @@ class novedadController {
                 res.status(202).json(
                     {
                         log: "Ingresado",
-                        uri: globales.globales.urlBaseNovedad + resp.dataValues.idnovedad
+                        uri: globals.globals.urlBaseNovedad + resp.dataValues.idnovedad
                     }
                 );
                 return;
@@ -284,13 +284,13 @@ class novedadController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de modificar la novedad proporcionada por el usuario, solo se actualiza la descripción. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the transaction response.
+   * @desc This method is responsible for modifying the novelty provided by the user, only the description is updated. <br> Creation Date: 04/11/2020
+   * @param {Request} req Object Request
+   * @param {Response} res Object Response
+   * @type {Promise<void>} Void type promise.
    */
-    public async updateNovedad(req: Request, res: Response): Promise<void> {
+    public async updateAlerts(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
             res.status(500).json({ log: "El ID introducido no es valido." });
@@ -333,4 +333,4 @@ class novedadController {
 
 }
 
-export default new novedadController();
+export default new alertController();
