@@ -1,6 +1,6 @@
 import { Router } from "express";
 import comprasController from "../controller/controllerCompras";
-import { Security } from "./../utils/seguridad";
+import { Security } from "../utils/security";
 
 /*
     FechaCreacion: 11/04/2020

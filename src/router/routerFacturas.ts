@@ -1,6 +1,6 @@
 import { Router } from "express";
 import facturasController from "../controller/controllerFacturas";
-import { Security } from "./../utils/seguridad";
+import { Security } from "../utils/security";
 
 /*
     FechaCreacion: 11/04/2020

@@ -14,6 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @classdesc Index class
+ * @desc Creation Data: 11/04/2020
+ * @author Danny Ríos <dprios@espol.edu.ec>
+ */
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const bodyParser = require("body-parser");
@@ -22,9 +27,9 @@ const helmet = require('helmet');
 const expectCt = require('expect-ct');
 const cors_1 = __importDefault(require("cors"));
 const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
-const routerPago_1 = __importDefault(require("./router/routerPago"));
-const routerNovedad_1 = __importDefault(require("./router/routerNovedad"));
-const routerUsuario_1 = __importDefault(require("./router/routerUsuario"));
+const routerPayment_1 = __importDefault(require("./router/routerPayment"));
+const routerNovelty_1 = __importDefault(require("./router/routerNovelty"));
+const routerUser_1 = __importDefault(require("./router/routerUser"));
 //import routerRols from "./router/routerRol"; 
 const routerCompras_1 = __importDefault(require("./router/routerCompras"));
 const routerLogin_1 = __importDefault(require("./router/routerLogin"));
@@ -56,9 +61,9 @@ class Server {
     }
     router() {
         this.app.use("/api/pedidos", routerPedidos_1.default);
-        this.app.use("/api/pagos", routerPago_1.default);
-        this.app.use("/api/novedad", routerNovedad_1.default);
-        this.app.use("/api/usuarios", routerUsuario_1.default);
+        this.app.use("/api/pagos", routerPayment_1.default);
+        this.app.use("/api/novedad", routerNovelty_1.default);
+        this.app.use("/api/usuarios", routerUser_1.default);
         //this.app.use("/api/rols",routerRols);
         this.app.use("/api/compras", routerCompras_1.default);
         this.app.use("/api/login", routerLogin_1.default);

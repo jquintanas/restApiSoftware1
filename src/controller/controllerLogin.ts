@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { Security } from "./../utils/seguridad";
-import globales from "./../utils/globales";
+import { Security } from "../utils/security";
+import global from "../utils/global";
 const tokenList: any = {};
-const usuarios = require('./../../models').Usuarios;
+const user = require('./../../models').Usuarios;
 const jwt = require("jsonwebtoken");
 
 
@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
  * @class
  * @public
  * @version 1.0.0
- * @returns {novedadController} novedadController
+ * @returns {loginController} loginController
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class loginController {
@@ -39,13 +39,13 @@ class loginController {
             return;
         }
         let claveDescifrada = Security.decrypt(clave);
-        usuarios.findOne(
+        user.findOne(
             {
                 where:
                 {
                     cedula: id,
                     contrasenia: clave,
-                    rol: globales.globals.idRolGeneral //3
+                    rol: global.globals.idGeneralRole //3
                 },
                 attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion"]
 
@@ -55,8 +55,8 @@ class loginController {
                 res.status(404).json({ log: "No Existen datos a mostrar para el ID." })
                 return;
             }
-            let token = jwt.sign({ id }, globales.globals.secretToken, { expiresIn: globales.globals.tiempoToken });
-            let refreshToken = jwt.sign({ id }, globales.globals.refreshToken, { expiresIn: globales.globals.tiempoRefreshToken });
+            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.tiempoToken });
+            let refreshToken = jwt.sign({ id }, global.globals.refreshToken, { expiresIn: global.globals.tiempoRefreshToken });
             let response = {
                 "status": "Logged in",
                 "token": token
@@ -89,7 +89,7 @@ class loginController {
 
         if ((refreshToken) && (refreshToken in tokenList)) {
 
-            let token = jwt.sign({ id }, globales.globals.secretToken, { expiresIn: globales.globals.tiempoToken });
+            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.tiempoToken });
             tokenList[refreshToken].token = token;
             res.status(200).json({ token });
         } else {

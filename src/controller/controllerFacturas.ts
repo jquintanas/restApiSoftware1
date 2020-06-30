@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { facturasInterface } from "./../interfaces/facturasInterface";
-import globales from "./../utils/globales";
-import { Security } from "./../utils/seguridad";
+import globales from "../utils/global";
+import { Security } from "../utils/security";
 
 /** 
  * @const facturas

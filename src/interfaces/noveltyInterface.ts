@@ -1,11 +1,11 @@
 /**
- * @interface pagosInterface
+ * @interface NoveltyInterface 
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  * @public
  * @version 1.0.0
- * @desc Interfaz para modelo novedad.
+ * @desc Novelty interface model.
  */
-export interface novedadinterface {
+export interface NoveltyInterface {
     idnovedad?: Number;
     idusuarioReporta: string;
     idusuarioReportado: string;

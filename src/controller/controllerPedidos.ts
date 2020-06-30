@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { pedidosInterface } from "./../interfaces/pedidosInterface";
-import globales from "./../utils/globales";
-import { Security } from "./../utils/seguridad";
+import globales from "../utils/global";
+import { Security } from "../utils/security";
 /** 
  * @const {Pedidos} 
  * @desc Import del modelo pedidos de la base de datos.

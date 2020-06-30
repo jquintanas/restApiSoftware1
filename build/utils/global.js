@@ -1,26 +1,28 @@
-export default {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = {
     globals: {
         /**
-         * @const urlBasePagos
-         * @desc URL del api de pagos.
+         * @const urlPaymentBase
+         * @desc Payment API URL.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBasePagos: "http://localhost:3000/api/pagos/",
+        urlPaymentBase: "http://localhost:3000/api/pagos/",
         /**
-         * @const urlBaseUsuario
-         * @desc URL del api de usuarios.
+         * @const urlUserBase
+         * @desc User API URL.
          * @author Karla Burgos <kbburgos@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseUsuario: "http://localhost:3000/api/usuarios/",
+        urlUserBase: "http://localhost:3000/api/usuarios/",
         /**
-         * @const urlBaseNovedad
-         * @desc URL del api de novedades.
+         * @const urlNoveltyBase
+         * @desc Novelty API URL.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseNovedad: "http://localhost:3000/api/novedades/",
+        urlNoveltyBase: "http://localhost:3000/api/novedades/",
         /**
          * @const urlBasePedidos
          * @desc URL del api de pedidos.
@@ -29,15 +31,15 @@ export default {
          */
         urlBasePedidos: "http://localhost:3000/api/pedidos/",
         /**
-         * @const idRolGeneral
-         * @desc Rol de usuario general.
+         * @const idGeneralRole
+         * @desc General User Role.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        idRolGeneral: 3,
+        idGeneralRole: 3,
         /**
          * @const secretToken
-         * @desc Clave secreta para tokens.
+         * @desc Secret token key.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
@@ -48,13 +50,13 @@ export default {
          * @author Danny Ríos <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        refreshToken:"530157b48c7fd777f6c02a158b7bafca274efeb638da854c0d460e6e250b8713",
+        refreshToken: "530157b48c7fd777f6c02a158b7bafca274efeb638da854c0d460e6e250b8713",
         /**
-         * @const urlBaseNovedad
-         * @desc Clave secreta para encriptar y desencriptar.
-         * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-         * @version 1.0.0
-         */
+             * @const secretEncryp
+             * @desc Secret key to encrypt and decrypt.
+             * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+             * @version 1.0.0
+             */
         secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a",
         /**
          * @const urlBaseFacturas
@@ -91,6 +93,5 @@ export default {
          * @version 1.0.0
          */
         tiempoRefreshToken: 86400,
-        
-    }
+    },
 };

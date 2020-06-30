@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import pedidosController from "../controller/controllerPedidos";
-import { Security } from "./../utils/seguridad";
+import { Security } from "../utils/security";
 
 /**
  * @classdesc Clase router de pedidos.

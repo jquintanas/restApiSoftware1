@@ -3,10 +3,10 @@
  * @author Karla Burgos <kbburgos@espol.edu.ec>
  * @public
  * @version 1.0.0
- * @desc Interfaz para modelo rol.
+ * @desc Role interface model.
  */
 
-export interface rolinterface {
+export interface roleinterface {
     idrol?: Number;
     descripcion: string;
     createdAt?: Date;

@@ -10,6 +10,11 @@
   Comentario: se agregan router de pago y novedad.
   */
 
+  /**
+   * @classdesc Index class
+   * @desc Creation Data: 11/04/2020
+   * @author Danny Ríos <dprios@espol.edu.ec>
+   */
  import express, {Application} from "express";
  import morgan from "morgan";
  const bodyParser =  require("body-parser");
@@ -20,12 +25,12 @@
  import cors from "cors";
  
  import routerPedidos from "./router/routerPedidos";
- import routerPagos from "./router/routerPago";
- import routernovedad from "./router/routerNovedad";
- import routerUsuarios from "./router/routerUsuario"; 
+ import Paymentrouter from "./router/routerPayment";
+ import Noveltyrouter from "./router/routerNovelty";
+ import Userrouter from "./router/routerUser"; 
  //import routerRols from "./router/routerRol"; 
  import routerCompras from "./router/routerCompras"; 
- import routerLogin from "./router/routerLogin";
+ import Loginrouter from "./router/routerLogin";
  import routerFacturas from "./router/routerFacturas";
  //import routerFacturas from "./router/routerFacturas"; 
  
@@ -58,12 +63,12 @@
 
   router() {
     this.app.use("/api/pedidos",routerPedidos);
-    this.app.use("/api/pagos",routerPagos);
-    this.app.use("/api/novedad", routernovedad);
-    this.app.use("/api/usuarios",routerUsuarios);
+    this.app.use("/api/pagos",Paymentrouter);
+    this.app.use("/api/novedad", Noveltyrouter);
+    this.app.use("/api/usuarios",Userrouter);
     //this.app.use("/api/rols",routerRols);
     this.app.use("/api/compras",routerCompras);
-    this.app.use("/api/login", routerLogin);
+    this.app.use("/api/login", Loginrouter);
     this.app.use("/api/facturas",routerFacturas);
   }
 

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { comprasInterface } from "./../interfaces/comprasInterface";
-import globales from "./../utils/globales";
-import { Security } from "./../utils/seguridad";
-import controllerUsuario from "./controllerUsuario";
+import globales from "../utils/global";
+import { Security } from "../utils/security";
+import controllerUsuario from "./controllerUser";
 
 /** 
  * @const compras

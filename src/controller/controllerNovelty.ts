@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import globals from "./../utils/globales";
-import { novedadinterface } from "./../interfaces/novedadInterface";
-import { Security } from "../utils/seguridad";
+import global from "../utils/global";
+import { NoveltyInterface } from "../interfaces/noveltyInterface";
+import { Security } from "../utils/security";
 /** 
  * @const Novedad
  * @desc Import of the model New from the database.
  */
-const novedad = require("./../../models").Novedads;
+const novelty = require("./../../models").Novedads;
 
 /**
  * @classdesc Novelty controlling class.
@@ -14,7 +14,7 @@ const novedad = require("./../../models").Novedads;
  * @class
  * @public
  * @version 1.0.0
- * @returns {alertController} novedadController
+ * @returns {alertController} noveltyController
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class alertController {
@@ -34,7 +34,7 @@ class alertController {
         let dataId = res.locals;
         let id: number = dataId.post;
 
-        novedad.findAll(
+        novelty.findAll(
             {
 
                 attributes: ['idnovedad', 'idusuarioReportado', 'descripcion', 'createdAt'],
@@ -66,7 +66,7 @@ class alertController {
      */
     public async getAlerts(req: Request, res: Response): Promise<void> {
 
-        novedad.findAll(
+        novelty.findAll(
             {
 
                 attributes: ['idnovedad', 'idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt', 'updatedAt'],
@@ -104,7 +104,7 @@ class alertController {
             res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
-        novedad.findOne(
+        novelty.findOne(
             {
                 where: {
                     idnovedad: id
@@ -140,7 +140,7 @@ class alertController {
     */
     public async findByReported(req: Request, res: Response): Promise<void> {
         let { reportado } = req.params;
-        novedad.findAll(
+        novelty.findAll(
             {
                 where: {
                     idUsuarioreportado: reportado
@@ -177,7 +177,7 @@ class alertController {
    */
     public async findByReports(req: Request, res: Response): Promise<void> {
         let { reporta } = req.params;
-        novedad.findAll(
+        novelty.findAll(
             {
                 where: {
                     idUsuarioreporta: reporta
@@ -213,7 +213,7 @@ class alertController {
    * @type {Promise<void>} Void type promise.
    */
     public async findAll(req: Request, res: Response): Promise<void> {
-        novedad.findAll(
+        novelty.findAll(
             {
                 attributes: ['idnovedad', 'idUsuarioreporta', 'idUsuarioreportado', 'descripcion']
             }
@@ -248,7 +248,7 @@ class alertController {
     public async addAlerts(req: Request, res: Response): Promise<void> {
         let { hash } = req.body;
         //aqui desencriptar los datos
-        let data: novedadinterface = {
+        let data: NoveltyInterface = {
             descripcion: req.body.descripcion,
             idusuarioReporta: req.body.idusuarioReporta,
             idusuarioReportado: req.body.idusuarioReportado
@@ -258,12 +258,12 @@ class alertController {
             res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
             return;
         }
-        novedad.create(data).then((resp: any) => {
+        novelty.create(data).then((resp: any) => {
             if (resp._options.isNewRecord) {
                 res.status(202).json(
                     {
                         log: "Ingresado",
-                        uri: globals.globals.urlBaseNovedad + resp.dataValues.idnovedad
+                        uri: global.globals.urlNoveltyBase + resp.dataValues.idnovedad
                     }
                 );
                 return;
@@ -303,13 +303,13 @@ class alertController {
         }
         let { descripcion } = req.body;
         let { reportado, reporta } = req.params;
-        let data: novedadinterface = {
+        let data: NoveltyInterface = {
             descripcion: descripcion,
             idusuarioReporta: reporta,
             idusuarioReportado: reportado,
             updatedAt: new Date()
         }
-        novedad.update(data,
+        novelty.update(data,
             {
                 where:
                 {

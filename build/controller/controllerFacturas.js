@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const globales_1 = __importDefault(require("./../utils/globales"));
-const seguridad_1 = require("./../utils/seguridad");
+const global_1 = __importDefault(require("../utils/global"));
+const security_1 = require("../utils/security");
 /**
  * @const facturas
  * @desc Import del modelo facturas de la base de datos.
@@ -225,7 +225,7 @@ y su integridad. <br> Fecha Creación: 12/04/2020
                 idpedido: req.body.idpedido,
                 idpago: req.body.idpago,
             };
-            let hashInterno = seguridad_1.Seguridad.hashJSON(factura);
+            let hashInterno = security_1.Security.hashJSON(factura);
             if (hashInterno != hash) {
                 res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
                 return;
@@ -234,7 +234,7 @@ y su integridad. <br> Fecha Creación: 12/04/2020
                 if (rs._options.isNewRecord) {
                     res.status(202).json({
                         log: "Factura ingresado con éxito",
-                        uri: globales_1.default.globales.urlBaseFacturas + rs.dataValues.idfactura
+                        uri: global_1.default.globals.urlBaseFacturas + rs.dataValues.idfactura
                     });
                     return;
                 }

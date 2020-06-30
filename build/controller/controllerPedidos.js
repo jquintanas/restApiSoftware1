@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const globales_1 = __importDefault(require("./../utils/globales"));
-const seguridad_1 = require("./../utils/seguridad");
+const global_1 = __importDefault(require("../utils/global"));
+const security_1 = require("../utils/security");
 /**
  * @const {Pedidos}
  * @desc Import del modelo pedidos de la base de datos.
@@ -128,7 +128,7 @@ class pedidosController {
                 subtotal: req.body.subtotal,
                 cubiertos: req.body.cubiertos
             };
-            let hashInterno = seguridad_1.Seguridad.hashJSON(pedido);
+            let hashInterno = security_1.Security.hashJSON(pedido);
             pedido.createdAt = new Date();
             if (hashInterno != hash) {
                 res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
@@ -138,7 +138,7 @@ class pedidosController {
                 if (resp._options.isNewRecord) {
                     res.status(202).json({
                         log: "Pedido ingresado con éxito",
-                        uri: globales_1.default.globales.urlBasePedidos + resp.dataValues.idpedido
+                        uri: global_1.default.globals.urlBasePedidos + resp.dataValues.idpedido
                     });
                     return;
                 }

@@ -2,7 +2,7 @@ let crypto = require('crypto');
 var AES = require("crypto-js/aes");
 var CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-import globales from "./globales"
+import global from "./global"
 /**
  * @classdesc Container class of api security functions.
  * @desc Creation Date: 04/13/2020
@@ -44,7 +44,7 @@ export class Security {
      * @param {String} cadena string to encrypt.
      */
     public static encrypt(cadena: string) {
-        let pass = globales.globals.secretEncryp;
+        let pass = global.globals.secretEncryp;
         return AES.encrypt(cadena, pass).toString().replace(/\//gi, "-");
     }
 
@@ -59,7 +59,7 @@ export class Security {
      * @param {String} cadena string to decrypt.
      */
     public static decrypt(cadena: string) {
-        let pass = globales.globals.secretEncryp;
+        let pass = global.globals.secretEncryp;
         let subString = cadena.replace(/-/gi, "/");
         let bytes = AES.decrypt(subString, pass);
         return bytes.toString(CryptoJS.enc.Utf8);
@@ -82,7 +82,7 @@ export class Security {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
 
-            jwt.verify(bearerToken, globales.globals.secretToken, (err: any, data: any) => {
+            jwt.verify(bearerToken, global.globals.secretToken, (err: any, data: any) => {
                 if (err) {
                     res.status(403).json({ log: "El token ha expirado.", err: err })
                 } else {

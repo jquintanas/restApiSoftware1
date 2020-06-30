@@ -12,8 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const globales_1 = __importDefault(require("./../utils/globales"));
-const seguridad_1 = require("./../utils/seguridad");
+const global_1 = __importDefault(require("../utils/global"));
+const security_1 = require("../utils/security");
 /**
  * @const compras
  * @desc Import del modelo compras de la base de datos.
@@ -157,7 +157,7 @@ class comprasController {
                 createdAt: new Date(),
                 updatedAt: new Date()
             };
-            let hashInterno = seguridad_1.Seguridad.hashJSON(compra);
+            let hashInterno = security_1.Security.hashJSON(compra);
             compra.createdAt = new Date();
             if (hashInterno != hash) {
                 res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
@@ -167,7 +167,7 @@ class comprasController {
                 if (rs._options.isNewRecord) {
                     res.status(202).json({
                         log: "Compra ingresado con éxito",
-                        uri: globales_1.default.globales.urlBaseCompras + rs.dataValues.idcompra
+                        uri: global_1.default.globals.urlBaseCompras + rs.dataValues.idcompra
                     });
                     return;
                 }
