@@ -1,5 +1,5 @@
 export default {
-    globales: {
+    globals: {
         /**
          * @const urlBasePagos
          * @desc URL del api de pagos.

@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { facturasInterface } from "./../interfaces/facturasInterface";
 import globales from "./../utils/globales";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 /** 
  * @const facturas
@@ -242,7 +242,7 @@ class facturasController {
                     idpago: req.body.idpago,
                 };
 
-                let hashInterno = Seguridad.hashJSON(factura);
+                let hashInterno = Security.hashJSON(factura);
                 if(hashInterno != hash){
                     res.status(401).json({log: "Violación de integridad de datos, hash invalido.",hash,hashInterno});
                     return;
@@ -253,7 +253,7 @@ class facturasController {
                         res.status(202).json(
                             {
                                 log: "Factura ingresado con éxito",
-                                uri: globales.globales.urlBaseFacturas + rs.dataValues.idfactura                    
+                                uri: globales.globals.urlBaseFacturas + rs.dataValues.idfactura                    
                             }
                         );
                         return;

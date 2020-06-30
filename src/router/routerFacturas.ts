@@ -1,6 +1,6 @@
 import { Router } from "express";
 import facturasController from "../controller/controllerFacturas";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 /*
     FechaCreacion: 11/04/2020
@@ -27,10 +27,10 @@ class routerFacturas {
 
     config():void {
         //this.router.[get | post]
-        this.router.post("/post", Seguridad.verificarToken, facturasController.postData);
-        this.router.get("/fuser",Seguridad.verificarToken, facturasController.getFacturasUser);
-        this.router.get("/getFacturas",Seguridad.verificarToken, facturasController.getFacturas);
-        this.router.get("/:id",Seguridad.verificarToken, facturasController.findByID);
+        this.router.post("/post", Security.checkToken, facturasController.postData);
+        this.router.get("/fuser",Security.checkToken, facturasController.getFacturasUser);
+        this.router.get("/getFacturas",Security.checkToken, facturasController.getFacturas);
+        this.router.get("/:id",Security.checkToken, facturasController.findByID);
         
       }
 }

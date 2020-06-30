@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { comprasInterface } from "./../interfaces/comprasInterface";
 import globales from "./../utils/globales";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 import controllerUsuario from "./controllerUsuario";
 
 /** 
@@ -163,7 +163,7 @@ class comprasController {
       updatedAt: new Date()
     };
 
-    let hashInterno = Seguridad.hashJSON(compra);
+    let hashInterno = Security.hashJSON(compra);
     compra.createdAt = new Date();
     if (hashInterno != hash) {
       res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
@@ -174,7 +174,7 @@ class comprasController {
         res.status(202).json(
           {
             log: "Compra ingresado con éxito",
-            uri: globales.globales.urlBaseCompras + rs.dataValues.idcompra
+            uri: globales.globals.urlBaseCompras + rs.dataValues.idcompra
           }
         );
         return;

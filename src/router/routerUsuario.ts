@@ -1,6 +1,6 @@
 import { Router } from "express";
 import usuarioController from "../controller/controllerUsuario";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
 class routerUsuarios {
   public router: Router = Router();
@@ -11,10 +11,10 @@ class routerUsuarios {
   config(): void {
     //this.router.[get | post | put | delete]
     //this.router.get("/", Seguridad.verificarToken, usuarioController.findAll);
-    this.router.get("/:id", Seguridad.verificarToken, usuarioController.findByID);
-    this.router.post("/", Seguridad.verificarToken, usuarioController.addUsuario);
-    this.router.delete("/:id",Seguridad.verificarToken,usuarioController.deleteUsuario);
-    this.router.put("/:id/:reporta/:reportado",Seguridad.verificarToken,usuarioController.updateUsuario);
+    this.router.get("/:id", Security.checkToken, usuarioController.findByID);
+    this.router.post("/", Security.checkToken, usuarioController.addUsuario);
+    this.router.delete("/:id",Security.checkToken,usuarioController.deleteUsuario);
+    this.router.put("/:id/:reporta/:reportado",Security.checkToken,usuarioController.updateUsuario);
   }
   
 }

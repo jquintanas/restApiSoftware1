@@ -1,6 +1,6 @@
 import { Router } from "express";
 import pagosController from "../controller/controllerPago";
-import { Seguridad } from "./../utils/seguridad";
+import { Security } from "./../utils/seguridad";
 
  /**
  * @classdesc Clase router de pago.
@@ -20,9 +20,9 @@ class routerPagos {
 
     config():void {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id",Seguridad.verificarToken,pagosController.findByID);
-        this.router.post("/", Seguridad.verificarToken,pagosController.addPago);
-        this.router.delete("/:id", Seguridad.verificarToken,pagosController.deletePago);
+        this.router.get("/:id",Security.checkToken,pagosController.findByID);
+        this.router.post("/", Security.checkToken,pagosController.addPago);
+        this.router.delete("/:id", Security.checkToken,pagosController.deletePago);
       }
 }
 export default new routerPagos().router

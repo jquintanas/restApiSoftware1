@@ -2,8 +2,8 @@ import { Router } from "express";
 import comprasLogin from "../controller/controllerLogin";
 
   /**
- * @classdesc Clase router de login.
- * @desc Fecha Creación: 19/04/2020
+ * @classdesc Login router class.
+ * @desc Creation Date: 04/19/2020
  * @class
  * @public
  * @version 1.0.0
@@ -20,7 +20,7 @@ class routerLogin {
     config():void {
         //this.router.[post]
         this.router.post("/usuario" ,comprasLogin.login);
-        this.router.post("/token",comprasLogin.token);
+        this.router.post("/token",comprasLogin.generateToken);
         this.router.post("/reject",comprasLogin.rejectToken);
       }
 }

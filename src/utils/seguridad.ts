@@ -4,14 +4,14 @@ var CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
 import globales from "./globales"
 /**
- * @classdesc Clase contenedora de las funciones de seguridad del api.
- * @desc Fecha Creación: 13/04/2020
+ * @classdesc Container class of api security functions.
+ * @desc Creation Date: 04/13/2020
  * @class
  * @public
  * @version 1.0.0
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-export class Seguridad {
+export class Security {
 
     /**
      * @static
@@ -19,15 +19,15 @@ export class Seguridad {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {String} Hash sha256 del JSON ingresado.
-     * @desc Este método se encarga de generar el hash sha256 del JSON que se ingresa como argumento, se procede a recorrer el mismo y almacenarlo como un string para posterior generar el hash respectivo. <br> Fecha Creación: 13/04/2020
-     * @param {Any} json JSON a calcular el hash.
+     * @returns {String} Hash sha256 of the entered JSON.
+     * @desc This method is in charge of generating the sha256 hash of the JSON that is entered as an argument, proceeds to loop through it and store it as a string to later generate the respective hash. <br> Creation Date: 04/13/2020
+     * @param {Any} json JSON to calculate the hash.
      */
     static hashJSON(json: any) {
         let data: string = "";
-        for (let clave in json) {
-            if (json.hasOwnProperty(clave)) {
-                data += clave + ":" + json[clave] + ","
+        for (let pass in json) {
+            if (json.hasOwnProperty(pass)) {
+                data += pass + ":" + json[pass] + ","
             }
         }
         return crypto.createHash('sha256').update(data).digest('hex');
@@ -39,13 +39,13 @@ export class Seguridad {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {String} Cadena cifrada.
-     * @desc Genera un cifrado AES de la cadena introducida para su posterior retorno y procesamiento adicional se procede a reemplazar los caracteres incompatibles para poder ser enviados en la URL.<br> Fecha Creación: 13/04/2020
-     * @param {String} cadena cadena a encriptar.
+     * @returns {String} Encrypted string.
+     * @desc It generates an AES encryption of the entered string for its later return and additional processing, we proceed to replace the incompatible characters to be sent in the URL. <br> Creation Date: 04/13/2020
+     * @param {String} cadena string to encrypt.
      */
-    public static encriptar(cadena: string) {
-        let clave = globales.globales.secretEncryp;
-        return AES.encrypt(cadena, clave).toString().replace(/\//gi, "-");
+    public static encrypt(cadena: string) {
+        let pass = globales.globals.secretEncryp;
+        return AES.encrypt(cadena, pass).toString().replace(/\//gi, "-");
     }
 
     /**
@@ -54,14 +54,14 @@ export class Seguridad {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {String} Cadena descifrada.
-     * @desc Descifra la cadena que se introduce como argumento para transformarla a texto plano luego de su procesamiento y regresión al AES normal debido a que la cadena ingresa reemplazada con algunos caracteres.<br> Fecha Creación: 13/04/2020
-     * @param {String} cadena cadena a desencriptar.
+     * @returns {String} Decrypted string.
+     * @desc Decrypts the string that is entered as an argument to transform it into plain text after its processing and regression to the normal AES because the string enters replaced with some characters. <br> Creation Date: 04/13/2020
+     * @param {String} cadena string to decrypt.
      */
-    public static desencriptar(cadena: string) {
-        let clave = globales.globales.secretEncryp;
-        let cade = cadena.replace(/-/gi, "/");
-        let bytes = AES.decrypt(cade, clave);
+    public static decrypt(cadena: string) {
+        let pass = globales.globals.secretEncryp;
+        let subString = cadena.replace(/-/gi, "/");
+        let bytes = AES.decrypt(subString, pass);
         return bytes.toString(CryptoJS.enc.Utf8);
     }
 
@@ -73,18 +73,18 @@ export class Seguridad {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @desc función middleware para verificar la valides del token de sesión enviado.
+     * @desc middleware function to verify the validity of the sent session token.
      */
-    public static verificarToken(req: any, res: any, next: any) {
+    public static checkToken(req: any, res: any, next: any) {
         let bearerHeader = req.headers["authorization"];
         //console.log(bearerHeader)
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
-            
-            jwt.verify(bearerToken, globales.globales.secretToken, (err:any, data:any) => {
+
+            jwt.verify(bearerToken, globales.globals.secretToken, (err: any, data: any) => {
                 if (err) {
-                    res.status(403).json({log: "El token ha expirado.", err:err})
+                    res.status(403).json({ log: "El token ha expirado.", err: err })
                 } else {
                     //console.log(data);
                     let dataId = data['id'];
