@@ -10,38 +10,27 @@
   Comentario: se agregan router de pago y novedad.
   */
 
-//import {Application} from "express";
-const express = require('express');
-//import morgan from "morgan";
-const morgan = require('morgan');
-const bodyParser =  require("body-parser");
-const path = require("path");
-const helmet = require('helmet');
-const expectCt = require('expect-ct');
-
-//import cors from "cors";
-const cors = require('cors');
-
-import routerPedidos from "./router/routerPedidos";
-//const routerPedidos = require('./router/routerPedidos');
-import routerPagos from "./router/routerPago";
-//const routerPagos = require('./router/routerPago');
-import routernovedad from "./router/routerNovedad";
-//const routernovedad = require('./router/routerNovedad');
-import routerUsuarios from "./router/routerUsuario"; 
-//const routerUsuarios = require('./router/routerUsuario');
-//import routerRols from "./router/routerRol"; 
-import routerCompras from "./router/routerCompras"; 
-//const routerCompras = require('./router/routerCompras');
-import routerLogin from "./router/routerLogin";
-//const routerLogin = require('./router/routerLogin');
-import routerFacturas from "./router/routerFacturas";
-//const routerFacturas = require('./router/routerFacturas');
-
-
-class Server {
-  //public app:Application;
-  app;
+ import express, {Application} from "express";
+ import morgan from "morgan";
+ const bodyParser =  require("body-parser");
+ const path = require("path");
+ const helmet = require('helmet');
+ const expectCt = require('expect-ct');
+ 
+ import cors from "cors";
+ 
+ import routerPedidos from "./router/routerPedidos";
+ import routerPagos from "./router/routerPago";
+ import routernovedad from "./router/routerNovedad";
+ import routerUsuarios from "./router/routerUsuario"; 
+ //import routerRols from "./router/routerRol"; 
+ import routerCompras from "./router/routerCompras"; 
+ import routerLogin from "./router/routerLogin";
+ import routerFacturas from "./router/routerFacturas";
+ //import routerFacturas from "./router/routerFacturas"; 
+ 
+ class Server {
+   public app:Application;
   constructor() {
     this.app = express();
     this.config();

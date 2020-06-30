@@ -6,8 +6,8 @@
   "engines": {
     "node": "v12.13.1"
   },
-  "type": "module",
   "scripts": {
+    "build": "tsc -w",
     "dev": "nodemon build/index.js",
     "start": "node build/index.js",
     "docs": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r"
