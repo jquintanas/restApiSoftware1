@@ -25,7 +25,7 @@ exports.default = {
         urlNoveltyBase: "http://localhost:3000/api/novedades/",
         /**
          * @const urlBasePedidos
-         * @desc URL del api de pedidos.
+         * @desc Orders API URL.
          * @author Danny Ríos <dprios@espol.edu.ec>
          * @version 1.0.0
          */
@@ -46,7 +46,7 @@ exports.default = {
         secretToken: "7187ba3735b821b9ae7bd7d5dd98b61a07ec2e9cef2aad92b97a4ed6080290e6",
         /**
          * @const refreshToken
-         * @desc Clave secreta para refrescar el token.
+         * @desc Secret refresh token.
          * @author Danny Ríos <dprios@espol.edu.ec>
          * @version 1.0.0
          */
@@ -80,18 +80,18 @@ exports.default = {
          */
         listRefreshTokens: {},
         /**
-         * @const tiempoToken
-         * @desc Tiempo de vida del token.
+         * @const lifetimeToken
+         * @desc Token lifetime.
          * @author Danny Rios <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        tiempoToken: 900,
+        lifetimeToken: 900,
         /**
-         * @const tiempoRefreshToken
-         * @desc Tiempo de vida del refresh token
+         * @const lifetimeRefreshToken
+         * @desc Refresh token lifetime
          * @author Danny Rios <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        tiempoRefreshToken: 86400,
+        lifetimeRefreshToken: 86400,
     },
 };

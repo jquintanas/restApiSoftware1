@@ -31,7 +31,7 @@ class purchaseController {
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
-     * @desc This method search all the purchases by user<br> FechaCreacion: 25/06/2020
+     * @desc This method search all the purchases by user<br> Creation Date: 25/06/2020
      * @param {Request} req Object Request
      * @param {Response} res Object response
      * @type {Promise<void>} Void Promise.

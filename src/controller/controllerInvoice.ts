@@ -55,11 +55,11 @@ class invoiceController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las facturas de acuerdo al usuario <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will sear all the invoices by user <br> Creation Date: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise
      */
     public async getInvoiceUser(req: Request, res: Response): Promise<void> {     
         let dataId = res.locals; 
@@ -119,7 +119,7 @@ class invoiceController {
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
-     * @desc This method will sear all the invoices <br> FechaCreacion: 25/06/2020
+     * @desc This method will sear all the invoices <br> Creation Date: 25/06/2020
      * @param {Request} req Object Request
      * @param {Response} res Object response
      * @type {Promise<void>} Void promise

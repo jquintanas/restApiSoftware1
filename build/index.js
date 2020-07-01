@@ -26,15 +26,14 @@ const path = require("path");
 const helmet = require('helmet');
 const expectCt = require('expect-ct');
 const cors_1 = __importDefault(require("cors"));
-const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
+const routerOrders_1 = __importDefault(require("./router/routerOrders"));
 const routerPayment_1 = __importDefault(require("./router/routerPayment"));
 const routerNovelty_1 = __importDefault(require("./router/routerNovelty"));
 const routerUser_1 = __importDefault(require("./router/routerUser"));
 //import routerRols from "./router/routerRol"; 
-const routerCompras_1 = __importDefault(require("./router/routerCompras"));
+const routerPurchase_1 = __importDefault(require("./router/routerPurchase"));
 const routerLogin_1 = __importDefault(require("./router/routerLogin"));
-const routerFacturas_1 = __importDefault(require("./router/routerFacturas"));
-//import routerFacturas from "./router/routerFacturas"; 
+const routerInvoice_1 = __importDefault(require("./router/routerInvoice"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -60,14 +59,14 @@ class Server {
         }));
     }
     router() {
-        this.app.use("/api/pedidos", routerPedidos_1.default);
-        this.app.use("/api/pagos", routerPayment_1.default);
-        this.app.use("/api/novedad", routerNovelty_1.default);
-        this.app.use("/api/usuarios", routerUser_1.default);
+        this.app.use("/api/orders", routerOrders_1.default);
+        this.app.use("/api/payments", routerPayment_1.default);
+        this.app.use("/api/noveltys", routerNovelty_1.default);
+        this.app.use("/api/usersS", routerUser_1.default);
         //this.app.use("/api/rols",routerRols);
-        this.app.use("/api/compras", routerCompras_1.default);
+        this.app.use("/api/purchase", routerPurchase_1.default);
         this.app.use("/api/login", routerLogin_1.default);
-        this.app.use("/api/facturas", routerFacturas_1.default);
+        this.app.use("/api/invoice", routerInvoice_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {

@@ -59,8 +59,8 @@ class loginController {
                     res.status(404).json({ log: "No Existen datos a mostrar para el ID." });
                     return;
                 }
-                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.tiempoToken });
-                let refreshToken = jwt.sign({ id }, global_1.default.globals.refreshToken, { expiresIn: global_1.default.globals.tiempoRefreshToken });
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
+                let refreshToken = jwt.sign({ id }, global_1.default.globals.refreshToken, { expiresIn: global_1.default.globals.lifetimeRefreshToken });
                 let response = {
                     "status": "Logged in",
                     "token": token
@@ -91,7 +91,7 @@ class loginController {
         return __awaiter(this, void 0, void 0, function* () {
             let { id, refreshToken } = req.body;
             if ((refreshToken) && (refreshToken in tokenList)) {
-                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.tiempoToken });
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
                 tokenList[refreshToken].token = token;
                 res.status(200).json({ token });
             }

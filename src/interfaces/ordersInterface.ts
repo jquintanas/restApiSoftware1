@@ -1,11 +1,11 @@
 /**
- * @interface pedidosInterface
+ * @interface ordersInterface
  * @author Danny Rios <dprios@espol.edu.ec>
  * @public
  * @version 1.0.0
- * @desc Interfaz para modelo pedidos.
+ * @desc Order interface model.
  */
-export interface pedidosInterface{
+export interface ordersInterface{
     idpedido?: Number;
     idcompra: Number;
     idproducto: Number;
