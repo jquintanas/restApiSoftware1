@@ -55,8 +55,8 @@ class loginController {
                 res.status(404).json({ log: "No Existen datos a mostrar para el ID." })
                 return;
             }
-            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.tiempoToken });
-            let refreshToken = jwt.sign({ id }, global.globals.refreshToken, { expiresIn: global.globals.tiempoRefreshToken });
+            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
+            let refreshToken = jwt.sign({ id }, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
             let response = {
                 "status": "Logged in",
                 "token": token
@@ -89,7 +89,7 @@ class loginController {
 
         if ((refreshToken) && (refreshToken in tokenList)) {
 
-            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.tiempoToken });
+            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
             tokenList[refreshToken].token = token;
             res.status(200).json({ token });
         } else {

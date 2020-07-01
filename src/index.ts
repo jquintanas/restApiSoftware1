@@ -24,7 +24,7 @@
  
  import cors from "cors";
  
- import routerPedidos from "./router/routerPedidos";
+ import Ordersrouter from "./router/routerPedidos";
  import Paymentrouter from "./router/routerPayment";
  import Noveltyrouter from "./router/routerNovelty";
  import Userrouter from "./router/routerUser"; 
@@ -62,9 +62,9 @@
   
 
   router() {
-    this.app.use("/api/pedidos",routerPedidos);
-    this.app.use("/api/pagos",Paymentrouter);
-    this.app.use("/api/novedad", Noveltyrouter);
+    this.app.use("/api/orders",Ordersrouter);
+    this.app.use("/api/payments",Paymentrouter);
+    this.app.use("/api/noveltys", Noveltyrouter);
     this.app.use("/api/usuarios",Userrouter);
     //this.app.use("/api/rols",routerRols);
     this.app.use("/api/compras",routerCompras);
