@@ -1,28 +1,28 @@
 import { Request, Response } from "express";
-import { comprasInterface } from "./../interfaces/comprasInterface";
+import { purchaseInterface } from "./../interfaces/purchaseInterface";
 import globales from "../utils/global";
 import { Security } from "../utils/security";
-import controllerUsuario from "./controllerUser";
-
+import controllerUser from "./controllerUser";
+ 
 /** 
- * @const compras
- * @desc Import del modelo compras de la base de datos.
+ * @const purchase
+ * @desc Import Purchase model from data base.
  */
 
-const compras = require('./../../models').compras;
+const purchases = require('./../../models').compras;
 
 
 /**
-* @classdesc Clase controladora de compras.
+* @classdesc  Purchase controller class.
 * @desc Fecha Creación: 12/04/2020
 * @class
 * @public
 * @version 1.0.0
-* @returns {comprasController}  comprasController
+* @returns {purhcaseController}  purchaseController
 * @author Francesca Man Ging <fman@espol.edu.ec>
 */
 
-class comprasController {
+class purchaseController {
 
   /**
      * @async
@@ -30,17 +30,17 @@ class comprasController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las compras por usuario<br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method search all the purchases by user<br> FechaCreacion: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void Promise.
      */
-    public async getComprasUser(req: Request, res: Response): Promise<void> {   
+    public async getPurchaseUser(req: Request, res: Response): Promise<void> {   
       let dataId = res.locals; 
       let id : number = dataId.post;   
       console.log('id',id);    
-      compras.findAll(
+      purchases.findAll(
           {
               
               attributes: ['idcompra', 'fechacompra','horaEntrega'],
@@ -64,15 +64,15 @@ class comprasController {
      * @method
      * @public
      * @version 1.0.0
-     * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las compras <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method search the Purchase <br> FechaCreacion: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void Promise.
      */
-    public async getCompras(req: Request, res: Response): Promise<void> {       
-      compras.findAll(
+    public async getPurchase(req: Request, res: Response): Promise<void> {       
+      purchases.findAll(
           {
               
               attributes: ['idcompra','idusuario', 'fechacompra','horaEntrega','createdAt'],
@@ -95,11 +95,11 @@ class comprasController {
   * @public
   * @version 1.0.0
   * @author Francesca Man Ging <fman@espol.edu.ec>
-  * @returns {JSON} JSON con los datos obtenidos de la consulta.
-  * @desc Este método se encarga de buscar la compra en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
+  * @returns {JSON} JSON with the transaction response.
+  * @desc This method search the purchase by the ID given by the URL. <br> Fecha Creación: 12/04/2020
   * @param {Request} req Objeto Request
   * @param {Response} res Objeto response
-  * @type {Promise<void>} Promesa de tipo void.
+  * @type {Promise<void>} Void Promise.
   */
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
@@ -114,7 +114,7 @@ class comprasController {
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
-    compras.findOne({
+    purchases.findOne({
         where: {
             idcompra: id
         },
@@ -145,15 +145,15 @@ class comprasController {
    * @public
    * @version 1.0.0
    * @author Francesca Man Ging <fman@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de agregar la compra proporcionado por el usuario. <br> Fecha Creación: 12/04/2020
-  * @param {Request} req Objeto Request
-  * @param {Response} res Objeto response
-  * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method add the puchase fiven by the user. <br> Fecha Creación: 12/04/2020
+  * @param {Request} req Object Request
+  * @param {Response} res Object response
+  * @type {Promise<void>} Void Promise.
   */
   public async postData(req: Request, res: Response): Promise<void> {
     let { hash } = req.body;
-    let compra: comprasInterface = {
+    let purchase: purchaseInterface = {
       idcompra: req.body.idcompra,
       idusuario: req.body.idusuario,
       fechacompra: new Date(),
@@ -163,13 +163,13 @@ class comprasController {
       updatedAt: new Date()
     };
 
-    let hashInterno = Security.hashJSON(compra);
-    compra.createdAt = new Date();
+    let hashInterno = Security.hashJSON(purchase);
+    purchase.createdAt = new Date();
     if (hashInterno != hash) {
       res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
       return;
     }
-    compras.create(compra).then((rs: any) => {
+    purchases.create(purchase).then((rs: any) => {
       if (rs._options.isNewRecord) {
         res.status(202).json(
           {
@@ -196,10 +196,10 @@ class comprasController {
    * @version 1.0.0
    * @author Francesca Man Ging <fman@espol.edu.ec>
    * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc   Este método se encarga de eliminar la compra en base al ID que se proporciona por la url. <br> Fecha Creación: 12/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @desc  This method eliminate de purchase by de ID given by the URL.  <br> Fecha Creación: 12/04/2020
+   * @param {Request} req Object Request
+   * @param {Response} res Object response
+   * @type {Promise<void>} Void Promise.
    */
 
   public async deleteData(req: Request, res: Response): Promise<void> {
@@ -215,7 +215,7 @@ class comprasController {
       return;
     }
     
-    compras.destroy({ where: { idcompra: id } }).then((data: any) => {
+    purchases.destroy({ where: { idcompra: id } }).then((data: any) => {
       if (data == 1) {
         res.status(200).json({ log: "Compra eliminado correctamente" });
         return;
@@ -233,4 +233,4 @@ class comprasController {
 
 }
 
-export default new comprasController();
+export default new purchaseController();
