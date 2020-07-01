@@ -29,10 +29,9 @@
  import Noveltyrouter from "./router/routerNovelty";
  import Userrouter from "./router/routerUser"; 
  //import routerRols from "./router/routerRol"; 
- import routerCompras from "./router/routerCompras"; 
+ import routerPurchase from "./router/routerPurchase";
  import Loginrouter from "./router/routerLogin";
- import routerFacturas from "./router/routerFacturas";
- //import routerFacturas from "./router/routerFacturas"; 
+ import routerInvoice from "./router/routerInvoice";
  
  class Server {
    public app:Application;
@@ -67,9 +66,9 @@
     this.app.use("/api/novedad", Noveltyrouter);
     this.app.use("/api/usuarios",Userrouter);
     //this.app.use("/api/rols",routerRols);
-    this.app.use("/api/compras",routerCompras);
+    this.app.use("/api/compras",routerPurchase);
     this.app.use("/api/login", Loginrouter);
-    this.app.use("/api/facturas",routerFacturas);
+    this.app.use("/api/facturas",routerInvoice);
   }
 
   start(){
