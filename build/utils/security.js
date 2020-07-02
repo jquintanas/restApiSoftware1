@@ -1,8 +1,14 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Security = void 0;
 let crypto = require('crypto');
 var AES = require("crypto-js/aes");
 var CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
-import globales from "./globales"
+const global_1 = __importDefault(require("./global"));
 /**
  * @classdesc Container class of api security functions.
  * @desc Creation Date: 04/13/2020
@@ -11,8 +17,7 @@ import globales from "./globales"
  * @version 1.0.0
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-export class Security {
-
+class Security {
     /**
      * @static
      * @method
@@ -23,16 +28,15 @@ export class Security {
      * @desc This method is in charge of generating the sha256 hash of the JSON that is entered as an argument, proceeds to loop through it and store it as a string to later generate the respective hash. <br> Creation Date: 04/13/2020
      * @param {Any} json JSON to calculate the hash.
      */
-    static hashJSON(json: any) {
-        let data: string = "";
+    static hashJSON(json) {
+        let data = "";
         for (let pass in json) {
             if (json.hasOwnProperty(pass)) {
-                data += pass + ":" + json[pass] + ","
+                data += pass + ":" + json[pass] + ",";
             }
         }
         return crypto.createHash('sha256').update(data).digest('hex');
     }
-
     /**
      * @static
      * @method
@@ -43,11 +47,10 @@ export class Security {
      * @desc It generates an AES encryption of the entered string for its later return and additional processing, we proceed to replace the incompatible characters to be sent in the URL. <br> Creation Date: 04/13/2020
      * @param {String} cadena string to encrypt.
      */
-    public static encrypt(cadena: string) {
-        let pass = globales.globals.secretEncryp;
+    static encrypt(cadena) {
+        let pass = global_1.default.globals.secretEncryp;
         return AES.encrypt(cadena, pass).toString().replace(/\//gi, "-");
     }
-
     /**
      * @static
      * @method
@@ -58,15 +61,12 @@ export class Security {
      * @desc Decrypts the string that is entered as an argument to transform it into plain text after its processing and regression to the normal AES because the string enters replaced with some characters. <br> Creation Date: 04/13/2020
      * @param {String} cadena string to decrypt.
      */
-    public static decrypt(cadena: string) {
-        let pass = globales.globals.secretEncryp;
+    static decrypt(cadena) {
+        let pass = global_1.default.globals.secretEncryp;
         let subString = cadena.replace(/-/gi, "/");
         let bytes = AES.decrypt(subString, pass);
         return bytes.toString(CryptoJS.enc.Utf8);
     }
-
-
-
     /**
      * @static
      * @method
@@ -75,17 +75,17 @@ export class Security {
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
      * @desc middleware function to verify the validity of the sent session token.
      */
-    public static checkToken(req: any, res: any, next: any) {
+    static checkToken(req, res, next) {
         let bearerHeader = req.headers["authorization"];
         //console.log(bearerHeader)
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
-
-            jwt.verify(bearerToken, globales.globals.secretToken, (err: any, data: any) => {
+            jwt.verify(bearerToken, global_1.default.globals.secretToken, (err, data) => {
                 if (err) {
-                    res.status(403).json({ log: "El token ha expirado.", err: err })
-                } else {
+                    res.status(403).json({ log: "El token ha expirado.", err: err });
+                }
+                else {
                     //console.log(data);
                     let dataId = data['id'];
                     res.locals.post = dataId;
@@ -94,9 +94,10 @@ export class Security {
                 }
             });
             //res.status(403).json({log: "No tiene permiso para ver el recurso."})
-        } else {
+        }
+        else {
             res.status(403).json({ log: "No existe el token de sesión." });
         }
-
     }
 }
+exports.Security = Security;

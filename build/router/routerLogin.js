@@ -6,12 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerLogin_1 = __importDefault(require("../controller/controllerLogin"));
 /**
-* @classdesc Clase router de login.
-* @desc Fecha Creación: 19/04/2020
+* @classdesc Login router class.
+* @desc Creation Date: 04/19/2020
 * @class
 * @public
 * @version 1.0.0
-* @returns {routerPagos} router
+* @returns {routerLogin} router
 * @author Jonathan Quintana <jiquinta@espol.edu.ec>
 */
 class routerLogin {
@@ -22,7 +22,7 @@ class routerLogin {
     config() {
         //this.router.[post]
         this.router.post("/usuario", controllerLogin_1.default.login);
-        this.router.post("/token", controllerLogin_1.default.token);
+        this.router.post("/token", controllerLogin_1.default.generateToken);
         this.router.post("/reject", controllerLogin_1.default.rejectToken);
     }
 }

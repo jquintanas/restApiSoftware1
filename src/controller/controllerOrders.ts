@@ -1,25 +1,25 @@
 import { Request, Response } from "express";
-import { pedidosInterface } from "./../interfaces/pedidosInterface";
-import globales from "./../utils/globales";
-import { Security } from "./../utils/seguridad";
+import { ordersInterface } from "../interfaces/ordersInterface";
+import global from "../utils/global";
+import { Security } from "../utils/security";
 /** 
- * @const {Pedidos} 
- * @desc Import del modelo pedidos de la base de datos.
+ * @const {Orders} 
+ * @desc Import Orders model from data base.
  */
 const pedidos = require('./../../models').Pedidos;
 /** 
- * @const {Compras} 
- * @desc Import del modelo compras de la base de datos.
+ * @const {Purchases} 
+ * @desc Import Purchase model from data base.
  */
 const compras = require('./../../models').compras;
 
 /**
- * @classdesc Clase controladora de pedidos.
+ * @classdesc Order controller class.
  * @desc FechaCreacion: 01/04/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {pedidosController} pedidosController
+ * @returns {orderController} orderController
  * @author Danny Rios <dprios@espol.edu.ec>
  */
 class pedidosController {
@@ -29,13 +29,13 @@ class pedidosController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos de acuerdo al usuario <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method search all the orders by user<br> Creation Date: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void Promise.
      */
-    public async getPedidosUser(req: Request, res: Response): Promise<void> {     
+    public async getOrdersUser(req: Request, res: Response): Promise<void> {     
         let dataId = res.locals; 
         let id : number = dataId.post;
   
@@ -71,13 +71,13 @@ class pedidosController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 25/06/2020
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will sear all the orders <br> Creation Date: 25/06/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Promise.
      */
-    public async getPedidos(req: Request, res: Response): Promise<void> {          
+    public async getOrders(req: Request, res: Response): Promise<void> {          
         pedidos.findAll(
             {
                 
@@ -106,15 +106,15 @@ class pedidosController {
    * @public
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de agregar un nuevo pedido <br> FechaCreacion: 01/04/2020
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method will add a new order after it verify the data and it's integrity. <br> Creation Date: 01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @type {Promise<void>}  Void Promise.
    */
     public async postData(req: Request, res: Response): Promise<void> {        
         let {hash} = req.body;
-        let pedido :pedidosInterface = {
+        let pedido :ordersInterface = {
             idpedido: req.body.idpedido,
             idcompra: req.body.idcompra,
             idproducto: req.body.idproducto,
@@ -134,7 +134,7 @@ class pedidosController {
                 res.status(202).json(
                     {
                         log: "Pedido ingresado con éxito",
-                        uri: globales.globals.urlBasePedidos + resp.dataValues.idpedido                      
+                        uri: global.globals.urlBasePedidos + resp.dataValues.idpedido                      
                     }
                 );
                 return;
@@ -154,12 +154,11 @@ class pedidosController {
    * @public
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
-    por la url. <br> FechaCreacion: 01/04/2020
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date:01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @type {Promise<void>} Void Promise.
    */
     public async deleteData(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
@@ -194,12 +193,11 @@ class pedidosController {
    * @public
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de buscar el pago en base al ID proporcionaro en la url
-   * . <br> FechaCreacion: 01/04/2020
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method find a order that match with the ID in the url. The search is performed in the database. <br> Creation Date: 01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @type {Promise<void>} Void Promise.
    */
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;

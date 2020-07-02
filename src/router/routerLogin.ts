@@ -7,7 +7,7 @@ import comprasLogin from "../controller/controllerLogin";
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerPagos} router
+ * @returns {routerLogin} router
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class routerLogin {

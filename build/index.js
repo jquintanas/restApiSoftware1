@@ -14,6 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * @classdesc Index class
+ * @desc Creation Data: 11/04/2020
+ * @author Danny Ríos <dprios@espol.edu.ec>
+ */
 const express_1 = __importDefault(require("express"));
 const morgan_1 = __importDefault(require("morgan"));
 const bodyParser = require("body-parser");
@@ -21,15 +26,14 @@ const path = require("path");
 const helmet = require('helmet');
 const expectCt = require('expect-ct');
 const cors_1 = __importDefault(require("cors"));
-const routerPedidos_1 = __importDefault(require("./router/routerPedidos"));
-const routerPago_1 = __importDefault(require("./router/routerPago"));
-const routerNovedad_1 = __importDefault(require("./router/routerNovedad"));
-const routerUsuario_1 = __importDefault(require("./router/routerUsuario"));
+const routerOrders_1 = __importDefault(require("./router/routerOrders"));
+const routerPayment_1 = __importDefault(require("./router/routerPayment"));
+const routerNovelty_1 = __importDefault(require("./router/routerNovelty"));
+const routerUser_1 = __importDefault(require("./router/routerUser"));
 //import routerRols from "./router/routerRol"; 
-const routerCompras_1 = __importDefault(require("./router/routerCompras"));
+const routerPurchase_1 = __importDefault(require("./router/routerPurchase"));
 const routerLogin_1 = __importDefault(require("./router/routerLogin"));
-const routerFacturas_1 = __importDefault(require("./router/routerFacturas"));
-//import routerFacturas from "./router/routerFacturas"; 
+const routerInvoice_1 = __importDefault(require("./router/routerInvoice"));
 class Server {
     constructor() {
         this.app = express_1.default();
@@ -55,14 +59,14 @@ class Server {
         }));
     }
     router() {
-        this.app.use("/api/pedidos", routerPedidos_1.default);
-        this.app.use("/api/pagos", routerPago_1.default);
-        this.app.use("/api/novedad", routerNovedad_1.default);
-        this.app.use("/api/usuarios", routerUsuario_1.default);
+        this.app.use("/api/orders", routerOrders_1.default);
+        this.app.use("/api/payments", routerPayment_1.default);
+        this.app.use("/api/noveltys", routerNovelty_1.default);
+        this.app.use("/api/usersS", routerUser_1.default);
         //this.app.use("/api/rols",routerRols);
-        this.app.use("/api/compras", routerCompras_1.default);
+        this.app.use("/api/purchase", routerPurchase_1.default);
         this.app.use("/api/login", routerLogin_1.default);
-        this.app.use("/api/facturas", routerFacturas_1.default);
+        this.app.use("/api/invoice", routerInvoice_1.default);
     }
     start() {
         this.app.listen(this.app.get("port"), () => {

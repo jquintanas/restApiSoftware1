@@ -1,6 +1,6 @@
 import { Router } from "express";
 import paymentController from "../controller/controllerPago";
-import { Security } from "./../utils/seguridad";
+import { Security } from "./../utils/security";
 
  /**
  * @classdesc Payment router class.

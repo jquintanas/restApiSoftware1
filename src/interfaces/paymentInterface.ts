@@ -1,11 +1,11 @@
 /**
- * @interface pagosInterface
+ * @interface PaymentInterface
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  * @public
  * @version 1.0.0
- * @desc Interfaz para modelo pago.
+ * @desc Payment interface model.
  */
-export interface pagosInterface {
+export interface PaymentInterface {
     idPago?: Number;
     idformaPago: Number;
     total: Number;

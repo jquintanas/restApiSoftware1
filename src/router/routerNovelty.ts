@@ -1,6 +1,6 @@
 import { Router } from "express";
-import alertController from "./../controller/controllerNovedad";
-import { Security } from "./../utils/seguridad";
+import alertController from "../controller/controllerNovelty";
+import { Security } from "../utils/security";
 
 
   /**
@@ -9,7 +9,7 @@ import { Security } from "./../utils/seguridad";
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerPagos} router
+ * @returns {routerAlerts} router
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class routerAlerts {

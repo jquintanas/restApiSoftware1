@@ -16,37 +16,36 @@ const global_1 = __importDefault(require("../utils/global"));
 const rols = require("./../../models").rols;
 const security_1 = require("../utils/security");
 /**
- * @const Usuarios
- * @desc Import del modelo Usuario de la base de datos.
+ * @const User
+ * @desc Import User model from data base.
  */
-const usuarios = require("./../../models").Usuarios;
+const user = require("./../../models").Usuarios;
 /**
- * @classdesc Clase controladora de usuarios.
- * @desc Fecha Creación: 12/04/2020
+ * @classdesc User controller class.
+ * @desc Creation Date: 12/04/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {usuariosController} usuariosController
+ * @returns {userController} userController
  * @author Karla Burgos <kbburgos@espol.edu.ec>
  */
-class usuariosController {
+class userController {
     /**
      * @async
      * @method
      * @public
      * @version 1.0.0
      * @author Karla Burgos <kbburgos@espol.edu.ec>
-     * @returns {JSON} JSON con la respuesta de la transacción.
-     * @desc  Este método se encarga de agregar el usuario proporcionado por el usuario posterior a verificar los datos
-      y su integridad. <br> Fecha Creación: 19/04/2020
+     * @returns {JSON} JSON with the transaction response.
+     * @desc  This method add a user to the system. <br> Creation Date: 19/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Promise.
      */
-    addUsuario(req, res) {
+    addUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { hash } = req.body;
-            //aqui desencriptar los datos
+            //data description here
             let data = {
                 cedula: req.body.cedula,
                 nombre: req.body.nombre,
@@ -58,7 +57,7 @@ class usuariosController {
                 direccion: req.body.direccion
             };
             let hashInterno = security_1.Security.hashJSON(data);
-            //aqui se debe desencriptar el hash
+            //here the hash must be decrypted
             data.createdAt = new Date();
             if (hashInterno != hash) {
                 res
@@ -66,7 +65,7 @@ class usuariosController {
                     .json({ log: "Violación de integridad de datos, hash invalido." });
                 return;
             }
-            usuarios.create(data).then((resp) => {
+            user.create(data).then((resp) => {
                 if (resp._options.isNewRecord) {
                     res.status(202).json({
                         log: "Ingresado",
@@ -89,11 +88,11 @@ class usuariosController {
      * @public
      * @version 1.0.0
      * @author Karla Burgos <kbburgos@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar el usuario en base a la cedula proporcionado en la url. <br> Fecha Creación: 12/04/2020
+     * @returns {JSON} JSON with the consult data.
+     * @desc This method is responsible for searching the user based on the ID provided in the url. <br> Creation Date: 12/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Ptromise.
      */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -109,7 +108,7 @@ class usuariosController {
                     .json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            usuarios
+            user
                 .findOne({
                 where: {
                     cedula: id,
@@ -137,13 +136,13 @@ class usuariosController {
      * @public
      * @version 1.0.0
      * @author Karla Burgos <kbburgos@espol.edu.ec>
-     * @returns {JSON} JSON con la respuesta de la transacción.
-     * @desc   Este método se encarga de eliminar el usuario en base a la cedula que se proporciona por la url. <br> Fecha Creación: 12/04/2020
+     * @returns {JSON} JSON with the transaction response.
+     * @desc  This method removes the user from the base to the ID which is provided by the url. <br> Creation Date: 12/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Promise.
      */
-    deleteUsuario(req, res) {
+    deleteUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
@@ -157,7 +156,7 @@ class usuariosController {
                     .json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            usuarios.destroy({ where: { cedula: id } }).then((data) => {
+            user.destroy({ where: { cedula: id } }).then((data) => {
                 if (data == 1) {
                     res.status(200).json({ log: "Eliminado" });
                     return;
@@ -179,11 +178,11 @@ class usuariosController {
      * @public
      * @version 1.0.0
      * @author Karla Burgos <kbburgos@espol.edu.ec>
-     * @returns {JSON} JSON con la respuesta de la transacción.
-     * @desc  Este método se encarga de modificar el usuario proporcionada por el cliente, se actualizan todos los datos. <br> Fecha Creación: 19/04/2020
+     * @returns {JSON} JSON with the transaction response.
+     * @desc  This method modifies the user's information in the database, all the data is updated. <br> Creation Date: 19/04/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Promise.
      */
     updateUsuario(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -215,7 +214,7 @@ class usuariosController {
                     .json({ log: "Violación de integridad de datos, hash invalido." });
                 return;
             }
-            usuarios
+            user
                 .update(data, {
                 where: {
                     cedula: id,
@@ -236,4 +235,4 @@ class usuariosController {
         });
     }
 }
-exports.default = new usuariosController();
+exports.default = new userController();

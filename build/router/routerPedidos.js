@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const controllerPedidos_1 = __importDefault(require("../controller/controllerPedidos"));
-const seguridad_1 = require("./../utils/seguridad");
+const security_1 = require("../utils/security");
 /**
  * @classdesc Clase router de pedidos.
  * @desc Fecha Creación: 01/04/2020
@@ -22,11 +22,11 @@ class routerPedidos {
     }
     config() {
         //this.router.[get | post | put | delete]     
-        this.router.get("/user", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.getPedidosUser);
+        this.router.get("/user", security_1.Security.checkToken, controllerPedidos_1.default.getPedidosUser);
         this.router.get("/getAll", controllerPedidos_1.default.getPedidos);
-        this.router.get("/:id", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.findByID);
-        this.router.post("/post", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.postData);
-        this.router.delete("/:id", seguridad_1.Seguridad.verificarToken, controllerPedidos_1.default.deleteData);
+        this.router.get("/:id", security_1.Security.checkToken, controllerPedidos_1.default.findByID);
+        this.router.post("/post", security_1.Security.checkToken, controllerPedidos_1.default.postData);
+        this.router.delete("/:id", security_1.Security.checkToken, controllerPedidos_1.default.deleteData);
     }
 }
 const appRoutes = new routerPedidos();

@@ -16,7 +16,9 @@
     "type": "git",
     "url": "git+https://github.com/jquintanas/restApiSoftware1.git"
   },
-  "keywords": ["heroku"],
+  "keywords": [
+    "heroku"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

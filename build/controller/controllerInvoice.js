@@ -15,32 +15,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const global_1 = __importDefault(require("../utils/global"));
 const security_1 = require("../utils/security");
 /**
- * @const facturas
- * @desc Import del modelo facturas de la base de datos.
+ * @const invoice
+ * @desc Import the invoice model from the data base.
  */
-const facturas = require('./../../models').Facturas;
+const invoice = require('./../../models').Facturas;
 /**
- * @const pedidos
- * @desc Import del modelo pedidos de la base de datos.
+ * @const order
+ * @desc Import the order model from the data base.
  */
-const pedidos = require('./../../models').Pedidos;
+const order = require('./../../models').Pedidos;
 /**
- * @const pagos
- * @desc Import del modelo compras de la base de datos.
+ * @const purchase
+ * @desc Import the purchase model from the data base.
  */
-const compras = require('./../../models').compras;
+const purchase = require('./../../models').compras;
 /**
- * @const pagos
- * @desc Import del modelo compras de la base de datos.
+ * @const payment
+ * @desc Import the payment model from the data base.
  */
-const pagos = require('./../../models').Pagos;
+const payment = require('./../../models').Pagos;
 /**
- * @const formaPagos
- * @desc Import del modelo compras de la base de datos.
+ * @const paymentMethod
+ * @desc Import the paymentMethod model from the data base.
  */
-const formasPagos = require('./../../models').formasPagos;
+const paymentMethod = require('./../../models').formasPagos;
 /**
-    * @classdesc Clase controladora de facturas.
+    * @classdesc Controller class from invoice
     * @desc Fecha Creación: 12/04/2020
     * @class
     * @public
@@ -48,34 +48,34 @@ const formasPagos = require('./../../models').formasPagos;
     * @returns {facturasController}  facturasController
     * @author Francesca Man Ging <fman@espol.edu.ec>
     */
-class facturasController {
+class invoiceController {
     /**
      * @async
      * @method
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las facturas de acuerdo al usuario <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will sear all the invoices by user <br> Creation Date: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise
      */
-    getFacturasUser(req, res) {
+    getInvoiceUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let dataId = res.locals;
             let id = dataId.post;
             console.log(id);
-            facturas.findAll({
+            invoice.findAll({
                 attributes: ['idfactura', 'idpedido', 'idpago'],
                 include: [
                     {
-                        model: pedidos,
+                        model: order,
                         required: true,
                         attributes: ['idpedido'],
                         include: [
                             {
-                                model: compras,
+                                model: purchase,
                                 required: true,
                                 attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega'],
                                 where: {
@@ -85,12 +85,12 @@ class facturasController {
                         ]
                     },
                     {
-                        model: pagos,
+                        model: payment,
                         required: true,
                         attributes: ['idPago'],
                         include: [
                             {
-                                model: formasPagos,
+                                model: paymentMethod,
                                 required: true,
                                 attributes: ['id', 'nombre', 'descripcion']
                             }
@@ -113,36 +113,36 @@ class facturasController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar las facturas <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will sear all the invoices <br> Creation Date: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise
      */
-    getFacturas(req, res) {
+    getInvoice(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            facturas.findAll({
+            invoice.findAll({
                 attributes: ['idfactura', 'idpedido', 'idpago'],
                 include: [
                     {
-                        model: pedidos,
+                        model: order,
                         required: true,
                         attributes: ['idpedido'],
                         include: [
                             {
-                                model: compras,
+                                model: purchase,
                                 required: true,
                                 attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega'],
                             }
                         ]
                     },
                     {
-                        model: pagos,
+                        model: payment,
                         required: true,
                         attributes: ['idPago'],
                         include: [
                             {
-                                model: formasPagos,
+                                model: paymentMethod,
                                 required: true,
                                 attributes: ['id', 'nombre', 'descripcion']
                             }
@@ -165,11 +165,11 @@ class facturasController {
      * @public
      * @version 1.0.0
      * @author Francesca Man Ging <fman@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar la factura en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will search the invoice by the ID given in the URL. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise
      */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -183,7 +183,7 @@ class facturasController {
                 res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
-            facturas.findOne({
+            invoice.findOne({
                 where: {
                     idfactura: id
                 },
@@ -210,27 +210,26 @@ class facturasController {
      * @public
      * @version 1.0.0
      * @author Francesca Man Ging <fman@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc  Este método se encarga de agregar una nueva facturas posterior a verificar los datos
-y su integridad. <br> Fecha Creación: 12/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc  This method will add a new invoice after it verify the data and it's integrity. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise.
      */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { hash } = req.body;
-            let factura = {
+            let invoice1 = {
                 idfactura: req.body.idfactura,
                 idpedido: req.body.idpedido,
                 idpago: req.body.idpago,
             };
-            let hashInterno = security_1.Security.hashJSON(factura);
+            let hashInterno = security_1.Security.hashJSON(invoice1);
             if (hashInterno != hash) {
                 res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
                 return;
             }
-            facturas.create(factura).then((rs) => {
+            invoice.create(invoice1).then((rs) => {
                 if (rs._options.isNewRecord) {
                     res.status(202).json({
                         log: "Factura ingresado con éxito",
@@ -248,4 +247,4 @@ y su integridad. <br> Fecha Creación: 12/04/2020
         });
     }
 }
-exports.default = new facturasController();
+exports.default = new invoiceController();

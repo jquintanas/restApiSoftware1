@@ -12,18 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const seguridad_1 = require("./../utils/seguridad");
-const globales_1 = __importDefault(require("./../utils/globales"));
+const security_1 = require("../utils/security");
+const global_1 = __importDefault(require("../utils/global"));
 const tokenList = {};
-const usuarios = require('./../../models').Usuarios;
+const user = require('./../../models').Usuarios;
 const jwt = require("jsonwebtoken");
 /**
- * @classdesc Clase controladora de Login.
- * @desc Fecha Creación: 19/04/2020
+ * @classdesc Login controller class.
+ * @desc Creation Date: 04/19/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {novedadController} novedadController
+ * @returns {loginController} loginController
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
 class loginController {
@@ -33,11 +33,11 @@ class loginController {
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar el usuario en base a las credenciales proporcionadas y devuelve los datos de este junto con el token de sesión. <br> Fecha Creación: 19/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is responsible for searching the user based on the provided credentials and returns the user's data along with the session token. <br> Creation Date: 04/19/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object Response
+     * @type {Promise<void>} Void type promise.
      */
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -46,12 +46,12 @@ class loginController {
                 res.status(401).json({ log: "Faltan datos, ingrese usuario y clave." });
                 return;
             }
-            let claveDescifrada = seguridad_1.Seguridad.desencriptar(clave);
-            usuarios.findOne({
+            let claveDescifrada = security_1.Security.decrypt(clave);
+            user.findOne({
                 where: {
                     cedula: id,
                     contrasenia: clave,
-                    rol: globales_1.default.globales.idRolGeneral //3
+                    rol: global_1.default.globals.idGeneralRole //3
                 },
                 attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion"]
             }).then((data) => {
@@ -59,8 +59,8 @@ class loginController {
                     res.status(404).json({ log: "No Existen datos a mostrar para el ID." });
                     return;
                 }
-                let token = jwt.sign({ id }, globales_1.default.globales.secretToken, { expiresIn: globales_1.default.globales.tiempoToken });
-                let refreshToken = jwt.sign({ id }, globales_1.default.globales.refreshToken, { expiresIn: globales_1.default.globales.tiempoRefreshToken });
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
+                let refreshToken = jwt.sign({ id }, global_1.default.globals.refreshToken, { expiresIn: global_1.default.globals.lifetimeRefreshToken });
                 let response = {
                     "status": "Logged in",
                     "token": token
@@ -81,17 +81,17 @@ class loginController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de generar un token a partir del id y refreshtoken recibido por el usuario. <br> Fecha Creación: 22/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is in charge of generating a token from the id and refreshtoken received by the user. <br> Creation Date: 06/22/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void type promise.
      */
-    token(req, res) {
+    generateToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let { id, refreshToken } = req.body;
             if ((refreshToken) && (refreshToken in tokenList)) {
-                let token = jwt.sign({ id }, globales_1.default.globales.secretToken, { expiresIn: globales_1.default.globales.tiempoToken });
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
                 tokenList[refreshToken].token = token;
                 res.status(200).json({ token });
             }
@@ -106,11 +106,11 @@ class loginController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga eliminar el token existente en la lista de tokens cuando el usuario cierra sesión. <br> Fecha Creación: 22/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method takes care of removing the existing token in the token list when the user logs out. <br> Creation Date: 06/22/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void type promise.
      */
     rejectToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {

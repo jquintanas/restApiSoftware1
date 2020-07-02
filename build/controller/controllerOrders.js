@@ -15,22 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const global_1 = __importDefault(require("../utils/global"));
 const security_1 = require("../utils/security");
 /**
- * @const {Pedidos}
- * @desc Import del modelo pedidos de la base de datos.
+ * @const {Orders}
+ * @desc Import Orders model from data base.
  */
 const pedidos = require('./../../models').Pedidos;
 /**
- * @const {Compras}
- * @desc Import del modelo compras de la base de datos.
+ * @const {Purchases}
+ * @desc Import Purchase model from data base.
  */
 const compras = require('./../../models').compras;
 /**
- * @classdesc Clase controladora de pedidos.
+ * @classdesc Order controller class.
  * @desc FechaCreacion: 01/04/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {pedidosController} pedidosController
+ * @returns {orderController} orderController
  * @author Danny Rios <dprios@espol.edu.ec>
  */
 class pedidosController {
@@ -40,13 +40,13 @@ class pedidosController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos de acuerdo al usuario <br> FechaCreacion: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method search all the orders by user<br> Creation Date: 25/06/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void Promise.
      */
-    getPedidosUser(req, res) {
+    getOrdersUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let dataId = res.locals;
             let id = dataId.post;
@@ -78,13 +78,13 @@ class pedidosController {
      * @public
      * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar los pedidos <br> FechaCreacion: 25/06/2020
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will sear all the orders <br> Creation Date: 25/06/2020
      * @param {Request} req Objeto Request
      * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @type {Promise<void>} Void Promise.
      */
-    getPedidos(req, res) {
+    getOrders(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             pedidos.findAll({
                 attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
@@ -111,11 +111,11 @@ class pedidosController {
    * @public
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de agregar un nuevo pedido <br> FechaCreacion: 01/04/2020
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method will add a new order after it verify the data and it's integrity. <br> Creation Date: 01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @type {Promise<void>}  Void Promise.
    */
     postData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -157,12 +157,11 @@ class pedidosController {
     * @public
     * @version 1.0.0
     * @author Danny Rios <dprios@espol.edu.ec>
-    * @returns {JSON} JSON con la respuesta de la transacción.
-    * @desc  Este método se encarga de eliminar un pedido buscandolo en base al id proporcionado
-     por la url. <br> FechaCreacion: 01/04/2020
+    * @returns {JSON} JSON with the transaction response.
+    * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date:01/04/2020
     * @param {Request} req Objeto Request
     * @param {Response} res Objeto response
-    * @type {Promise<void>} Promesa de tipo void.
+    * @type {Promise<void>} Void Promise.
     */
     deleteData(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -198,12 +197,11 @@ class pedidosController {
    * @public
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc  Este método se encarga de buscar el pago en base al ID proporcionaro en la url
-   * . <br> FechaCreacion: 01/04/2020
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method find a order that match with the ID in the url. The search is performed in the database. <br> Creation Date: 01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @type {Promise<void>} Void Promise.
    */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
