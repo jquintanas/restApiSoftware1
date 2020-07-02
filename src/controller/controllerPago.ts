@@ -6,26 +6,26 @@ import globales from "./../utils/globales";
 import { Security } from "./../utils/seguridad";
 
  /**
- * @classdesc Clase controladora de pagos.
- * @desc Fecha Creación: 11/04/2020
+ * @classdesc Payment controlling class.
+ * @desc Creation Date: 04/11/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {pagosController} pagosController
+ * @returns {paymentController} paymentController
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-class pagosController {
+class paymentController {
     /**
      * @async
      * @method
      * @public
      * @version 1.0.0
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-     * @returns {JSON} JSON con los datos obtenidos de la consulta.
-     * @desc Este método se encarga de buscar el pago en base al ID proporcionado en la url. <br> Fecha Creación: 11/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
-     * @type {Promise<void>} Promesa de tipo void.
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is responsible for searching the payment based on the ID provided in the url. <br> Creation Date: 04/11/2020
+     * @param {Request} req Request Object
+     * @param {Response} res Response Object
+     * @type {Promise<void>} Void type promise.
      */
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
@@ -73,14 +73,13 @@ class pagosController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc   Este método se encarga de agregar los datos del pago realizado por el usuario, se debe validar la integridad
-    de los mismos, cuando se ingresa exitosamente los datos se retorna el mensaje pertinente y la uri del recurso. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the transaction response.
+   * @desc  This method is in charge of adding the data of the payment made by the user, the integrity of the same must be validated, when the data is successfully entered the relevant message and the uri of the resource are returned. <br> Creation Date: 04/11/2020
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
+   * @type {Promise<void>} Void type promise.
    */
-    public async addPago(req: Request, res: Response): Promise<void> {
+    public async addPayment(req: Request, res: Response): Promise<void> {
         let {hash} = req.body;
         let data: pagosInterface = {
             idformaPago: req.body.idformaPago,
@@ -119,13 +118,13 @@ class pagosController {
    * @public
    * @version 1.0.0
    * @author Jonathan Quintana <jiquinta@espol.edu.ec>
-   * @returns {JSON} JSON con la respuesta de la transacción.
-   * @desc   Este método se encarga de eliminar una forma de pago en base al ID que se proporciona por la url. <br> Fecha Creación: 11/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Promesa de tipo void.
+   * @returns {JSON} JSON with the transaction response.
+   * @desc   This method is responsible for deleting a payment method based on the ID that is provided by the url. <br> Creation Date: 04/11/2020
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
+   * @type {Promise<void>} Void type promise.
    */
-    public async deletePago(req: Request, res: Response): Promise<void> {
+    public async deletePayment(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
             res.status(500).json({ log: "El ID introducido no es valido." });
@@ -153,4 +152,4 @@ class pagosController {
     }
 }
 
-export default new pagosController();
+export default new paymentController();

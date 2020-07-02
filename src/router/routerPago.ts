@@ -1,17 +1,17 @@
 import { Router } from "express";
-import pagosController from "../controller/controllerPago";
+import paymentController from "../controller/controllerPago";
 import { Security } from "./../utils/seguridad";
 
  /**
- * @classdesc Clase router de pago.
- * @desc Fecha Creación: 11/04/2020
+ * @classdesc Payment router class.
+ * @desc Creation Date: 04/11/2020
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerPagos} router
+ * @returns {routerPayments} router
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-class routerPagos {
+class routerPayments {
     public router: Router = Router();
 
     constructor() {
@@ -20,9 +20,9 @@ class routerPagos {
 
     config():void {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id",Security.checkToken,pagosController.findByID);
-        this.router.post("/", Security.checkToken,pagosController.addPago);
-        this.router.delete("/:id", Security.checkToken,pagosController.deletePago);
+        this.router.get("/:id",Security.checkToken,paymentController.findByID);
+        this.router.post("/", Security.checkToken,paymentController.addPayment);
+        this.router.delete("/:id", Security.checkToken,paymentController.deletePayment);
       }
 }
-export default new routerPagos().router
+export default new routerPayments().router
