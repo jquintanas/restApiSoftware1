@@ -8,28 +8,28 @@ exports.default = {
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        urlPaymentBase: "http://localhost:3000/api/pagos/",
+        urlPaymentBase: "http://localhost:3000/api/payments/",
         /**
          * @const urlUserBase
          * @desc User API URL.
          * @author Karla Burgos <kbburgos@espol.edu.ec>
          * @version 1.0.0
          */
-        urlUserBase: "http://localhost:3000/api/usuarios/",
+        urlUserBase: "http://localhost:3000/api/usersS/",
         /**
          * @const urlNoveltyBase
          * @desc Novelty API URL.
          * @author Jonathan Quintana <jiquinta@espol.edu.ec>
          * @version 1.0.0
          */
-        urlNoveltyBase: "http://localhost:3000/api/novedades/",
+        urlNoveltyBase: "http://localhost:3000/api/noveltys/",
         /**
-         * @const urlBasePedidos
+         * @const urlBaseOrders
          * @desc Orders API URL.
          * @author Danny Ríos <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBasePedidos: "http://localhost:3000/api/pedidos/",
+        urlBasePedidos: "http://localhost:3000/api/orders/",
         /**
          * @const idGeneralRole
          * @desc General User Role.
@@ -59,22 +59,22 @@ exports.default = {
              */
         secretEncryp: "71bec6b99ebd7fbd65d44410eeaf17852de12204f176635b200c17986534d8cfbbab73a34baf7f91f567b90f76d74d61ab6e30f097ed4f49f24d11581527b89a",
         /**
-         * @const urlBaseFacturas
-         * @desc URL del api de facturas.
+         * @const urlBaseInvoice
+         * @desc   Invoice API URL.
          * @author Francesca Man Ging <fman@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseFacturas: "http://localhost:3000/api/facturas/",
+        urlBaseFacturas: "http://localhost:3000/api/invoice/",
         /**
-         * @const urlBaseCompras
-         * @desc URL del api de compras.
+         * @const urlBasePurchases
+         * @desc  Purchases API URL.
          * @author Francesca Man Ging <fman@espol.edu.ec>
          * @version 1.0.0
          */
-        urlBaseCompras: "http://localhost:3000/api/compras/",
+        urlBaseCompras: "http://localhost:3000/api/purchase/",
         /**
          * @const listRefreshTokens
-         * @desc Lista de los tokens para refresh.
+         * @desc Token refresh list.
          * @author Danny Rios <dprios@espol.edu.ec>
          * @version 1.0.0
          */

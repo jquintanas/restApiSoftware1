@@ -10,7 +10,8 @@
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
     "start": "node build/index.js",
-    "docs": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r"
+    "docs": "jsdoc -c jsdoc.json -t ./node_modules/ink-docstrap/template -R README.md -r",
+    "test": "mocha --timeout 20000"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/jquintanas/restApiSoftware1#readme",
   "dependencies": {
+    "@types/mocha": "^7.0.2",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "crypto-js": "^4.0.0",
@@ -41,8 +43,12 @@
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.4",
     "@types/morgan": "^1.9.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "ink-docstrap": "^1.3.2",
     "jsdoc": "^3.6.4",
-    "nodemon": "^2.0.2"
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.2",
+    "should-http": "^0.1.1"
   }
 }

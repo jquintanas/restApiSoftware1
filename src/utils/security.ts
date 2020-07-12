@@ -84,7 +84,7 @@ export class Security {
 
             jwt.verify(bearerToken, global.globals.secretToken, (err: any, data: any) => {
                 if (err) {
-                    res.status(403).json({ log: "El token ha expirado.", err: err })
+                    res.status(403).json({ err: err })
                 } else {
                     //console.log(data);
                     let dataId = data['id'];
