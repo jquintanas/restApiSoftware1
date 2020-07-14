@@ -4,7 +4,7 @@ import global from "../utils/global";
 import { Security } from "../utils/security";
 /** 
  * @const {Orders} 
- * @desc Import Orders model from data base.
+ * @desc Import Order model from data base.
  */
 const pedidos = require('./../../models').Pedidos;
 /** 
@@ -22,7 +22,7 @@ const compras = require('./../../models').compras;
  * @returns {orderController} orderController
  * @author Danny Rios <dprios@espol.edu.ec>
  */
-class pedidosController {
+class orderController {
     /**
      * @async
      * @method
@@ -155,7 +155,7 @@ class pedidosController {
    * @version 1.0.0
    * @author Danny Rios <dprios@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
-   * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date:01/04/2020
+   * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date: 01/04/2020
    * @param {Request} req Objeto Request
    * @param {Response} res Objeto response
    * @type {Promise<void>} Void Promise.
@@ -241,4 +241,4 @@ class pedidosController {
         );
     }
 }
-export default new pedidosController();
+export default new orderController();

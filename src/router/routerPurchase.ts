@@ -8,7 +8,7 @@ import { Security } from "../utils/security";
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerCompras} router
+ * @returns {routerPurchase} router
  * @author Francesca Man Ging<fman@espol.edu.ec>
  */
 

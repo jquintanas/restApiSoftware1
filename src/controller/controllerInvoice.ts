@@ -39,12 +39,12 @@ const paymentMethod = require('./../../models').formasPagos;
 
 
      /**
-         * @classdesc Controller class from invoice
+         * @classdesc Invoice controller class
          * @desc Fecha Creación: 12/04/2020
          * @class
          * @public
          * @version 1.0.0
-         * @returns {facturasController}  facturasController
+         * @returns {invoiceController}  invoiceController
          * @author Francesca Man Ging <fman@espol.edu.ec>
          */
 

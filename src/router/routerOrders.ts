@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import pedidosController from "../controller/controllerOrders";
+import orderController from "../controller/controllerOrder";
 import { Security } from "../utils/security";
 
 /**
@@ -8,10 +8,10 @@ import { Security } from "../utils/security";
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerOrders} router
+ * @returns {routerOrder} router
  * @author Danny Ríos <dprios@espol.edu.ec>
  */
-class routerPedidos {
+class routerOrder {
     public router: Router = Router();
   
     constructor() {
@@ -19,13 +19,13 @@ class routerPedidos {
     }
     config():void {
       //this.router.[get | post | put | delete]     
-      this.router.get("/user", Security.checkToken, pedidosController.getOrdersUser);
-      this.router.get("/getAll", Security.checkToken, pedidosController.getOrders);
-      this.router.get("/:id", Security.checkToken, pedidosController.findByID);
-      this.router.post("/post", Security.checkToken, pedidosController.postData);
-      this.router.delete("/:id", Security.checkToken, pedidosController.deleteData);
+      this.router.get("/user", Security.checkToken, orderController.getOrdersUser);
+      this.router.get("/getAll", Security.checkToken, orderController.getOrders);
+      this.router.get("/:id", Security.checkToken, orderController.findByID);
+      this.router.post("/post", Security.checkToken, orderController.postData);
+      this.router.delete("/:id", Security.checkToken, orderController.deleteData);
       
     }
   }
-  const appRoutes = new routerPedidos();
+  const appRoutes = new routerOrder();
   export default appRoutes.router;

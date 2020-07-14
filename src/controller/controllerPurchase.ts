@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { purchaseInterface } from "./../interfaces/purchaseInterface";
 import globales from "../utils/global";
 import { Security } from "../utils/security";
-import controllerUser from "./controllerUser";
  
 /** 
  * @const purchase

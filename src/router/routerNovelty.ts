@@ -12,7 +12,7 @@ import { Security } from "../utils/security";
  * @returns {routerAlerts} router
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-class routerAlerts {
+class routerOrder {
     public router: Router = Router();
 
     constructor() {
@@ -34,4 +34,4 @@ class routerAlerts {
     }
 }
 
-export default new routerAlerts().router
+export default new routerOrder().router
