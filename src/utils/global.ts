@@ -93,6 +93,6 @@ export default {
      * @author Danny Rios <dprios@espol.edu.ec>
      * @version 1.0.0
      */
-    lifetimeRefreshToken: 86400,
+    lifetimeRefreshToken: 604800,
   },
 };
