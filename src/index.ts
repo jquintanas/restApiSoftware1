@@ -43,7 +43,6 @@
   config() {
     this.app.set("port", process.env.PORT || 3000);
     this.app.use(cors());
-    //static files
     this.app.use(express.static(path.join(__dirname, '/public')));
     this.app.use(morgan("dev"));
     this.app.use(bodyParser.json());
@@ -65,7 +64,6 @@
     this.app.use("/api/payments",Paymentrouter);
     this.app.use("/api/noveltys", Noveltyrouter);
     this.app.use("/api/usersS",Userrouter);
-    //this.app.use("/api/rols",routerRols);
     this.app.use("/api/purchase",routerPurchase);
     this.app.use("/api/login", Loginrouter);
     this.app.use("/api/invoice",routerInvoice);
@@ -74,7 +72,6 @@
   start(){
     this.app.listen(this.app.get("port"), () => {
       console.log("server on port: ", this.app.get("port"));
-      //db.sequelize.sync();
     });
   }
 }
