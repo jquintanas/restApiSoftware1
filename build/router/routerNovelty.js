@@ -15,7 +15,7 @@ const security_1 = require("../utils/security");
 * @returns {routerAlerts} router
 * @author Jonathan Quintana <jiquinta@espol.edu.ec>
 */
-class routerAlerts {
+class routerOrder {
     constructor() {
         this.router = express_1.Router();
         this.config();
@@ -32,4 +32,4 @@ class routerAlerts {
         this.router.put("/:id/:reporta/:reportado", security_1.Security.checkToken, controllerNovelty_1.default.updateAlerts);
     }
 }
-exports.default = new routerAlerts().router;
+exports.default = new routerOrder().router;

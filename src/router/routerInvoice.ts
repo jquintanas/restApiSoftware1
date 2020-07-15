@@ -8,7 +8,7 @@ import { Security } from "../utils/security";
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerFacturas} router
+ * @returns {routerInvoice} router
  * @author Francesca Man Ging<fman@espol.edu.ec>
  */
 
@@ -19,13 +19,13 @@ class routerInvoice {
         this.config();
     }
 
-    config():void {
+    config(): void {
         //this.router.[get | post]
         this.router.post("/post", Security.checkToken, invoiceController.postData);
-        this.router.get("/fuser",Security.checkToken, invoiceController.getInvoiceUser);
-        this.router.get("/getFacturas",Security.checkToken, invoiceController.getInvoice);
-        this.router.get("/:id",Security.checkToken, invoiceController.findByID);
-        
-      }
+        this.router.get("/fuser", Security.checkToken, invoiceController.getInvoiceUser);
+        this.router.get("/getFacturas", Security.checkToken, invoiceController.getInvoice);
+        this.router.get("/:id", Security.checkToken, invoiceController.findByID);
+
+    }
 }
 export default new routerInvoice().router

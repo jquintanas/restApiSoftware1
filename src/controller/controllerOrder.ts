@@ -4,7 +4,7 @@ import global from "../utils/global";
 import { Security } from "../utils/security";
 /** 
  * @const {Orders} 
- * @desc Import Orders model from data base.
+ * @desc Import Order model from data base.
  */
 const pedidos = require('./../../models').Pedidos;
 /** 
@@ -22,7 +22,7 @@ const compras = require('./../../models').compras;
  * @returns {orderController} orderController
  * @author Danny Rios <dprios@espol.edu.ec>
  */
-class pedidosController {
+class orderController {
     /**
      * @async
      * @method
@@ -35,20 +35,20 @@ class pedidosController {
      * @param {Response} res Object response
      * @type {Promise<void>} Void Promise.
      */
-    public async getOrdersUser(req: Request, res: Response): Promise<void> {     
-        let dataId = res.locals; 
-        let id : number = dataId.post;
-  
-        
+    public async getOrdersUser(req: Request, res: Response): Promise<void> {
+        let dataId = res.locals;
+        let id: number = dataId.post;
+
+
         pedidos.findAll(
             {
-                
-                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
                 include: [
                     {
                         model: compras,
                         required: true,
-                        attributes: ['entregaDomocilio','horaEntrega'],
+                        attributes: ['entregaDomocilio', 'horaEntrega'],
                         where: {
                             idusuario: id
                         },
@@ -73,20 +73,20 @@ class pedidosController {
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
      * @desc This method will sear all the orders <br> Creation Date: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
+     * @param {Request} req Request Object
+     * @param {Response} res Response Object
      * @type {Promise<void>} Void Promise.
      */
-    public async getOrders(req: Request, res: Response): Promise<void> {          
+    public async getOrders(req: Request, res: Response): Promise<void> {
         pedidos.findAll(
             {
-                
-                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
+
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
                 include: [
                     {
                         model: compras,
                         required: true,
-                        attributes: ['entregaDomocilio','horaEntrega'],
+                        attributes: ['entregaDomocilio', 'horaEntrega'],
                     }
                 ]
             }
@@ -108,33 +108,33 @@ class pedidosController {
    * @author Danny Rios <dprios@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method will add a new order after it verify the data and it's integrity. <br> Creation Date: 01/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>}  Void Promise.
    */
-    public async postData(req: Request, res: Response): Promise<void> {        
-        let {hash} = req.body;
-        let pedido :ordersInterface = {
+    public async postData(req: Request, res: Response): Promise<void> {
+        let { hash } = req.body;
+        let pedido: ordersInterface = {
             idpedido: req.body.idpedido,
             idcompra: req.body.idcompra,
             idproducto: req.body.idproducto,
             cantidad: req.body.cantidad,
             subtotal: req.body.subtotal,
-            cubiertos: req.body.cubiertos          
-        }  
-        
-        let hashInterno = Security.hashJSON(pedido);       
+            cubiertos: req.body.cubiertos
+        }
+
+        let hashInterno = Security.hashJSON(pedido);
         pedido.createdAt = new Date();
-        if(hashInterno != hash){
-            res.status(401).json({log: "Violación de integridad de datos, hash invalido."});
+        if (hashInterno != hash) {
+            res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
             return;
-        }       
+        }
         pedidos.create(pedido).then((resp: any) => {
             if (resp._options.isNewRecord) {
                 res.status(202).json(
                     {
                         log: "Pedido ingresado con éxito",
-                        uri: global.globals.urlBasePedidos + resp.dataValues.idpedido                      
+                        uri: global.globals.urlBasePedidos + resp.dataValues.idpedido
                     }
                 );
                 return;
@@ -148,18 +148,18 @@ class pedidosController {
         });
     }
 
-   /**
-   * @async
-   * @method
-   * @public
-   * @version 1.0.0
-   * @author Danny Rios <dprios@espol.edu.ec>
-   * @returns {JSON} JSON with the transaction response.
-   * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date:01/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
-   * @type {Promise<void>} Void Promise.
-   */
+    /**
+    * @async
+    * @method
+    * @public
+    * @version 1.0.0
+    * @author Danny Rios <dprios@espol.edu.ec>
+    * @returns {JSON} JSON with the transaction response.
+    * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date: 01/04/2020
+    * @param {Request} req Request Object
+    * @param {Response} res Response Object
+    * @type {Promise<void>} Void Promise.
+    */
     public async deleteData(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
@@ -195,8 +195,8 @@ class pedidosController {
    * @author Danny Rios <dprios@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method find a order that match with the ID in the url. The search is performed in the database. <br> Creation Date: 01/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Promise.
    */
     public async findByID(req: Request, res: Response): Promise<void> {
@@ -210,22 +210,22 @@ class pedidosController {
             res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
-        
+
         pedidos.findOne(
             {
                 where: {
                     idpedido: id
                 },
-                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad','subtotal','cubiertos'],
-                    include: [
-                        {
-                            model: compras,
-                            required: true,
-                            attributes: ['idcompra', 'fechacompra', 'entregaDomocilio','horaEntrega']
-                        }
-                    ]
-                
-                
+                attributes: ['idpedido', 'idcompra', 'idproducto', 'cantidad', 'subtotal', 'cubiertos'],
+                include: [
+                    {
+                        model: compras,
+                        required: true,
+                        attributes: ['idcompra', 'fechacompra', 'entregaDomocilio', 'horaEntrega']
+                    }
+                ]
+
+
             }
         ).then((data: any) => {
             if (data == null) {
@@ -241,4 +241,4 @@ class pedidosController {
         );
     }
 }
-export default new pedidosController();
+export default new orderController();

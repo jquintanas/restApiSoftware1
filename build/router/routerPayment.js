@@ -22,7 +22,7 @@ class routerPayments {
     }
     config() {
         //this.router.[get | post | put | delete]
-        this.router.get("/:id", controllerPayment_1.default.findByID);
+        this.router.get("/:id", security_1.Security.checkToken, controllerPayment_1.default.findByID);
         this.router.post("/", security_1.Security.checkToken, controllerPayment_1.default.addPayment);
         this.router.delete("/:id", security_1.Security.checkToken, controllerPayment_1.default.deletePayment);
     }

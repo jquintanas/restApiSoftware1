@@ -23,7 +23,7 @@ class routerUser {
     config() {
         //this.router.[get | post | put | delete]
         //this.router.get("/", Seguridad.verificarToken, userController.findAll);
-        this.router.get("/:id", controllerUser_1.default.findByID);
+        this.router.get("/:id", security_1.Security.checkToken, controllerUser_1.default.findByID);
         this.router.post("/", security_1.Security.checkToken, controllerUser_1.default.addUser);
         this.router.delete("/:id", security_1.Security.checkToken, controllerUser_1.default.deleteUser);
         this.router.put("/:id/:reporta/:reportado", security_1.Security.checkToken, controllerUser_1.default.updateUsuario);

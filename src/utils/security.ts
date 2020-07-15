@@ -77,23 +77,19 @@ export class Security {
      */
     public static checkToken(req: any, res: any, next: any) {
         let bearerHeader = req.headers["authorization"];
-        //console.log(bearerHeader)
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];
-
             jwt.verify(bearerToken, global.globals.secretToken, (err: any, data: any) => {
                 if (err) {
-                    res.status(403).json({ log: "El token ha expirado.", err: err })
+                    res.status(403).json({ err: err })
                 } else {
-                    //console.log(data);
                     let dataId = data['id'];
                     res.locals.post = dataId;
                     next();
                     return;
                 }
             });
-            //res.status(403).json({log: "No tiene permiso para ver el recurso."})
         } else {
             res.status(403).json({ log: "No existe el token de sesión." });
         }

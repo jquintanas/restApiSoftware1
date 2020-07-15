@@ -12,7 +12,7 @@ const security_1 = require("../utils/security");
  * @class
  * @public
  * @version 1.0.0
- * @returns {routerCompras} router
+ * @returns {routerPurchase} router
  * @author Francesca Man Ging<fman@espol.edu.ec>
  */
 class routerPurchase {
