@@ -33,11 +33,11 @@ $ npm run build
 $ npm run dev
 ```
 
-## Despliegue 📦
+## Deployment 📦
 
 After this we proceed to go to the config folder and open the file config.json and change the credentials of the database for those of our base server depending on the environment in which you are going to work.
 
-# Construido con 🛠️
+# Built with 🛠️
 
 * [Express](https://expressjs.com/es/) - back end middleware
 * [Sequelize](https://github.com/sequelize/sequelize) - Database ORM
@@ -51,7 +51,7 @@ Api-Rest requires the following complements.
 | MySql-Schema | [Descargar.](https://github.com/jquintanas/restApiSoftware1/blob/master/database/scripStructure.sql) |
 | MySql - Model | [Descargar.](https://github.com/jquintanas/restApiSoftware1/blob/master/database/relacional.pdf) |
 
-# Autores ✒️
+# Authors ✒️
 Author: Group #3
 
 | Integrantes |
