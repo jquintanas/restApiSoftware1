@@ -7,17 +7,18 @@ JSON web token is implemented for resource management and authentication measure
 
 [Link del api desplegada](https://omipalisf2.herokuapp.com/api)
 
-Autor: Grupo #3
+Autor: Group #3
 
 [Repositorio Sequelize](https://github.com/sequelize/sequelize)
 
 [Repositorio Sequelize CLI](https://gist.github.com/vapurrmaid/a111bf3fc0224751cb2f76532aac2465)
 
-[Tutorial - PDF - Construción paso a paso del api](https://drive.google.com/file/d/1tRdwe4MyKbKdK7PEgvDaIzt6msHExxyu/view?usp=sharing)
+[documentation on github pages](https://jquintanas.github.io/restApiSoftware1/)
 
 
 # Documentation 
 All available methods are found on the project documentation wiki along with the corresponding description.
+[documentation on github pages](https://jquintanas.github.io/restApiSoftware1/)
 
 ### Installation
 The Rest-Api requires [Node.js] (https://nodejs.org/) and [TypeScript] (https://www.typescriptlang.org/index.html#download-links) to run.
@@ -38,9 +39,9 @@ Api-Rest requires the following complements.
 
 | Complemento | Recurso |
 | ------ | ------ |
-| MySql-Schema | [Descargar.](https://drive.google.com/file/d/1vHSVdihuLvsXWXIjqmPfuFox6q1bAq2V/view?usp=sharing) |
-| MySql - Respaldo | [Descargar.](https://drive.google.com/file/d/1kkqIHW5FbOIEVbhZTHwo086qjuMK8rv3/view?usp=sharing) |
+| MySql-Schema | [Descargar.](https://github.com/jquintanas/restApiSoftware1/blob/master/database/scripStructure.sql) |
+| MySql - Model | [Descargar.](https://github.com/jquintanas/restApiSoftware1/blob/master/database/relacional.pdf) |
 
-Licencia
+License
 ----
 MIT
