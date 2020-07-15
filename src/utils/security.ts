@@ -76,7 +76,7 @@ export class Security {
      * @desc middleware function to verify the validity of the sent session token.
      */
     public static checkToken(req: any, res: any, next: any) {
-        let bearerHeader = req.headers["authorization"];        
+        let bearerHeader = req.headers["authorization"];
         if (typeof bearerHeader !== 'undefined') {
             let bearer = bearerHeader.split(" ");
             let bearerToken = bearer[1];

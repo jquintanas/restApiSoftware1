@@ -24,10 +24,10 @@ class routerUser {
     //this.router.get("/", Seguridad.verificarToken, userController.findAll);
     this.router.get("/:id", Security.checkToken, userController.findByID);
     this.router.post("/", Security.checkToken, userController.addUser);
-    this.router.delete("/:id",Security.checkToken,userController.deleteUser);
-    this.router.put("/:id/:reporta/:reportado",Security.checkToken,userController.updateUsuario);
+    this.router.delete("/:id", Security.checkToken, userController.deleteUser);
+    this.router.put("/:id/:reporta/:reportado", Security.checkToken, userController.updateUsuario);
   }
-  
+
 }
 const appRoutes = new routerUser();
 export default appRoutes.router;

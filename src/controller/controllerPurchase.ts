@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { purchaseInterface } from "./../interfaces/purchaseInterface";
 import globales from "../utils/global";
 import { Security } from "../utils/security";
- 
+
 /** 
  * @const purchase
  * @desc Import Purchase model from data base.
@@ -35,26 +35,26 @@ class purchaseController {
      * @param {Response} res Object response
      * @type {Promise<void>} Void Promise.
      */
-    public async getPurchaseUser(req: Request, res: Response): Promise<void> {   
-      let dataId = res.locals; 
-      let id : number = dataId.post;   
-      console.log('id',id);    
-      purchases.findAll(
-          {
-              
-              attributes: ['idcompra', 'fechacompra','horaEntrega'],
-              where: {
-                idusuario: id
-              },
-          }
-      ).then((data: any) => {
-          res.status(200).json(data);
-          return;
-      }, (err: any) => {
-          res.status(500).json({ log: "Error!! No hay datos en la base" });
-          console.log(err);
-          return;
-      });
+  public async getPurchaseUser(req: Request, res: Response): Promise<void> {
+    let dataId = res.locals;
+    let id: number = dataId.post;
+    console.log('id', id);
+    purchases.findAll(
+      {
+
+        attributes: ['idcompra', 'fechacompra', 'horaEntrega'],
+        where: {
+          idusuario: id
+        },
+      }
+    ).then((data: any) => {
+      res.status(200).json(data);
+      return;
+    }, (err: any) => {
+      res.status(500).json({ log: "Error!! No hay datos en la base" });
+      console.log(err);
+      return;
+    });
 
   }
 
@@ -70,23 +70,23 @@ class purchaseController {
      * @param {Response} res Object response
      * @type {Promise<void>} Void Promise.
      */
-    public async getPurchase(req: Request, res: Response): Promise<void> {       
-      purchases.findAll(
-          {
-              
-              attributes: ['idcompra','idusuario', 'fechacompra','horaEntrega','createdAt'],
-          }
-      ).then((data: any) => {
-          res.status(200).json(data);
-          return;
-      }, (err: any) => {
-          res.status(500).json({ log: "Error!! No hay datos en la base" });
-          console.log(err);
-          return;
-      });
+  public async getPurchase(req: Request, res: Response): Promise<void> {
+    purchases.findAll(
+      {
+
+        attributes: ['idcompra', 'idusuario', 'fechacompra', 'horaEntrega', 'createdAt'],
+      }
+    ).then((data: any) => {
+      res.status(200).json(data);
+      return;
+    }, (err: any) => {
+      res.status(500).json({ log: "Error!! No hay datos en la base" });
+      console.log(err);
+      return;
+    });
 
   }
-  
+
 
   /**
   * @async
@@ -114,27 +114,27 @@ class purchaseController {
       return;
     }
     purchases.findOne({
-        where: {
-            idcompra: id
-        },
-        attributes: ['idcompra', 'idusuario', 'fechacompra','idformaEntrega','horaEntrega'],
-      }
-      ).then(
-        (data: any) => {
-          if (data == null) {
-            res
-              .status(404)
-              .json({ log: "No Existen datos a mostrar para el ID." })
-            return;
-          }
-          res.status(200).json(data);
-          return;
-        },
-        (err: any) => {
-          res.status(500).json(err);
+      where: {
+        idcompra: id
+      },
+      attributes: ['idcompra', 'idusuario', 'fechacompra', 'idformaEntrega', 'horaEntrega'],
+    }
+    ).then(
+      (data: any) => {
+        if (data == null) {
+          res
+            .status(404)
+            .json({ log: "No Existen datos a mostrar para el ID." })
           return;
         }
-      );
+        res.status(200).json(data);
+        return;
+      },
+      (err: any) => {
+        res.status(500).json(err);
+        return;
+      }
+    );
   }
 
 
@@ -203,7 +203,7 @@ class purchaseController {
 
   public async deleteData(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
-    
+
     if (isNaN(id)) {
       res.status(500).json({ log: "El ID introducido no es valido." });
       return;
@@ -213,7 +213,7 @@ class purchaseController {
       res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
-    
+
     purchases.destroy({ where: { idcompra: id } }).then((data: any) => {
       if (data == 1) {
         res.status(200).json({ log: "Compra eliminado correctamente" });

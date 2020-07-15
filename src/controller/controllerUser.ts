@@ -30,14 +30,14 @@ class userController {
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method add a user to the system. <br> Creation Date: 19/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Promise.
    */
 
   public async addUser(req: Request, res: Response): Promise<void> {
-    let {hash}  =  req.body;
-    
+    let { hash } = req.body;
+
     //data description here
     let data: userinterface = {
       cedula: req.body.cedula,
@@ -55,7 +55,7 @@ class userController {
     if (hashInterno != hash) {
       res
         .status(401)
-        .json({log: "Violación de integridad de datos, hash invalido."});
+        .json({ log: "Violación de integridad de datos, hash invalido." });
       return;
     }
 
@@ -87,16 +87,16 @@ class userController {
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the consult data.
    * @desc This method is responsible for searching the user based on the ID provided in the url. <br> Creation Date: 12/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Ptromise.
    */
 
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
-   
+
     if (isNaN(id)) {
-      
+
       res.status(500).json({ log: "La cédula introducida no es valido." });
       return;
     }
@@ -140,8 +140,8 @@ class userController {
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method removes the user from the base to the ID which is provided by the url. <br> Creation Date: 12/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Promise.
    */
 
@@ -185,8 +185,8 @@ class userController {
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method modifies the user's information in the database, all the data is updated. <br> Creation Date: 19/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Promise.
    */
 

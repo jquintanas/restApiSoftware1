@@ -12,20 +12,20 @@ import { Security } from "../utils/security";
  * @author Danny Ríos <dprios@espol.edu.ec>
  */
 class routerOrder {
-    public router: Router = Router();
-  
-    constructor() {
-      this.config();
-    }
-    config():void {
-      //this.router.[get | post | put | delete]     
-      this.router.get("/user", Security.checkToken, orderController.getOrdersUser);
-      this.router.get("/getAll", Security.checkToken, orderController.getOrders);
-      this.router.get("/:id", Security.checkToken, orderController.findByID);
-      this.router.post("/post", Security.checkToken, orderController.postData);
-      this.router.delete("/:id", Security.checkToken, orderController.deleteData);
-      
-    }
+  public router: Router = Router();
+
+  constructor() {
+    this.config();
   }
-  const appRoutes = new routerOrder();
-  export default appRoutes.router;
+  config(): void {
+    //this.router.[get | post | put | delete]     
+    this.router.get("/user", Security.checkToken, orderController.getOrdersUser);
+    this.router.get("/getAll", Security.checkToken, orderController.getOrders);
+    this.router.get("/:id", Security.checkToken, orderController.findByID);
+    this.router.post("/post", Security.checkToken, orderController.postData);
+    this.router.delete("/:id", Security.checkToken, orderController.deleteData);
+
+  }
+}
+const appRoutes = new routerOrder();
+export default appRoutes.router;

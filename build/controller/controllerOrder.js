@@ -80,8 +80,8 @@ class orderController {
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
      * @desc This method will sear all the orders <br> Creation Date: 25/06/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
+     * @param {Request} req Request Object
+     * @param {Response} res Response Object
      * @type {Promise<void>} Void Promise.
      */
     getOrders(req, res) {
@@ -113,8 +113,8 @@ class orderController {
    * @author Danny Rios <dprios@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method will add a new order after it verify the data and it's integrity. <br> Creation Date: 01/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>}  Void Promise.
    */
     postData(req, res) {
@@ -159,8 +159,8 @@ class orderController {
     * @author Danny Rios <dprios@espol.edu.ec>
     * @returns {JSON} JSON with the transaction response.
     * @desc  This method is responsible for deleting a order method based on the ID that is provided by the url. <br> Creation Date: 01/04/2020
-    * @param {Request} req Objeto Request
-    * @param {Response} res Objeto response
+    * @param {Request} req Request Object
+    * @param {Response} res Response Object
     * @type {Promise<void>} Void Promise.
     */
     deleteData(req, res) {
@@ -199,8 +199,8 @@ class orderController {
    * @author Danny Rios <dprios@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method find a order that match with the ID in the url. The search is performed in the database. <br> Creation Date: 01/04/2020
-   * @param {Request} req Objeto Request
-   * @param {Response} res Objeto response
+   * @param {Request} req Request Object
+   * @param {Response} res Response Object
    * @type {Promise<void>} Void Promise.
    */
     findByID(req, res) {
