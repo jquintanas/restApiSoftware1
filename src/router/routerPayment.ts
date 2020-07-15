@@ -1,5 +1,5 @@
 import { Router } from "express";
-import paymentController from "../controller/controllerPago";
+import paymentController from "../controller/controllerPayment";
 import { Security } from "./../utils/security";
 
  /**
