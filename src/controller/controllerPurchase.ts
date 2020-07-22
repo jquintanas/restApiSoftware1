@@ -37,7 +37,11 @@ class purchaseController {
      */
     public async getPurchaseUser(req: Request, res: Response): Promise<void> {   
       let dataId = res.locals; 
-      let id : number = dataId.post;   
+      let id : number = dataId.post;  
+      if (isNaN(id)) {
+        res.status(400).json({ log: "La cédula ingresada no es valida." });
+        return;
+      } 
       console.log('id',id);    
       purchases.findAll(
           {
