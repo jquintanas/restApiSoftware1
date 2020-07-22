@@ -38,14 +38,14 @@ class loginController {
             res.status(401).json({ log: "Faltan datos, ingrese usuario y clave." });
             return;
         }
-        let claveDescifrada = Security.decrypt(clave);
+        let hashClave = Security.hashPassword(clave);
         user.findOne(
             {
                 where:
                 {
                     cedula: id,
-                    contrasenia: clave,
-                    rol: global.globals.idGeneralRole //3
+                    contrasenia: hashClave,
+                    rol: global.globals.idGeneralRole 
                 },
                 attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion"]
 
@@ -55,19 +55,22 @@ class loginController {
                 res.status(404).json({ log: "No Existen datos a mostrar para el ID." })
                 return;
             }
+            data.telefono = Security.decrypt(data.telefono);
+            data.email = Security.decrypt(data.email);
+            data.direccion = Security.decrypt(data.direccion);
             let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
             let refreshToken = jwt.sign({ id }, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
             let response = {
-                "status": "Logged in",
+                "status": id,
                 "token": token
             }
             tokenList[refreshToken] = response;
-
+            console.log("tokenlist: ",tokenList);
             res.status(200).json({ data, token, refreshToken });
             return;
         }, (err: any) => {
-            console.log(err);
-            res.status(500).json({ log: "Error" });
+           
+            res.status(500).json(err);
             return;
         });
     }
@@ -92,8 +95,10 @@ class loginController {
             let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
             tokenList[refreshToken].token = token;
             res.status(200).json({ token });
+            return;
         } else {
             res.status(404).json({ log: "No existe el token en la lista de tokens." });
+            return;
         }
     }
     /**
@@ -112,8 +117,10 @@ class loginController {
         let refreshToken = req.body.refreshToken;
         if (refreshToken in tokenList) {
             delete tokenList[refreshToken]
+            return;
         }
         res.status(200).json({ log: "token eliminado" });
+        return;
     }
 
 }

@@ -49,7 +49,8 @@ class Security {
      */
     static encrypt(cadena) {
         let pass = global_1.default.globals.secretEncryp;
-        return AES.encrypt(cadena, pass).toString().replace(/\//gi, "-");
+        //.toString().replace(/\//gi, "-")
+        return AES.encrypt(cadena, pass).toString();
     }
     /**
      * @static
@@ -82,7 +83,7 @@ class Security {
             let bearerToken = bearer[1];
             jwt.verify(bearerToken, global_1.default.globals.secretToken, (err, data) => {
                 if (err) {
-                    res.status(403).json({ err: err });
+                    res.status(401).json({ error: 'El token ha expirado' });
                 }
                 else {
                     let dataId = data['id'];
@@ -95,6 +96,18 @@ class Security {
         else {
             res.status(403).json({ log: "No existe el token de sesión." });
         }
+    }
+    /**
+     * @static
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Ríos <dprios@espol.edu.ec>
+     * @desc funtion to convert password to 256-bit (32-byte) hash value.
+     * @param {String} password string to generate the sha256.
+     */
+    static hashPassword(password) {
+        return crypto.createHash('sha256').update(password).digest('hex');
     }
 }
 exports.Security = Security;

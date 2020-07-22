@@ -2,6 +2,9 @@ let crypto = require('crypto');
 var AES = require("crypto-js/aes");
 var CryptoJS = require("crypto-js");
 const jwt = require("jsonwebtoken");
+
+
+
 import global from "./global"
 /**
  * @classdesc Container class of api security functions.
@@ -11,8 +14,9 @@ import global from "./global"
  * @version 1.0.0
  * @author Jonathan Quintana <jiquinta@espol.edu.ec>
  */
-export class Security {
 
+export class Security {
+  
     /**
      * @static
      * @method
@@ -45,7 +49,8 @@ export class Security {
      */
     public static encrypt(cadena: string) {
         let pass = global.globals.secretEncryp;
-        return AES.encrypt(cadena, pass).toString().replace(/\//gi, "-");
+        //.toString().replace(/\//gi, "-")
+        return AES.encrypt(cadena, pass).toString();
     }
 
     /**
@@ -82,7 +87,7 @@ export class Security {
             let bearerToken = bearer[1];
             jwt.verify(bearerToken, global.globals.secretToken, (err: any, data: any) => {
                 if (err) {
-                    res.status(403).json({ err: err })
+                    res.status(401).json({ error:'El token ha expirado'})
                 } else {
                     let dataId = data['id'];
                     res.locals.post = dataId;
@@ -94,5 +99,18 @@ export class Security {
             res.status(403).json({ log: "No existe el token de sesión." });
         }
 
+    }
+
+    /**
+     * @static
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Danny Ríos <dprios@espol.edu.ec>
+     * @desc funtion to convert password to 256-bit (32-byte) hash value.
+     * @param {String} password string to generate the sha256.
+     */
+    public static hashPassword(password: string) {
+        return crypto.createHash('sha256').update(password).digest('hex');
     }
 }

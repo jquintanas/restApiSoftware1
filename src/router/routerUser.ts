@@ -25,7 +25,7 @@ class routerUser {
     this.router.get("/:id", Security.checkToken, userController.findByID);
     this.router.post("/", Security.checkToken, userController.addUser);
     this.router.delete("/:id",Security.checkToken,userController.deleteUser);
-    this.router.put("/:id/:reporta/:reportado",Security.checkToken,userController.updateUsuario);
+    this.router.put("/update/:id",Security.checkToken,userController.updateUsuario);
   }
   
 }

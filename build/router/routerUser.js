@@ -26,7 +26,7 @@ class routerUser {
         this.router.get("/:id", security_1.Security.checkToken, controllerUser_1.default.findByID);
         this.router.post("/", security_1.Security.checkToken, controllerUser_1.default.addUser);
         this.router.delete("/:id", security_1.Security.checkToken, controllerUser_1.default.deleteUser);
-        this.router.put("/:id/:reporta/:reportado", security_1.Security.checkToken, controllerUser_1.default.updateUsuario);
+        this.router.put("/update/:id", security_1.Security.checkToken, controllerUser_1.default.updateUsuario);
     }
 }
 const appRoutes = new routerUser();

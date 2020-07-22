@@ -43,11 +43,17 @@ class alertController {
                 },
             }
         ).then((data: any) => {
+            if (data == null) {
+                res
+                  .status(404)
+                  .json({ log: "No existen novedades del usuario" });
+                return;
+            }
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json({ log: "Error!! No hay datos en la base" });
-            console.log(err);
+            res.status(500).json(err);
+            
             return;
         });
 
@@ -72,11 +78,17 @@ class alertController {
                 attributes: ['idnovedad', 'idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt', 'updatedAt'],
             }
         ).then((data: any) => {
+            if (data == null) {
+                res
+                  .status(404)
+                  .json({ log: "No hay novedades" });
+                return;
+            }
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json({ log: "Error!! No hay datos en la base" });
-            console.log(err);
+            res.status(500).json(err);
+            
             return;
         });
 
@@ -96,12 +108,12 @@ class alertController {
     public async findById(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
-            res.status(500).json({ log: "El ID introducido no es valido." });
+            res.status(401).json({ log: "El ID introducido no es valido." });
             return;
         }
         id = Number(id);
         if (Number.isInteger(id) == false) {
-            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            res.status(401).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
         novelty.findOne(
@@ -119,8 +131,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            console.log(err);
-            res.status(500).json({ log: "Error" });
+            res.status(500).json(err);
             return;
         }
         );
@@ -155,8 +166,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            console.log(err);
-            res.status(500).json({ log: "Error" });
+            res.status(500).json(err);
             return;
         }
 
@@ -192,8 +202,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            console.log(err);
-            res.status(500).json({ log: "Error" });
+            res.status(500).json(err);
             return;
         }
 
@@ -225,8 +234,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            console.log(err);
-            res.status(500).json({ log: "Error" });
+            res.status(500).json(err);
             return;
         }
         );
@@ -268,11 +276,10 @@ class alertController {
                 );
                 return;
             }
-            res.status(200).json({ log: "No se ingresaron los datos." });
+            res.status(404).json({ log: "No se pudo crear la novedad." });
             return;
         }, (err: any) => {
-            res.status(500).json({ log: "Error" });
-            console.log(err);
+            res.status(500).json(err);
             return;
         }
         );
@@ -321,11 +328,10 @@ class alertController {
                 res.status(200).json({ log: "Novedad actualizada." })
                 return;
             }
-            res.status(202).json({ log: "No se pudo actualizar." });
+            res.status(404).json({ log: "No se encontro la novedad." });
             return;
         }, (err: any) => {
-            console.error(err);
-            res.status(500).json({ log: "Error" });
+            res.status(500).json(err);
             return;
 
         });

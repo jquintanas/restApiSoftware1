@@ -63,11 +63,16 @@ class orderController {
                     }
                 ]
             }).then((data) => {
+                if (data == null) {
+                    res
+                        .status(404)
+                        .json({ log: "No hay pedidos" });
+                    return;
+                }
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
+                res.status(500).json(err);
                 return;
             });
         });
@@ -96,11 +101,16 @@ class orderController {
                     }
                 ]
             }).then((data) => {
+                if (data == null) {
+                    res
+                        .status(404)
+                        .json({ log: "No existe el pedido" });
+                    return;
+                }
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
+                res.status(500).json(err);
                 return;
             });
         });
@@ -142,11 +152,10 @@ class orderController {
                     });
                     return;
                 }
-                res.status(200).json({ log: "No se ingresaron los datos." });
+                res.status(401).json({ log: "No se ingresaron los datos." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
-                console.log(err);
+                res.status(500).json(err);
                 return;
             });
         });

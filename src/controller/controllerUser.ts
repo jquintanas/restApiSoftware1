@@ -26,7 +26,7 @@ class userController {
    * @async
    * @method
    * @public
-   * @version 1.0.0
+   * @version 1.0.1
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method add a user to the system. <br> Creation Date: 19/04/2020
@@ -38,7 +38,6 @@ class userController {
   public async addUser(req: Request, res: Response): Promise<void> {
     let {hash}  =  req.body;
     
-    //data description here
     let data: userinterface = {
       cedula: req.body.cedula,
       nombre: req.body.nombre,
@@ -50,25 +49,29 @@ class userController {
       direccion: req.body.direccion
     };
     let hashInterno = Security.hashJSON(data);
-    //here the hash must be decrypted
     data.createdAt = new Date();
     if (hashInterno != hash) {
       res
         .status(401)
         .json({log: "Violación de integridad de datos, hash invalido."});
       return;
-    }
-
+    };
+    data.telefono = Security.encrypt(data.telefono!);;
+    data.email = Security.encrypt(data.email!);;
+    data.direccion = Security.encrypt(data.direccion!);;
+    data.contrasenia = Security.hashPassword(data.contrasenia);
     user.create(data).then(
       (resp: any) => {
         if (resp._options.isNewRecord) {
-          res.status(202).json({
-            log: "Ingresado",
-            uri: global.globals.urlUserBase + resp.dataValues.cedula,
+          res
+            .status(202)
+            .json({
+              log: "Ingresado",
+              uri: global.globals.urlUserBase + data.cedula,
           });
           return;
         }
-        res.status(200).json({ log: "No se ingresaron los datos." });
+        res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
         return;
       },
       (err: any) => {
@@ -83,7 +86,7 @@ class userController {
    * @async
    * @method
    * @public
-   * @version 1.0.0
+   * @version 1.0.1
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the consult data.
    * @desc This method is responsible for searching the user based on the ID provided in the url. <br> Creation Date: 12/04/2020
@@ -94,25 +97,28 @@ class userController {
 
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
-   
+
     if (isNaN(id)) {
       
-      res.status(500).json({ log: "La cédula introducida no es valido." });
+      res.status(400).json({ log: "La cédula introducida no es valido." });
       return;
     }
     id = Number(id);
     if (Number.isInteger(id) == false) {
       res
-        .status(500)
+        .status(400)
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
+    
+    
     user
       .findOne({
         where: {
           cedula: id,
+          
         },
-        attributes: ["cedula", "nombre", "apellido", "direccion", "rol"],
+        attributes: ["cedula", "nombre", "apellido", "telefono","email", "direccion", "rol"],
       })
       .then(
         (data: any) => {
@@ -122,6 +128,9 @@ class userController {
               .json({ log: "No Existen datos a mostrar para el ID." });
             return;
           }
+          data.telefono = Security.decrypt(data.telefono);
+          data.email = Security.decrypt(data.email);
+          data.direccion = Security.decrypt(data.direccion);
           res.status(200).json(data);
           return;
         },
@@ -148,13 +157,13 @@ class userController {
   public async deleteUser(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
-      res.status(500).json({ log: "El ID introducido no es valido." });
+      res.status(400).json({ log: "El ID introducido no es valido." });
       return;
     }
     id = Number(id);
     if (Number.isInteger(id) == false) {
       res
-        .status(500)
+        .status(400)
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
@@ -164,13 +173,12 @@ class userController {
           res.status(200).json({ log: "Eliminado" });
           return;
         } else {
-          res.status(200).json({ log: "Sin datos a eliminar." });
+          res.status(404).json({ log: "Sin datos a eliminar." });
           return;
         }
       },
       (err: any) => {
         res.status(500).json({ log: "Error" });
-        console.log(err);
         return;
       }
     );
@@ -181,7 +189,7 @@ class userController {
    * @async
    * @method
    * @public
-   * @version 1.0.0
+   * @version 1.0.1
    * @author Karla Burgos <kbburgos@espol.edu.ec>
    * @returns {JSON} JSON with the transaction response.
    * @desc  This method modifies the user's information in the database, all the data is updated. <br> Creation Date: 19/04/2020
@@ -193,12 +201,12 @@ class userController {
   public async updateUsuario(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
-      res.status(500).json({ log: "La cédula ingresada no es valida." });
+      res.status(400).json({ log: "La cédula ingresada no es valida." });
       return;
     }
     id = String(id);
     let { hash } = req.body;
-    //aqui desencriptar los datos
+   
     let data: userinterface = {
       cedula: req.body.cedula,
       nombre: req.body.nombre,
@@ -211,8 +219,10 @@ class userController {
       updatedAt: new Date(),
     };
     let hashInterno = Security.hashJSON(data);
-    //aqui se debe desencriptar el hash
-    //data.createdAt = new Date();
+    data.telefono = Security.encrypt(data.telefono!);;
+    data.email = Security.encrypt(data.email!);;
+    data.direccion = Security.encrypt(data.direccion!);;
+    data.contrasenia = Security.hashPassword(data.contrasenia);
     if (hashInterno != hash) {
       res
         .status(401)
@@ -232,12 +242,11 @@ class userController {
             res.status(200).json({ log: "Usuario actualizado." });
             return;
           }
-          res.status(202).json({ log: "No se pudo actualizar." });
+          res.status(400).json({ log: "No se pudo actualizar." });
           return;
         },
         (err: any) => {
           res.status(500).json({ log: "Error" });
-          console.log(err);
           return;
         }
       );

@@ -119,7 +119,7 @@ class PaymentController {
                     });
                     return;
                 }
-                res.status(200).json({ log: "No se ingresaron los datos." });
+                res.status(401).json({ log: "No se ingresaron los datos." });
                 return;
             }, (err) => {
                 res.status(500).json({ log: "Error" });
@@ -164,7 +164,7 @@ class PaymentController {
                     return;
                 }
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                res.status(500).json(err);
                 console.log(err);
                 return;
             });

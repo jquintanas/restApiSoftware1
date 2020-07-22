@@ -7,7 +7,7 @@
  */
 
 export interface userinterface {
-    cedula?: String;
+    cedula?: string;
     nombre: string;
     apellido: string;
     telefono: string;
