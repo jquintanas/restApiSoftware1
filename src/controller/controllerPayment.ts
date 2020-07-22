@@ -30,13 +30,13 @@ class PaymentController {
   public async findByID(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
-      res.status(500).json({ log: "El ID introducido no es valido." });
+      res.status(400).json({ log: "El ID introducido no es valido." });
       return;
     }
     id = Number(id);
     if (Number.isInteger(id) == false) {
       res
-        .status(500)
+        .status(400)
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
@@ -66,8 +66,7 @@ class PaymentController {
           return;
         },
         (err: any) => {
-          console.log(err);
-          res.status(500).json({ log: "Error" });
+          res.status(500).json(err);
           return;
         }
       );
@@ -93,7 +92,6 @@ class PaymentController {
       total: req.body.total,
     };
     let hashInterno = Security.hashJSON(data);
-    //aqui se debe desencriptar el hash
     data.createdAt = new Date();
     if (hashInterno != hash) {
       res
@@ -110,12 +108,11 @@ class PaymentController {
           });
           return;
         }
-        res.status(401).json({ log: "No se ingresaron los datos." });
+        res.status(404).json({ log: "No se ingresaron los datos." });
         return;
       },
       (err: any) => {
-        res.status(500).json({ log: "Error" });
-        console.log(err);
+        res.status(500).json(err);
         return;
       }
     );
@@ -137,13 +134,13 @@ class PaymentController {
   public async deletePayment(req: Request, res: Response): Promise<void> {
     let id: any = req.params.id;
     if (isNaN(id)) {
-      res.status(500).json({ log: "El ID introducido no es valido." });
+      res.status(400).json({ log: "El ID introducido no es valido." });
       return;
     }
     id = Number(id);
     if (Number.isInteger(id) == false) {
       res
-        .status(500)
+        .status(400)
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
@@ -153,13 +150,12 @@ class PaymentController {
           res.status(200).json({ log: "Eliminado" });
           return;
         } else {
-          res.status(200).json({ log: "Sin datos a eliminar." });
+          res.status(404).json({ log: "Sin datos a eliminar." });
           return;
         }
       },
       (err: any) => {
         res.status(500).json(err);
-        console.log(err);
         return;
       }
     );

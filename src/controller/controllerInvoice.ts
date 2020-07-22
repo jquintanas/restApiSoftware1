@@ -198,13 +198,13 @@ class invoiceController {
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
-            res.status(401).json({ log: "El ID introducido no es valido." });
+            res.status(400).json({ log: "El ID introducido no es valido." });
             return;
         }
 
         id = Number(id);
         if (Number.isInteger(id) == false) {
-            res.status(401).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
 

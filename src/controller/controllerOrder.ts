@@ -172,12 +172,12 @@ class orderController {
     public async deleteData(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
-            res.status(500).json({ log: "El ID introducido no es valido." });
+            res.status(400).json({ log: "El ID introducido no es valido." });
             return;
         }
         id = Number(id);
         if (Number.isInteger(id) == false) {
-            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
         pedidos.destroy({ where: { idpedido: id } }).then((data: any) => {
@@ -186,12 +186,12 @@ class orderController {
                 return;
             }
             else {
-                res.status(200).json({ log: "No existe el pedido que desea eliminar." });
+                res.status(404).json({ log: "No existe el pedido que desea eliminar." });
                 return;
             }
         }, (err: any) => {
-            res.status(500).json({ log: "Error!!" });
-            console.log(err);
+            res.status(500).json(err);
+            
             return;
         });
     }
@@ -211,12 +211,12 @@ class orderController {
     public async findByID(req: Request, res: Response): Promise<void> {
         let id: any = req.params.id;
         if (isNaN(id)) {
-            res.status(500).json({ log: "El ID introducido no es valido." });
+            res.status(400).json({ log: "El ID introducido no es valido." });
             return;
         }
         id = Number(id);
         if (Number.isInteger(id) == false) {
-            res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+            res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
             return;
         }
 

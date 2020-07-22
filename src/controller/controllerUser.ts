@@ -242,7 +242,7 @@ class userController {
             res.status(200).json({ log: "Usuario actualizado." });
             return;
           }
-          res.status(400).json({ log: "No se pudo actualizar." });
+          res.status(404).json({ log: "No se pudo actualizar." });
           return;
         },
         (err: any) => {

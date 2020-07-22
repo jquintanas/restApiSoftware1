@@ -35,7 +35,7 @@ class loginController {
     public async login(req: Request, res: Response): Promise<void> {
         let { id, clave } = req.body;
         if (id == null || clave == null) {
-            res.status(401).json({ log: "Faltan datos, ingrese usuario y clave." });
+            res.status(400).json({ log: "Faltan datos, ingrese usuario y clave." });
             return;
         }
         let hashClave = Security.hashPassword(clave);
