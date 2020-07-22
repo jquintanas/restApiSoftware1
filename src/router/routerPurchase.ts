@@ -19,13 +19,13 @@ class routerPurchase {
         this.config();
     }
 
-    config():void {
+    config(): void {
         //this.router.[post]
         this.router.post("/post", Security.checkToken, purchaseController.postData);
         this.router.get("/cuser", Security.checkToken, purchaseController.getPurchaseUser);
         this.router.get("/getCompras", Security.checkToken, purchaseController.getPurchase);
         this.router.get("/:id", Security.checkToken, purchaseController.findByID);
         this.router.delete("/:id", Security.checkToken, purchaseController.deleteData);
-      }
+    }
 }
 export default new routerPurchase().router

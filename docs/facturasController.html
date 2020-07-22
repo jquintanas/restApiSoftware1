@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Documentation Class: facturasController</title>
+
+	<!--[if lt IE 9]>
+	<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link type="text/css" rel="stylesheet" href="styles/sunlight.default.css">
+
+	<link type="text/css" rel="stylesheet" href="styles/site.simplex.css">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-default navbar-fixed-top ">
+<div class="container">
+	<div class="navbar-header">
+		<a class="navbar-brand" href="index.html">Documentation</a>
+		<button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#topNavigation">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+        </button>
+	</div>
+	<div class="navbar-collapse collapse" id="topNavigation">
+		<ul class="nav navbar-nav">
+			
+			<li class="dropdown">
+				<a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="alertController.html">alertController</a></li><li><a href="comprasController.html">comprasController</a></li><li><a href="facturasController.html">facturasController</a></li><li><a href="invoiceController.html">invoiceController</a></li><li><a href="loginController.html">loginController</a></li><li><a href="orderController.html">orderController</a></li><li><a href="PaymentController.html">PaymentController</a></li><li><a href="pedidosController.html">pedidosController</a></li><li><a href="purchaseController.html">purchaseController</a></li><li><a href="routerAlerts.html">routerAlerts</a></li><li><a href="routerCompras.html">routerCompras</a></li><li><a href="routerFacturas.html">routerFacturas</a></li><li><a href="routerInvoice.html">routerInvoice</a></li><li><a href="routerLogin.html">routerLogin</a></li><li><a href="routerOrder.html">routerOrder</a></li><li><a href="routerPagos.html">routerPagos</a></li><li><a href="routerPayments.html">routerPayments</a></li><li><a href="routerPedidos.html">routerPedidos</a></li><li><a href="routerPurchase.html">routerPurchase</a></li><li><a href="routerUser.html">routerUser</a></li><li><a href="Security.html">Security</a></li><li><a href="Seguridad.html">Seguridad</a></li><li><a href="userController.html">userController</a></li><li><a href="usuariosController.html">usuariosController</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="interfaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Interfaces<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="invoiceInterface.html">invoiceInterface</a></li><li><a href="NoveltyInterface.html">NoveltyInterface</a></li><li><a href="ordersInterface.html">ordersInterface</a></li><li><a href="PaymentInterface.html">PaymentInterface</a></li><li><a href="purchaseInterface.html">purchaseInterface</a></li><li><a href="rolInterface.html">rolInterface</a></li><li><a href="userInterface.html">userInterface</a></li>
+				</ul>
+			</li>
+			
+			<li class="dropdown">
+				<a href="global.html" class="dropdown-toggle" data-toggle="dropdown">Global<b class="caret"></b></a>
+				<ul class="dropdown-menu ">
+					<li><a href="global.html#compras">compras</a></li><li><a href="global.html#express_1">express_1</a></li><li><a href="global.html#facturas">facturas</a></li><li><a href="global.html#formaPagos">formaPagos</a></li><li><a href="global.html#idGeneralRole">idGeneralRole</a></li><li><a href="global.html#idRolGeneral">idRolGeneral</a></li><li><a href="global.html#invoice">invoice</a></li><li><a href="global.html#lifetimeRefreshToken">lifetimeRefreshToken</a></li><li><a href="global.html#lifetimeToken">lifetimeToken</a></li><li><a href="global.html#listRefreshTokens">listRefreshTokens</a></li><li><a href="global.html#Novedad">Novedad</a></li><li><a href="global.html#order">order</a></li><li><a href="global.html#pagos">pagos</a></li><li><a href="global.html#payment">payment</a></li><li><a href="global.html#paymentMethod">paymentMethod</a></li><li><a href="global.html#pedidos">pedidos</a></li><li><a href="global.html#purchase">purchase</a></li><li><a href="global.html#refreshToken">refreshToken</a></li><li><a href="global.html#secretEncryp">secretEncryp</a></li><li><a href="global.html#secretToken">secretToken</a></li><li><a href="global.html#tiempoRefreshToken">tiempoRefreshToken</a></li><li><a href="global.html#tiempoToken">tiempoToken</a></li><li><a href="global.html#urlBaseCompras">urlBaseCompras</a></li><li><a href="global.html#urlBaseFacturas">urlBaseFacturas</a></li><li><a href="global.html#urlBaseInvoice">urlBaseInvoice</a></li><li><a href="global.html#urlBaseNovedad">urlBaseNovedad</a></li><li><a href="global.html#urlBaseOrders">urlBaseOrders</a></li><li><a href="global.html#urlBasePagos">urlBasePagos</a></li><li><a href="global.html#urlBasePedidos">urlBasePedidos</a></li><li><a href="global.html#urlBasePurchases">urlBasePurchases</a></li><li><a href="global.html#urlBaseUsuario">urlBaseUsuario</a></li><li><a href="global.html#urlNoveltyBase">urlNoveltyBase</a></li><li><a href="global.html#urlPaymentBase">urlPaymentBase</a></li><li><a href="global.html#urlUserBase">urlUserBase</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#Usuarios">Usuarios</a></li>
+				</ul>
+			</li>
+			
+		</ul>
+        
+            <div class="col-sm-3 col-md-3">
+                <form class="navbar-form" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" name="q" id="search-input">
+                        <div class="input-group-btn">
+                            <button class="btn btn-default" id="search-submit"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+	</div>
+
+</div>
+</div>
+
+
+<div class="container" id="toc-content">
+<div class="row">
+
+	
+	<div class="col-md-8">
+	
+		<div id="main">
+			
+
+	<h1 class="page-title">Class: facturasController</h1>
+<section>
+
+<header>
+    
+        <h2>
+        facturasController
+        </h2>
+        
+            <div class="class-description"><p>Clase controladora de facturas.</p></div>
+        
+    
+</header>
+
+
+<article>
+    <div class="container-overview">
+    
+        
+<hr>
+<dt>
+    <h4 class="name" id="facturasController"><span class="type-signature"></span>new facturasController()</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Fecha Creación: 12/04/2020</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+
+    
+<dl class="details">
+    
+
+	
+	<dt class="tag-version method-doc-label method-doc-details-label">Version:</dt>
+	<dd class="tag-version">
+		<ul class="dummy">
+			<li>1.0.0</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li><a href="mailto:fman@espol.edu.ec">Francesca Man Ging</a></li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>facturasController</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type"><a href="facturasController.html">facturasController</a></span>
+
+
+
+    </dd>
+</dl>
+
+
+        
+
+    
+</dd>
+
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        <dl>
+            
+<hr>
+<dt>
+    <h4 class="name" id="findByID"><span class="type-signature">&lt;async> </span>findByID(req, res)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Este método se encarga de buscar la factura en base al ID proporcionado en la url. <br> Fecha Creación: 12/04/2020</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto Request</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+	<dt class="tag-version method-doc-label method-doc-details-label">Version:</dt>
+	<dd class="tag-version">
+		<ul class="dummy">
+			<li>1.0.0</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li><a href="mailto:fman@espol.edu.ec">Francesca Man Ging</a></li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    <ul>
+            <li>
+<div class="param-desc">
+    <p>JSON con los datos obtenidos de la consulta.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSON</span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        
+            <li>
+<div class="param-desc">
+    <p>Promesa de tipo void.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        </ul>
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getFacturas"><span class="type-signature">&lt;async> </span>getFacturas(req, res)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Este método se encarga de buscar las facturas <br> FechaCreacion: 25/06/2020</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto Request</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+	<dt class="tag-version method-doc-label method-doc-details-label">Version:</dt>
+	<dd class="tag-version">
+		<ul class="dummy">
+			<li>1.0.0</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li><a href="mailto:dprios@espol.edu.ec">Danny Rios</a></li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    <ul>
+            <li>
+<div class="param-desc">
+    <p>JSON con los datos obtenidos de la consulta.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSON</span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        
+            <li>
+<div class="param-desc">
+    <p>Promesa de tipo void.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        </ul>
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="getFacturasUser"><span class="type-signature">&lt;async> </span>getFacturasUser(req, res)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Este método se encarga de buscar las facturas de acuerdo al usuario <br> FechaCreacion: 25/06/2020</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto Request</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+	<dt class="tag-version method-doc-label method-doc-details-label">Version:</dt>
+	<dd class="tag-version">
+		<ul class="dummy">
+			<li>1.0.0</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li><a href="mailto:dprios@espol.edu.ec">Danny Rios</a></li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    <ul>
+            <li>
+<div class="param-desc">
+    <p>JSON con los datos obtenidos de la consulta.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSON</span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        
+            <li>
+<div class="param-desc">
+    <p>Promesa de tipo void.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        </ul>
+
+    
+</dd>
+
+        
+            
+<hr>
+<dt>
+    <h4 class="name" id="postData"><span class="type-signature">&lt;async> </span>postData(req, res)</h4>
+    
+    
+</dt>
+<dd>
+
+    
+    <div class="description">
+        <p>Este método se encarga de agregar una nueva facturas posterior a verificar los datos
+y su integridad. <br> Fecha Creación: 12/04/2020</p>
+    </div>
+    
+
+    
+
+    
+
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto Request</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Response</span>
+
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Objeto response</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+    
+
+    
+<dl class="details">
+    
+
+	
+	<dt class="tag-version method-doc-label method-doc-details-label">Version:</dt>
+	<dd class="tag-version">
+		<ul class="dummy">
+			<li>1.0.0</li>
+		</ul>
+	</dd>
+	
+
+	
+
+	
+
+    
+
+    
+
+    
+
+    
+
+	
+
+	
+	<dt class="tag-author method-doc-label method-doc-details-label">Author:</dt>
+	<dd class="tag-author">
+		<ul>
+			<li><a href="mailto:fman@espol.edu.ec">Francesca Man Ging</a></li>
+			</ul>
+	</dd>
+	
+
+	
+
+	
+
+	
+
+
+
+	
+
+	
+
+	
+
+	
+</dl>
+
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    <ul>
+            <li>
+<div class="param-desc">
+    <p>JSON con los datos obtenidos de la consulta.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSON</span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        
+            <li>
+<div class="param-desc">
+    <p>Promesa de tipo void.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;void></span>
+
+
+
+    </dd>
+</dl>
+
+</li>
+        </ul>
+
+    
+</dd>
+
+        </dl>
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+		</div>
+	</div>
+
+	<div class="clearfix"></div>
+
+	
+		<div class="col-md-3">
+			<div id="toc" class="col-md-3 hidden-xs hidden-sm hidden-md"></div>
+		</div>
+	
+
+</div>
+</div>
+
+
+    <div class="modal fade" id="searchResults">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Search results</h4>
+          </div>
+          <div class="modal-body"></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+
+
+<footer>
+
+
+<span class="jsdoc-message">
+	Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.4</a>
+	
+		on 2020-07-14T22:49:49-05:00
+	
+	using the <a href="https://github.com/docstrap/docstrap">DocStrap template</a>.
+</span>
+</footer>
+
+<script src="scripts/docstrap.lib.js"></script>
+<script src="scripts/toc.js"></script>
+
+    <script type="text/javascript" src="scripts/fulltext-search-ui.js"></script>
+
+
+<script>
+$( function () {
+	$( "[id*='$']" ).each( function () {
+		var $this = $( this );
+
+		$this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+	} );
+
+	$( ".tutorial-section pre, .readme-section pre, pre.prettyprint.source" ).each( function () {
+		var $this = $( this );
+
+		var example = $this.find( "code" );
+		exampleText = example.html();
+		var lang = /{@lang (.*?)}/.exec( exampleText );
+		if ( lang && lang[1] ) {
+			exampleText = exampleText.replace( lang[0], "" );
+			example.html( exampleText );
+			lang = lang[1];
+		} else {
+			var langClassMatch = example.parent()[0].className.match(/lang\-(\S+)/);
+			lang = langClassMatch ? langClassMatch[1] : "javascript";
+		}
+
+		if ( lang ) {
+
+			$this
+			.addClass( "sunlight-highlight-" + lang )
+			.addClass( "linenums" )
+			.html( example.html() );
+
+		}
+	} );
+
+	Sunlight.highlightAll( {
+		lineNumbers : false,
+		showMenu : true,
+		enableDoclinks : true
+	} );
+
+	$.catchAnchorLinks( {
+        navbarOffset: 10
+	} );
+	$( "#toc" ).toc( {
+		anchorName  : function ( i, heading, prefix ) {
+			return $( heading ).attr( "id" ) || ( prefix + i );
+		},
+		selectors   : "#toc-content h1,#toc-content h2,#toc-content h3,#toc-content h4",
+		showAndHide : false,
+		smoothScrolling: true
+	} );
+
+	$( "#main span[id^='toc']" ).addClass( "toc-shim" );
+	$( '.dropdown-toggle' ).dropdown();
+
+    $( "table" ).each( function () {
+      var $this = $( this );
+      $this.addClass('table');
+    } );
+
+} );
+</script>
+
+
+
+<!--Navigation and Symbol Display-->
+
+
+<!--Google Analytics-->
+
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            SearcherDisplay.init();
+        });
+    </script>
+
+
+</body>
+</html>

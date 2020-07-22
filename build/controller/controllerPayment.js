@@ -34,8 +34,8 @@ class PaymentController {
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
      * @desc This method find a payment that match with the ID in the url. The search is performed in the database. <br> Creation Date: 11/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
+     * @param {Request} req Request Object
+     * @param {Response} res Response Object
      * @type {Promise<void>} Promesa de tipo void.
      */
     findByID(req, res) {
@@ -90,8 +90,8 @@ class PaymentController {
      * @author Jonathan Quintana <jiquinta@espol.edu.ec>
      * @returns {JSON} JSON with the transaction response.
      * @desc   This method adds the data of the payment made by the user, the integrity of the same must be validated, when the data is successfully entered the pertinent message is returned and the url of the resource. <br> Creation Date: 11/04/2020
-     * @param {Request} req Objeto Request
-     * @param {Response} res Objeto response
+     * @param {Request} req Request Object
+     * @param {Response} res Response Object
      * @type {Promise<void>} Void Promise.
      */
     addPayment(req, res) {
@@ -136,8 +136,8 @@ class PaymentController {
     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
     * @returns {JSON} JSON with the transaction response.
     * @desc   This method is responsible for deleting a payment method based on the ID that is provided by the url. <br> Creation Date: 11/04/2020
-    * @param {Request} req Objeto Request
-    * @param {Response} res Objeto response
+    * @param {Request} req Request Object
+    * @param {Response} res Response Object
     * @type {Promise<void>} Void Promise.
     */
     deletePayment(req, res) {

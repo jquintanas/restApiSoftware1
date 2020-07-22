@@ -1,15 +1,4 @@
 "use strict";
-/*
-  Fcreación: -----
-  Fmodificación: 1/04/2020
-  Ucreación: ------
-  Umodificación: Danny
-  Comentarios: se importó el archivo router pedidos para hacer uso de las rutas al momento de levantar el server
-
-  UModificacion: JQuintana
-  fecha: 11/04/2020
-  Comentario: se agregan router de pago y novedad.
-  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -30,7 +19,6 @@ const routerOrders_1 = __importDefault(require("./router/routerOrders"));
 const routerPayment_1 = __importDefault(require("./router/routerPayment"));
 const routerNovelty_1 = __importDefault(require("./router/routerNovelty"));
 const routerUser_1 = __importDefault(require("./router/routerUser"));
-//import routerRols from "./router/routerRol"; 
 const routerPurchase_1 = __importDefault(require("./router/routerPurchase"));
 const routerLogin_1 = __importDefault(require("./router/routerLogin"));
 const routerInvoice_1 = __importDefault(require("./router/routerInvoice"));

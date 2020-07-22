@@ -27,7 +27,7 @@ class routerUser {
     this.router.delete("/:id",Security.checkToken,userController.deleteUser);
     this.router.put("/update/:id",Security.checkToken,userController.updateUsuario);
   }
-  
+
 }
 const appRoutes = new routerUser();
 export default appRoutes.router;
