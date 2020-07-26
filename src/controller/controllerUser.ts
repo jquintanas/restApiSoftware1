@@ -57,7 +57,6 @@ class userController {
       return;
     };
     data.telefono = Security.encrypt(data.telefono!);;
-    data.email = Security.encrypt(data.email!);;
     data.direccion = Security.encrypt(data.direccion!);;
     data.contrasenia = Security.hashPassword(data.contrasenia);
     user.create(data).then(
@@ -75,8 +74,7 @@ class userController {
         return;
       },
       (err: any) => {
-        res.status(500).json({ log: "Error", error: err.original.code });
-        console.log(err);
+        res.status(500).json({ log: "Error" });
         return;
       }
     );
@@ -129,13 +127,12 @@ class userController {
             return;
           }
           data.telefono = Security.decrypt(data.telefono);
-          data.email = Security.decrypt(data.email);
           data.direccion = Security.decrypt(data.direccion);
           res.status(200).json(data);
           return;
         },
         (err: any) => {
-          res.status(500).json(err);
+          res.status(500).json({ log: "Error" });
           return;
         }
       );
@@ -170,7 +167,7 @@ class userController {
     user.destroy({ where: { cedula: id } }).then(
       (data: any) => {
         if (data == 1) {
-          res.status(200).json({ log: "Eliminado" });
+          res.status(200).json({ log: "Usuario eliminado" });
           return;
         } else {
           res.status(404).json({ log: "Sin datos a eliminar." });
@@ -220,7 +217,6 @@ class userController {
     };
     let hashInterno = Security.hashJSON(data);
     data.telefono = Security.encrypt(data.telefono!);;
-    data.email = Security.encrypt(data.email!);;
     data.direccion = Security.encrypt(data.direccion!);;
     data.contrasenia = Security.hashPassword(data.contrasenia);
     if (hashInterno != hash) {

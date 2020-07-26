@@ -45,6 +45,10 @@ class purchaseController {
         return __awaiter(this, void 0, void 0, function* () {
             let dataId = res.locals;
             let id = dataId.post;
+            if (isNaN(id)) {
+                res.status(400).json({ log: "La cédula ingresada no es valida." });
+                return;
+            }
             console.log('id', id);
             purchases.findAll({
                 attributes: ['idcompra', 'fechacompra', 'horaEntrega'],
@@ -61,7 +65,7 @@ class purchaseController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -83,16 +87,10 @@ class purchaseController {
             purchases.findAll({
                 attributes: ['idcompra', 'idusuario', 'fechacompra', 'horaEntrega', 'createdAt'],
             }).then((data) => {
-                if (data == null) {
-                    res
-                        .status(404)
-                        .json({ log: "No hay compras" });
-                    return;
-                }
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -113,13 +111,13 @@ class purchaseController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
-                res.status(401).json({ log: "El ID introducido no es valido." });
+                res.status(400).json({ log: "El ID introducido no es valido." });
                 return;
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
                 res
-                    .status(401)
+                    .status(400)
                     .json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
@@ -138,7 +136,7 @@ class purchaseController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -184,7 +182,7 @@ class purchaseController {
                 res.status(401).json({ log: "No se ingresaron los datos." });
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -205,12 +203,12 @@ class purchaseController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
-                res.status(401).json({ log: "El ID introducido no es valido." });
+                res.status(400).json({ log: "El ID introducido no es valido." });
                 return;
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
-                res.status(401).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
             purchases.destroy({ where: { idcompra: id } }).then((data) => {
@@ -223,7 +221,7 @@ class purchaseController {
                     return;
                 }
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });

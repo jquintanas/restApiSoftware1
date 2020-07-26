@@ -112,7 +112,7 @@ class invoiceController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         });
 
@@ -175,7 +175,7 @@ class invoiceController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
 
             return;
         });
@@ -225,7 +225,7 @@ class invoiceController {
                 return;
             },
                 (err: any) => {
-                    res.status(500).json(err);
+                    res.status(500).json({ log: "Error" });
                     return;
                 }
             );
@@ -272,8 +272,7 @@ class invoiceController {
             return;
         },
             (err: any) => {
-                res.status(500).json({ log: "Error, no se pudo crear la factura" });
-                console.log(err);
+                res.status(500).json({ log: "Error" });
                 return;
             }
         );

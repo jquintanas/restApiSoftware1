@@ -107,7 +107,7 @@ class invoiceController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -164,33 +164,33 @@ class invoiceController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
     }
     /**
-    * @async
-    * @method
-    * @public
-    * @version 1.0.0
-    * @author Francesca Man Ging <fman@espol.edu.ec>
-    * @returns {JSON} JSON with the transaction response.
-    * @desc This method will search the invoice by the ID given in the URL. <br> Fecha Creación: 12/04/2020
-    * @param {Request} req Object Request
-    * @param {Response} res Object response
-    * @type {Promise<void>} Void promise
-    */
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
+     * @author Francesca Man Ging <fman@espol.edu.ec>
+     * @returns {JSON} JSON with the transaction response.
+     * @desc This method will search the invoice by the ID given in the URL. <br> Fecha Creación: 12/04/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object response
+     * @type {Promise<void>} Void promise
+     */
     findByID(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
-                res.status(500).json({ log: "El ID introducido no es valido." });
+                res.status(400).json({ log: "El ID introducido no es valido." });
                 return;
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
-                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
             invoice.findOne({
@@ -209,7 +209,7 @@ class invoiceController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -247,10 +247,10 @@ class invoiceController {
                     });
                     return;
                 }
-                res.status(401).json({ log: "No se ingresaron los datos." });
+                res.status(200).json(rs);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });

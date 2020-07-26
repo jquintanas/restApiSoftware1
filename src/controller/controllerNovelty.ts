@@ -52,7 +52,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             
             return;
         });
@@ -87,7 +87,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             
             return;
         });
@@ -131,7 +131,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
         );
@@ -166,7 +166,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
 
@@ -202,7 +202,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
 
@@ -234,7 +234,7 @@ class alertController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
         );
@@ -279,7 +279,7 @@ class alertController {
             res.status(404).json({ log: "No se pudo crear la novedad." });
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
         );
@@ -331,7 +331,7 @@ class alertController {
             res.status(404).json({ log: "No se encontro la novedad." });
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
 
         });

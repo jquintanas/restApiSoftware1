@@ -65,7 +65,7 @@ class orderController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         });
 
@@ -105,7 +105,7 @@ class orderController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         });
 
@@ -152,7 +152,7 @@ class orderController {
             res.status(401).json({ log: "No se ingresaron los datos." });
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         });
     }
@@ -190,7 +190,7 @@ class orderController {
                 return;
             }
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             
             return;
         });
@@ -244,7 +244,7 @@ class orderController {
             res.status(200).json(data);
             return;
         }, (err: any) => {
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         }
         );

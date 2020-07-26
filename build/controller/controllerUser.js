@@ -66,8 +66,6 @@ class userController {
             ;
             data.telefono = security_1.Security.encrypt(data.telefono);
             ;
-            data.email = security_1.Security.encrypt(data.email);
-            ;
             data.direccion = security_1.Security.encrypt(data.direccion);
             ;
             data.contrasenia = security_1.Security.hashPassword(data.contrasenia);
@@ -84,8 +82,7 @@ class userController {
                 res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error", error: err.original.code });
-                console.log(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -131,12 +128,11 @@ class userController {
                     return;
                 }
                 data.telefono = security_1.Security.decrypt(data.telefono);
-                data.email = security_1.Security.decrypt(data.email);
                 data.direccion = security_1.Security.decrypt(data.direccion);
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -169,7 +165,7 @@ class userController {
             }
             user.destroy({ where: { cedula: id } }).then((data) => {
                 if (data == 1) {
-                    res.status(200).json({ log: "Eliminado" });
+                    res.status(200).json({ log: "Usuario eliminado" });
                     return;
                 }
                 else {
@@ -217,8 +213,6 @@ class userController {
             let hashInterno = security_1.Security.hashJSON(data);
             data.telefono = security_1.Security.encrypt(data.telefono);
             ;
-            data.email = security_1.Security.encrypt(data.email);
-            ;
             data.direccion = security_1.Security.encrypt(data.direccion);
             ;
             data.contrasenia = security_1.Security.hashPassword(data.contrasenia);
@@ -239,7 +233,7 @@ class userController {
                     res.status(200).json({ log: "Usuario actualizado." });
                     return;
                 }
-                res.status(400).json({ log: "No se pudo actualizar." });
+                res.status(404).json({ log: "No se pudo actualizar." });
                 return;
             }, (err) => {
                 res.status(500).json({ log: "Error" });

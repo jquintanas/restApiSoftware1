@@ -41,15 +41,15 @@ class loginController {
      */
     login(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let { id, clave } = req.body;
-            if (id == null || clave == null) {
-                res.status(401).json({ log: "Faltan datos, ingrese usuario y clave." });
+            let { email, clave } = req.body;
+            if (email == null || clave == null) {
+                res.status(400).json({ log: "Faltan datos, ingrese usuario y clave." });
                 return;
             }
             let hashClave = security_1.Security.hashPassword(clave);
             user.findOne({
                 where: {
-                    cedula: id,
+                    email: email,
                     contrasenia: hashClave,
                     rol: global_1.default.globals.idGeneralRole
                 },
@@ -60,12 +60,14 @@ class loginController {
                     return;
                 }
                 data.telefono = security_1.Security.decrypt(data.telefono);
-                data.email = security_1.Security.decrypt(data.email);
                 data.direccion = security_1.Security.decrypt(data.direccion);
+                let id = data.cedula;
                 let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
                 let refreshToken = jwt.sign({ id }, global_1.default.globals.refreshToken, { expiresIn: global_1.default.globals.lifetimeRefreshToken });
                 let response = {
-                    "status": id,
+                    "user": id,
+                    "email": email,
+                    "status": "loggin",
                     "token": token
                 };
                 tokenList[refreshToken] = response;
@@ -73,7 +75,7 @@ class loginController {
                 res.status(200).json({ data, token, refreshToken });
                 return;
             }, (err) => {
-                res.status(500).json(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -92,9 +94,9 @@ class loginController {
      */
     generateToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let { id, refreshToken } = req.body;
+            let { email, refreshToken } = req.body;
             if ((refreshToken) && (refreshToken in tokenList)) {
-                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
+                let token = jwt.sign({ email }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
                 tokenList[refreshToken].token = token;
                 res.status(200).json({ token });
                 return;
@@ -122,10 +124,13 @@ class loginController {
             let refreshToken = req.body.refreshToken;
             if (refreshToken in tokenList) {
                 delete tokenList[refreshToken];
+                res.status(200).json({ log: "token eliminado" });
                 return;
             }
-            res.status(200).json({ log: "token eliminado" });
-            return;
+            else {
+                res.status(404).json({ log: "no existe el token" });
+                return;
+            }
         });
     }
 }

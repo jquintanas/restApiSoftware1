@@ -33,8 +33,8 @@ class loginController {
      */
 
     public async login(req: Request, res: Response): Promise<void> {
-        let { id, clave } = req.body;
-        if (id == null || clave == null) {
+        let { email, clave } = req.body;
+        if (email == null || clave == null) {
             res.status(400).json({ log: "Faltan datos, ingrese usuario y clave." });
             return;
         }
@@ -43,7 +43,7 @@ class loginController {
             {
                 where:
                 {
-                    cedula: id,
+                    email: email,
                     contrasenia: hashClave,
                     rol: global.globals.idGeneralRole 
                 },
@@ -56,12 +56,14 @@ class loginController {
                 return;
             }
             data.telefono = Security.decrypt(data.telefono);
-            data.email = Security.decrypt(data.email);
             data.direccion = Security.decrypt(data.direccion);
-            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
-            let refreshToken = jwt.sign({ id }, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
+            let id = data.cedula;
+            let token = jwt.sign({id} , global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
+            let refreshToken = jwt.sign( {id}, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
             let response = {
-                "status": id,
+                "user": id,
+                "email":email,
+                "status": "loggin",
                 "token": token
             }
             tokenList[refreshToken] = response;
@@ -70,7 +72,7 @@ class loginController {
             return;
         }, (err: any) => {
            
-            res.status(500).json(err);
+            res.status(500).json({ log: "Error" });
             return;
         });
     }
@@ -88,11 +90,11 @@ class loginController {
      * @type {Promise<void>} Void type promise.
      */
     public async generateToken(req: Request, res: Response): Promise<void> {
-        let { id, refreshToken } = req.body;
+        let { email, refreshToken } = req.body;
 
         if ((refreshToken) && (refreshToken in tokenList)) {
 
-            let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
+            let token = jwt.sign({ email }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
             tokenList[refreshToken].token = token;
             res.status(200).json({ token });
             return;
@@ -117,10 +119,13 @@ class loginController {
         let refreshToken = req.body.refreshToken;
         if (refreshToken in tokenList) {
             delete tokenList[refreshToken]
+            res.status(200).json({ log: "token eliminado" });
             return;
-        }
-        res.status(200).json({ log: "token eliminado" });
-        return;
+        }else{
+            res.status(404).json({ log: "no existe el token" });
+            return;
+        }      
+        
     }
 
 }

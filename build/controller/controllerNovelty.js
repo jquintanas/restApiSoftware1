@@ -51,11 +51,16 @@ class alertController {
                     idusuarioReporta: id
                 },
             }).then((data) => {
+                if (data == null) {
+                    res
+                        .status(404)
+                        .json({ log: "No existen novedades del usuario" });
+                    return;
+                }
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -77,11 +82,16 @@ class alertController {
             novelty.findAll({
                 attributes: ['idnovedad', 'idusuarioReporta', 'idusuarioReportado', 'descripcion', 'createdAt', 'updatedAt'],
             }).then((data) => {
+                if (data == null) {
+                    res
+                        .status(404)
+                        .json({ log: "No hay novedades" });
+                    return;
+                }
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error!! No hay datos en la base" });
-                console.log(err);
+                res.status(500).json({ log: "Error" });
                 return;
             });
         });
@@ -102,12 +112,12 @@ class alertController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
-                res.status(500).json({ log: "El ID introducido no es valido." });
+                res.status(400).json({ log: "El ID introducido no es valido." });
                 return;
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
-                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
             novelty.findOne({
@@ -123,7 +133,6 @@ class alertController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                console.log(err);
                 res.status(500).json({ log: "Error" });
                 return;
             });
@@ -157,7 +166,6 @@ class alertController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                console.log(err);
                 res.status(500).json({ log: "Error" });
                 return;
             });
@@ -191,7 +199,6 @@ class alertController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                console.log(err);
                 res.status(500).json({ log: "Error" });
                 return;
             });
@@ -221,7 +228,6 @@ class alertController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                console.log(err);
                 res.status(500).json({ log: "Error" });
                 return;
             });
@@ -262,11 +268,10 @@ class alertController {
                     });
                     return;
                 }
-                res.status(200).json({ log: "No se ingresaron los datos." });
+                res.status(404).json({ log: "No se pudo crear la novedad." });
                 return;
             }, (err) => {
                 res.status(500).json({ log: "Error" });
-                console.log(err);
                 return;
             });
         });
@@ -287,12 +292,12 @@ class alertController {
         return __awaiter(this, void 0, void 0, function* () {
             let id = req.params.id;
             if (isNaN(id)) {
-                res.status(500).json({ log: "El ID introducido no es valido." });
+                res.status(400).json({ log: "El ID introducido no es valido." });
                 return;
             }
             id = Number(id);
             if (Number.isInteger(id) == false) {
-                res.status(500).json({ log: "El ID introducido no es valido, debe ser un entero." });
+                res.status(400).json({ log: "El ID introducido no es valido, debe ser un entero." });
                 return;
             }
             let { descripcion } = req.body;
@@ -312,10 +317,9 @@ class alertController {
                     res.status(200).json({ log: "Novedad actualizada." });
                     return;
                 }
-                res.status(202).json({ log: "No se pudo actualizar." });
+                res.status(404).json({ log: "No se encontro la novedad." });
                 return;
             }, (err) => {
-                console.error(err);
                 res.status(500).json({ log: "Error" });
                 return;
             });
