@@ -96,6 +96,7 @@ class orderController {
                 ]
             }
         ).then((data: any) => {
+
             if (data == null) {
                 res
                   .status(404)

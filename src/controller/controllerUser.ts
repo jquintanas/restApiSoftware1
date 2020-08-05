@@ -22,6 +22,47 @@ const user = require("./../../models").Usuarios;
  */
 
 class userController {
+
+  /**
+  * @async
+  * @method
+  * @public
+  * @version 1.0.0
+  * @author Danny Rios <dprios@espol.edu.ec>
+  * @returns {JSON} JSON with the transaction response.
+  * @desc This methodget all users <br> Creation Date: 05/08/2020
+  * @param {Request} req Request Object
+  * @param {Response} res Response Object
+  * @type {Promise<void>} Void Promise.
+  */
+  public async getUsers(req: Request, res: Response): Promise<void> {
+    user.findAll(
+        {
+          attributes: ["cedula", "nombre", "apellido", "telefono","email", "direccion", "rol"],
+        }
+    ).then((data: any) => {
+        if (data == null) {
+            res
+              .status(404)
+              .json({ log: "No hay usuarios" });
+            return;
+        }
+        for(let i = 0 ; i < data.length ; i++){
+          data[i].telefono = Security.decrypt(data[i].telefono );
+          data[i].direccion = Security.decrypt(data[i].direccion);
+        }
+
+        res.status(200).json(data);
+        return;
+    }, (err: any) => {
+        res.status(500).json({ log: "Error" });
+        return;
+    });
+
+  }
+
+
+
   /**
    * @async
    * @method
