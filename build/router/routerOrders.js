@@ -26,6 +26,7 @@ class routerOrder {
         this.router.get("/getAll", security_1.Security.checkToken, controllerOrder_1.default.getOrders);
         this.router.get("/:id", security_1.Security.checkToken, controllerOrder_1.default.findByID);
         this.router.post("/post", security_1.Security.checkToken, controllerOrder_1.default.postData);
+        this.router.put("/put", security_1.Security.checkToken, controllerOrder_1.default.updateOrder);
         this.router.delete("/:id", security_1.Security.checkToken, controllerOrder_1.default.deleteData);
     }
 }

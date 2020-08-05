@@ -93,5 +93,6 @@ exports.default = {
          * @version 1.0.0
          */
         lifetimeRefreshToken: 604800,
+        idAdminRole: 1,
     },
 };

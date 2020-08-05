@@ -248,5 +248,59 @@ class orderController {
             });
         });
     }
+    /**
+    * @async
+    * @method
+    * @public
+    * @version 1.0.0
+    * @author Danny Rios <dprios@espol.edu.ec>
+    * @returns {JSON} JSON with the transaction response.
+    * @desc  This method update order. <br> Creation Date: 30/07/2020
+    * @param {Request} req Request Object
+    * @param {Response} res Response Object
+    * @type {Promise<void>} Void Promise.
+    */
+    updateOrder(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let id = req.params.id;
+            if (isNaN(id)) {
+                res.status(400).json({ log: "El id del pedido no es válido." });
+                return;
+            }
+            id = String(id);
+            let { hash } = req.body;
+            let pedido = {
+                idpedido: req.body.idpedido,
+                idcompra: req.body.idcompra,
+                idproducto: req.body.idproducto,
+                cantidad: req.body.cantidad,
+                subtotal: req.body.subtotal,
+                cubiertos: req.body.cubiertos
+            };
+            let hashInterno = security_1.Security.hashJSON(pedido);
+            pedido.createdAt = new Date();
+            if (hashInterno != hash) {
+                res.status(401).json({ log: "Violación de integridad de datos, hash invalido." });
+                return;
+            }
+            pedidos
+                .update(pedido, {
+                where: {
+                    cedula: id,
+                },
+            })
+                .then((resp) => {
+                if (resp[0] == 1) {
+                    res.status(200).json({ log: "Pedido actualizado." });
+                    return;
+                }
+                res.status(404).json({ log: "No se pudo actualizar." });
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error" });
+                return;
+            });
+        });
+    }
 }
 exports.default = new orderController();

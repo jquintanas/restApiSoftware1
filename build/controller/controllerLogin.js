@@ -85,6 +85,59 @@ class loginController {
      * @method
      * @public
      * @version 1.0.0
+     * @author Jonathan Quintana <jiquinta@espol.edu.ec>
+     * @returns {JSON} JSON with the data obtained from the query.
+     * @desc This method is responsible for searching the user based on the provided credentials and returns the user's data along with the session token. <br> Creation Date: 04/19/2020
+     * @param {Request} req Object Request
+     * @param {Response} res Object Response
+     * @type {Promise<void>} Void type promise.
+     */
+    loginAdmin(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let { email, clave } = req.body;
+            if (email == null || clave == null) {
+                res.status(400).json({ log: "Faltan datos, ingrese usuario y clave." });
+                return;
+            }
+            let hashClave = security_1.Security.hashPassword(clave);
+            user.findOne({
+                where: {
+                    email: email,
+                    contrasenia: hashClave,
+                    rol: global_1.default.globals.idAdminRole
+                },
+                attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion"]
+            }).then((data) => {
+                if (data == null) {
+                    res.status(404).json({ log: "No Existen datos a mostrar para el ID." });
+                    return;
+                }
+                data.telefono = security_1.Security.decrypt(data.telefono);
+                data.direccion = security_1.Security.decrypt(data.direccion);
+                let id = data.cedula;
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
+                let refreshToken = jwt.sign({ id }, global_1.default.globals.refreshToken, { expiresIn: global_1.default.globals.lifetimeRefreshToken });
+                let response = {
+                    "user": id,
+                    "email": email,
+                    "status": "loggin",
+                    "token": token
+                };
+                tokenList[refreshToken] = response;
+                console.log("tokenlist: ", tokenList);
+                res.status(200).json({ data, token, refreshToken });
+                return;
+            }, (err) => {
+                res.status(500).json({ log: "Error" });
+                return;
+            });
+        });
+    }
+    /**
+     * @async
+     * @method
+     * @public
+     * @version 1.0.0
      * @author Danny Rios <dprios@espol.edu.ec>
      * @returns {JSON} JSON with the data obtained from the query.
      * @desc This method is in charge of generating a token from the id and refreshtoken received by the user. <br> Creation Date: 06/22/2020
@@ -94,9 +147,9 @@ class loginController {
      */
     generateToken(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let { email, refreshToken } = req.body;
+            let { id, refreshToken } = req.body;
             if ((refreshToken) && (refreshToken in tokenList)) {
-                let token = jwt.sign({ email }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
+                let token = jwt.sign({ id }, global_1.default.globals.secretToken, { expiresIn: global_1.default.globals.lifetimeToken });
                 tokenList[refreshToken].token = token;
                 res.status(200).json({ token });
                 return;

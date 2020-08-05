@@ -23,6 +23,7 @@ class routerOrder {
     this.router.get("/getAll", Security.checkToken, orderController.getOrders);
     this.router.get("/:id", Security.checkToken, orderController.findByID);
     this.router.post("/post", Security.checkToken, orderController.postData);
+    this.router.put("/put", Security.checkToken, orderController.updateOrder);
     this.router.delete("/:id", Security.checkToken, orderController.deleteData);
 
   }
