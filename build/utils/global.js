@@ -85,7 +85,7 @@ exports.default = {
          * @author Danny Rios <dprios@espol.edu.ec>
          * @version 1.0.0
          */
-        lifetimeToken: 900,
+        lifetimeToken: 3600,
         /**
          * @const lifetimeRefreshToken
          * @desc Refresh token lifetime

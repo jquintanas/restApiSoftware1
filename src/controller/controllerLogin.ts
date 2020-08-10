@@ -62,7 +62,6 @@ class loginController {
             let refreshToken = jwt.sign( {id}, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
             let response = {
                 "user": id,
-                "email":email,
                 "status": "loggin",
                 "token": token
             }
@@ -119,12 +118,10 @@ class loginController {
             let refreshToken = jwt.sign( {id}, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
             let response = {
                 "user": id,
-                "email":email,
                 "status": "loggin",
                 "token": token
             }
             tokenList[refreshToken] = response;
-            console.log("tokenlist: ",tokenList);
             res.status(200).json({ data, token, refreshToken });
             return;
         }, (err: any) => {
@@ -149,12 +146,20 @@ class loginController {
      */
     public async generateToken(req: Request, res: Response): Promise<void> {
         let { id, refreshToken } = req.body;
-
+        console.log(id);
         if ((refreshToken) && (refreshToken in tokenList)) {
 
             let token = jwt.sign({ id }, global.globals.secretToken, { expiresIn: global.globals.lifetimeToken });
-            tokenList[refreshToken].token = token;
-            res.status(200).json({ token });
+            let newRefreshToken = jwt.sign( {id}, global.globals.refreshToken, { expiresIn: global.globals.lifetimeRefreshToken });
+            delete tokenList[refreshToken];           
+            let response = {
+                "user": id,
+                "status": "loggin",
+                "token": token
+            }
+            tokenList[newRefreshToken] = response;
+            
+            res.status(200).json({ token,newRefreshToken});
             return;
         } else {
             res.status(404).json({ log: "No existe el token en la lista de tokens." });
@@ -177,6 +182,7 @@ class loginController {
         let refreshToken = req.body.refreshToken;
         if (refreshToken in tokenList) {
             delete tokenList[refreshToken]
+            console.log("lista de tokens: ",tokenList);
             res.status(200).json({ log: "token eliminado" });
             return;
         }else{
