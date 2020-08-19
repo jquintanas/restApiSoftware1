@@ -117,7 +117,15 @@ class userController {
                 res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                if (err.errors) {
+                    if (err.errors[0]) {
+                        if (err.errors[0].message == "PRIMARY must be unique") {
+                            res.status(500).json({ log: "Usuario ya existe." });
+                            return;
+                        }
+                    }
+                }
+                res.status(500).json({ log: "Error del servidor, intente nuevamente." });
                 return;
             });
         });
