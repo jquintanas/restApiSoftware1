@@ -77,8 +77,9 @@ class userController {
    */
 
   public async addUser(req: Request, res: Response): Promise<void> {
+    console.log(req.body);
     let {hash}  =  req.body;
-    
+    console.log({hash});
     let data: userinterface = {
       cedula: req.body.cedula,
       nombre: req.body.nombre,
@@ -90,6 +91,8 @@ class userController {
       direccion: req.body.direccion
     };
     let hashInterno = Security.hashJSON(data);
+    console.log(hashInterno);
+    console.log(data);
     data.createdAt = new Date();
     if (hashInterno != hash) {
       res
@@ -115,7 +118,7 @@ class userController {
         return;
       },
       (err: any) => {
-        res.status(500).json({ log: "Error" });
+        res.status(500).json({ log: err });
         return;
       }
     );

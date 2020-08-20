@@ -9,9 +9,9 @@
 export interface purchaseInterface {
     idcompra?: Number;
     idusuario: Number;
-    fechacompra: Date;
-    idformaEntrega : String,
-    horaEntrega: Date;
+    fechacompra?: Date;
+    entregaDomocilio : String,
+    horaEntrega?: Date;
     createdAt?: Date;
     updatedAt?: Date;
 }

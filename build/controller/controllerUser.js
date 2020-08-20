@@ -79,7 +79,9 @@ class userController {
      */
     addUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(req.body);
             let { hash } = req.body;
+            console.log({ hash });
             let data = {
                 cedula: req.body.cedula,
                 nombre: req.body.nombre,
@@ -91,6 +93,8 @@ class userController {
                 direccion: req.body.direccion
             };
             let hashInterno = security_1.Security.hashJSON(data);
+            console.log(hashInterno);
+            console.log(data);
             data.createdAt = new Date();
             if (hashInterno != hash) {
                 res
@@ -117,7 +121,7 @@ class userController {
                 res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                res.status(500).json({ log: err });
                 return;
             });
         });

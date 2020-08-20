@@ -159,18 +159,18 @@ class purchaseController {
             let purchase = {
                 idcompra: req.body.idcompra,
                 idusuario: req.body.idusuario,
-                fechacompra: new Date(),
-                idformaEntrega: req.body.idformaEntrega,
-                horaEntrega: new Date(),
-                createdAt: new Date(),
-                updatedAt: new Date()
+                entregaDomocilio: req.body.idformaEntrega
             };
-            let hashInterno = security_1.Security.hashJSON(purchase);
+            purchase.fechacompra = new Date();
+            purchase.horaEntrega = new Date();
             purchase.createdAt = new Date();
-            if (hashInterno != hash) {
-                res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
-                return;
-            }
+            purchase.updatedAt = new Date();
+            let hashInterno = security_1.Security.hashJSON(purchase);
+            //purchase.createdAt = new Date();
+            /* if (hashInterno != hash) {
+               res.status(401).json({ log: "Violación de integridad de datos, hash invalido.", hash, hashInterno });
+               return;
+             }*/
             purchases.create(purchase).then((rs) => {
                 if (rs._options.isNewRecord) {
                     res.status(202).json({
@@ -182,7 +182,7 @@ class purchaseController {
                 res.status(401).json({ log: "No se ingresaron los datos." });
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                res.status(500).json({ log: err });
                 return;
             });
         });
