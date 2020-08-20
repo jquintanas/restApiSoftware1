@@ -37,26 +37,26 @@ class userController {
   */
   public async getUsers(req: Request, res: Response): Promise<void> {
     user.findAll(
-        {
-          attributes: ["cedula", "nombre", "apellido", "telefono","email", "direccion", "rol"],
-        }
+      {
+        attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "rol"],
+      }
     ).then((data: any) => {
-        if (data == null) {
-            res
-              .status(404)
-              .json({ log: "No hay usuarios" });
-            return;
-        }
-        for(let i = 0 ; i < data.length ; i++){
-          data[i].telefono = Security.decrypt(data[i].telefono );
-          data[i].direccion = Security.decrypt(data[i].direccion);
-        }
+      if (data == null) {
+        res
+          .status(404)
+          .json({ log: "No hay usuarios" });
+        return;
+      }
+      for (let i = 0; i < data.length; i++) {
+        data[i].telefono = Security.decrypt(data[i].telefono);
+        data[i].direccion = Security.decrypt(data[i].direccion);
+      }
 
-        res.status(200).json(data);
-        return;
+      res.status(200).json(data);
+      return;
     }, (err: any) => {
-        res.status(500).json({ log: "Error" });
-        return;
+      res.status(500).json({ log: "Error" });
+      return;
     });
 
   }
@@ -77,9 +77,8 @@ class userController {
    */
 
   public async addUser(req: Request, res: Response): Promise<void> {
-    console.log(req.body);
-    let {hash}  =  req.body;
-    console.log({hash});
+    let { hash } = req.body;
+
     let data: userinterface = {
       cedula: req.body.cedula,
       nombre: req.body.nombre,
@@ -111,14 +110,22 @@ class userController {
             .json({
               log: "Ingresado",
               uri: global.globals.urlUserBase + data.cedula,
-          });
+            });
           return;
         }
         res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
         return;
       },
       (err: any) => {
-        res.status(500).json({ log: err });
+        if (err.errors) {
+          if (err.errors[0]) {
+            if (err.errors[0].message == "PRIMARY must be unique") {
+              res.status(500).json({log: "Usuario ya existe."});
+              return
+            }
+          }
+        }
+        res.status(500).json({log: "Error del servidor, intente nuevamente."});
         return;
       }
     );
@@ -141,7 +148,7 @@ class userController {
     let id: any = req.params.id;
 
     if (isNaN(id)) {
-      
+
       res.status(400).json({ log: "La cédula introducida no es valido." });
       return;
     }
@@ -152,15 +159,15 @@ class userController {
         .json({ log: "El ID introducido no es valido, debe ser un entero." });
       return;
     }
-    
-    
+
+
     user
       .findOne({
         where: {
           cedula: id,
-          
+
         },
-        attributes: ["cedula", "nombre", "apellido", "telefono","email", "direccion", "rol"],
+        attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "rol"],
       })
       .then(
         (data: any) => {
@@ -247,7 +254,7 @@ class userController {
     }
     id = String(id);
     let { hash } = req.body;
-   
+
     let data: userinterface = {
       cedula: req.body.cedula,
       nombre: req.body.nombre,
