@@ -38,7 +38,7 @@ class userController {
   public async getUsers(req: Request, res: Response): Promise<void> {
     user.findAll(
       {
-        attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "rol"],
+        attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "contrasenia", "rol"],
       }
     ).then((data: any) => {
       if (data == null) {
@@ -55,7 +55,7 @@ class userController {
       res.status(200).json(data);
       return;
     }, (err: any) => {
-      res.status(500).json({ log: "Error" });
+      res.status(500).json(err);
       return;
     });
 

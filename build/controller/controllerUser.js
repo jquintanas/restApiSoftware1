@@ -45,7 +45,7 @@ class userController {
     getUsers(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             user.findAll({
-                attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "rol"],
+                attributes: ["cedula", "nombre", "apellido", "telefono", "email", "direccion", "contrasenia", "rol"],
             }).then((data) => {
                 if (data == null) {
                     res
@@ -60,7 +60,7 @@ class userController {
                 res.status(200).json(data);
                 return;
             }, (err) => {
-                res.status(500).json({ log: "Error" });
+                res.status(500).json(err);
                 return;
             });
         });
@@ -79,9 +79,7 @@ class userController {
      */
     addUser(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(req.body);
             let { hash } = req.body;
-            console.log({ hash });
             let data = {
                 cedula: req.body.cedula,
                 nombre: req.body.nombre,
@@ -121,9 +119,6 @@ class userController {
                 res.status(400).json({ log: "Sintaxis incorrecta para crear el usuario." });
                 return;
             }, (err) => {
-<<<<<<< HEAD
-                res.status(500).json({ log: err });
-=======
                 if (err.errors) {
                     if (err.errors[0]) {
                         if (err.errors[0].message == "PRIMARY must be unique") {
@@ -133,7 +128,6 @@ class userController {
                     }
                 }
                 res.status(500).json({ log: "Error del servidor, intente nuevamente." });
->>>>>>> 25592586a008df70dbe355eb64d71bf1e8c7d965
                 return;
             });
         });
